@@ -1,0 +1,17 @@
+com\ly\traffic\middleplatform\domain\order\repository\mapper\UserService.class
+com\ly\traffic\middleplatform\infrastructure\FieldGenerateProcessor.class
+com\ly\traffic\middleplatform\interfaces\MainOrderController.class
+com\ly\traffic\middleplatform\service\MainOrderService.class
+com\ly\traffic\middleplatform\infrastructure\configure\DruidConfig.class
+com\ly\traffic\middleplatform\infrastructure\configure\SqlSessionFactoryBeanAdaptor.class
+com\ly\traffic\middleplatform\domain\order\repository\mapper\MainOrderMapper.class
+com\ly\traffic\middleplatform\interfaces\HelloController.class
+com\ly\traffic\middleplatform\RunApplication.class
+com\ly\traffic\middleplatform\domain\order\repository\mapper\UserMapper.class
+com\ly\traffic\middleplatform\domain\order\repository\po\UMainOrder.class
+com\ly\traffic\middleplatform\infrastructure\TestAno.class
+com\ly\traffic\train\domain\order\vo\PassengerInfoVO.class
+com\ly\traffic\middleplatform\infrastructure\GenerateField.class
+com\ly\traffic\train\domain\order\vo\ClientInfoVO.class
+com\ly\traffic\train\infrastructure\IOrderCreate.class
+com\ly\traffic\middleplatform\domain\order\repository\po\User.class

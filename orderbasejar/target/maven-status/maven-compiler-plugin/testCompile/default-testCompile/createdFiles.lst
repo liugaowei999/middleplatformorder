@@ -1,0 +1,4 @@
+com\ly\traffic\middleplatform\utils\http\factory\okhttp\OKHttpFactoryTest.class
+com\ly\traffic\middleplatform\utils\http\factory\okhttp\TestHttpClient.class
+com\ly\traffic\middleplatform\utils\http\factory\okhttp\TestHttp.class
+com\ly\traffic\middleplatform\utils\http\factory\httpasyncclient\HttpAsyncClientFactoryTest.class

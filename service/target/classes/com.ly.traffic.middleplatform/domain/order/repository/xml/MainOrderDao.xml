@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ly.traffic.middleplatform.domain.order.repository.mapper.MainOrderMapper">
+
+    <resultMap type="com.ly.traffic.middleplatform.domain.order.repository.po.UMainOrder" id="MainOrderMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="orderno" column="orderNo" jdbcType="VARCHAR"/>
+        <result property="memberid" column="memberId" jdbcType="INTEGER"/>
+        <result property="unionid" column="UnionId" jdbcType="VARCHAR"/>
+        <result property="openid" column="OpenId" jdbcType="VARCHAR"/>
+        <result property="supplierorderno" column="SupplierOrderNo" jdbcType="VARCHAR"/>
+        <result property="directpay" column="DirectPay" jdbcType="INTEGER"/>
+        <result property="issueflag" column="IssueFlag" jdbcType="INTEGER"/>
+        <result property="paymenttype" column="paymentType" jdbcType="INTEGER"/>
+        <result property="validpaytime" column="ValidPayTime" jdbcType="TIMESTAMP"/>
+        <result property="unionpay" column="UnionPay" jdbcType="INTEGER"/>
+        <result property="checkstatus" column="CheckStatus" jdbcType="INTEGER"/>
+        <result property="orderstatus" column="orderStatus" jdbcType="INTEGER"/>
+        <result property="mailflag" column="MailFlag" jdbcType="INTEGER"/>
+        <result property="paystatus" column="payStatus" jdbcType="INTEGER"/>
+        <result property="withholdstatus" column="WithholdStatus" jdbcType="INTEGER"/>
+        <result property="withholdfailreason" column="WithholdFailReason" jdbcType="VARCHAR"/>
+        <result property="contactname" column="ContactName" jdbcType="VARCHAR"/>
+        <result property="contactphone" column="ContactPhone" jdbcType="VARCHAR"/>
+        <result property="contactemail" column="ContactEmail" jdbcType="VARCHAR"/>
+        <result property="customertotalamount" column="CustomerTotalAmount" jdbcType="NUMERIC"/>
+        <result property="customertotalpaid" column="CustomerTotalPaid" jdbcType="NUMERIC"/>
+        <result property="tickettotalprice" column="TicketTotalPrice" jdbcType="NUMERIC"/>
+        <result property="reduceamount" column="reduceAmount" jdbcType="NUMERIC"/>
+        <result property="discountamount" column="discountAmount" jdbcType="NUMERIC"/>
+        <result property="bookflag" column="BookFlag" jdbcType="INTEGER"/>
+        <result property="extendcontent" column="extendContent" jdbcType="VARCHAR"/>
+        <result property="usercreatedate" column="UserCreateDate" jdbcType="TIMESTAMP"/>
+        <result property="createdate" column="CreateDate" jdbcType="TIMESTAMP"/>
+        <result property="createuser" column="CreateUser" jdbcType="VARCHAR"/>
+        <result property="updatedate" column="UpdateDate" jdbcType="TIMESTAMP"/>
+        <result property="updateuser" column="UpdateUser" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="MainOrderMap">
+        select
+          id, orderNo, memberId, UnionId, OpenId, SupplierOrderNo, DirectPay, IssueFlag, paymentType, ValidPayTime, UnionPay, CheckStatus, orderStatus, MailFlag, payStatus, WithholdStatus, WithholdFailReason, ContactName, ContactPhone, ContactEmail, CustomerTotalAmount, CustomerTotalPaid, TicketTotalPrice, reduceAmount, discountAmount, BookFlag, extendContent, UserCreateDate, CreateDate, CreateUser, UpdateDate, UpdateUser
+        from union_order.main_order
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="MainOrderMap">
+        select
+          id, orderNo, memberId, UnionId, OpenId, SupplierOrderNo, DirectPay, IssueFlag, paymentType, ValidPayTime, UnionPay, CheckStatus, orderStatus, MailFlag, payStatus, WithholdStatus, WithholdFailReason, ContactName, ContactPhone, ContactEmail, CustomerTotalAmount, CustomerTotalPaid, TicketTotalPrice, reduceAmount, discountAmount, BookFlag, extendContent, UserCreateDate, CreateDate, CreateUser, UpdateDate, UpdateUser
+        from union_order.main_order
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="MainOrderMap">
+        select
+          id, orderNo, memberId, UnionId, OpenId, SupplierOrderNo, DirectPay, IssueFlag, paymentType, ValidPayTime, UnionPay, CheckStatus, orderStatus, MailFlag, payStatus, WithholdStatus, WithholdFailReason, ContactName, ContactPhone, ContactEmail, CustomerTotalAmount, CustomerTotalPaid, TicketTotalPrice, reduceAmount, discountAmount, BookFlag, extendContent, UserCreateDate, CreateDate, CreateUser, UpdateDate, UpdateUser
+        from union_order.main_order
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="orderno != null and orderno != ''">
+                and orderNo = #{orderno}
+            </if>
+            <if test="memberid != null">
+                and memberId = #{memberid}
+            </if>
+            <if test="unionid != null and unionid != ''">
+                and UnionId = #{unionid}
+            </if>
+            <if test="openid != null and openid != ''">
+                and OpenId = #{openid}
+            </if>
+            <if test="supplierorderno != null and supplierorderno != ''">
+                and SupplierOrderNo = #{supplierorderno}
+            </if>
+            <if test="directpay != null">
+                and DirectPay = #{directpay}
+            </if>
+            <if test="issueflag != null">
+                and IssueFlag = #{issueflag}
+            </if>
+            <if test="paymenttype != null">
+                and paymentType = #{paymenttype}
+            </if>
+            <if test="validpaytime != null">
+                and ValidPayTime = #{validpaytime}
+            </if>
+            <if test="unionpay != null">
+                and UnionPay = #{unionpay}
+            </if>
+            <if test="checkstatus != null">
+                and CheckStatus = #{checkstatus}
+            </if>
+            <if test="orderstatus != null">
+                and orderStatus = #{orderstatus}
+            </if>
+            <if test="mailflag != null">
+                and MailFlag = #{mailflag}
+            </if>
+            <if test="paystatus != null">
+                and payStatus = #{paystatus}
+            </if>
+            <if test="withholdstatus != null">
+                and WithholdStatus = #{withholdstatus}
+            </if>
+            <if test="withholdfailreason != null and withholdfailreason != ''">
+                and WithholdFailReason = #{withholdfailreason}
+            </if>
+            <if test="contactname != null and contactname != ''">
+                and ContactName = #{contactname}
+            </if>
+            <if test="contactphone != null and contactphone != ''">
+                and ContactPhone = #{contactphone}
+            </if>
+            <if test="contactemail != null and contactemail != ''">
+                and ContactEmail = #{contactemail}
+            </if>
+            <if test="customertotalamount != null">
+                and CustomerTotalAmount = #{customertotalamount}
+            </if>
+            <if test="customertotalpaid != null">
+                and CustomerTotalPaid = #{customertotalpaid}
+            </if>
+            <if test="tickettotalprice != null">
+                and TicketTotalPrice = #{tickettotalprice}
+            </if>
+            <if test="reduceamount != null">
+                and reduceAmount = #{reduceamount}
+            </if>
+            <if test="discountamount != null">
+                and discountAmount = #{discountamount}
+            </if>
+            <if test="bookflag != null">
+                and BookFlag = #{bookflag}
+            </if>
+            <if test="extendcontent != null and extendcontent != ''">
+                and extendContent = #{extendcontent}
+            </if>
+            <if test="usercreatedate != null">
+                and UserCreateDate = #{usercreatedate}
+            </if>
+            <if test="createdate != null">
+                and CreateDate = #{createdate}
+            </if>
+            <if test="createuser != null and createuser != ''">
+                and CreateUser = #{createuser}
+            </if>
+            <if test="updatedate != null">
+                and UpdateDate = #{updatedate}
+            </if>
+            <if test="updateuser != null and updateuser != ''">
+                and UpdateUser = #{updateuser}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <!--<insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into union_order.main_order(orderNo, memberId, UnionId,
+        OpenId, SupplierOrderNo, DirectPay, IssueFlag, paymentType,
+        ValidPayTime, UnionPay, CheckStatus, orderStatus, MailFlag,
+        payStatus, WithholdStatus, WithholdFailReason, ContactName,
+        ContactPhone, ContactEmail, CustomerTotalAmount, CustomerTotalPaid,
+        TicketTotalPrice, reduceAmount, discountAmount, BookFlag,
+        extendContent, UserCreateDate, CreateDate, CreateUser, UpdateDate, UpdateUser)
+        values (#{orderno}, #{memberid}, #{unionid}, #{openid},
+        #{supplierorderno}, #{directpay}, #{issueflag}, #{paymenttype},
+        #{validpaytime}, #{unionpay}, #{checkstatus}, #{orderstatus},
+        #{mailflag}, #{paystatus}, #{withholdstatus}, #{withholdfailreason},
+        #{contactname}, #{contactphone}, #{contactemail}, #{customertotalamount},
+         #{customertotalpaid}, #{tickettotalprice}, #{reduceamount},
+         #{discountamount}, #{bookflag}, #{extendcontent}, #{usercreatedate},
+         #{createdate}, #{createuser}, #{updatedate}, #{updateuser})
+    </insert>-->
+
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into main_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="orderno != null">
+                orderNo,
+            </if>
+            <if test="memberid != null">
+                memberId,
+            </if>
+            <if test="unionid != null">
+                UnionId,
+            </if>
+            <if test="openid != null">
+                OpenId,
+            </if>
+            <if test="supplierorderno != null">
+                SupplierOrderNo,
+            </if>
+            <if test="directpay != null">
+                DirectPay,
+            </if>
+            <if test="issueflag != null">
+                IssueFlag,
+            </if>
+            <if test="paymenttype != null">
+                paymentType,
+            </if>
+            <if test="validpaytime != null">
+                ValidPayTime,
+            </if>
+            <if test="unionpay != null">
+                UnionPay,
+            </if>
+            <if test="checkstatus != null">
+                CheckStatus,
+            </if>
+            <if test="orderstatus != null">
+                orderStatus,
+            </if>
+            <if test="mailflag != null">
+                MailFlag,
+            </if>
+            <if test="paystatus != null">
+                payStatus,
+            </if>
+            <if test="withholdstatus != null">
+                WithholdStatus,
+            </if>
+            <if test="withholdfailreason != null">
+                WithholdFailReason,
+            </if>
+            <if test="contactname != null">
+                ContactName,
+            </if>
+            <if test="contactphone != null">
+                ContactPhone,
+            </if>
+            <if test="contactemail != null">
+                ContactEmail,
+            </if>
+            <if test="customertotalamount != null">
+                CustomerTotalAmount,
+            </if>
+            <if test="customertotalpaid != null">
+                CustomerTotalPaid,
+            </if>
+            <if test="tickettotalprice != null">
+                TicketTotalPrice,
+            </if>
+            <if test="reduceamount != null">
+                reduceAmount,
+            </if>
+            <if test="discountamount != null">
+                discountAmount,
+            </if>
+            <if test="bookflag != null">
+                BookFlag,
+            </if>
+            <if test="extendcontent != null">
+                extendContent,
+            </if>
+            <if test="usercreatedate != null">
+                UserCreateDate,
+            </if>
+            <if test="createdate != null">
+                CreateDate,
+            </if>
+            <if test="createuser != null">
+                CreateUser,
+            </if>
+            <if test="updatedate != null">
+                UpdateDate,
+            </if>
+            <if test="updateuser != null">
+                UpdateUser,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="orderno != null">
+                #{orderno},
+            </if>
+            <if test="memberid != null">
+                #{memberid},
+            </if>
+            <if test="unionid != null">
+                #{unionid},
+            </if>
+            <if test="openid != null">
+                #{openid},
+            </if>
+            <if test="supplierorderno != null">
+                #{supplierorderno},
+            </if>
+            <if test="directpay != null">
+                #{directpay},
+            </if>
+            <if test="issueflag != null">
+                #{issueflag},
+            </if>
+            <if test="paymenttype != null">
+                #{paymenttype},
+            </if>
+            <if test="validpaytime != null">
+                #{validpaytime},
+            </if>
+            <if test="unionpay != null">
+                #{unionpay},
+            </if>
+            <if test="checkstatus != null">
+                #{checkstatus},
+            </if>
+            <if test="orderstatus != null">
+                #{orderstatus},
+            </if>
+            <if test="mailflag != null">
+                #{mailflag},
+            </if>
+            <if test="paystatus != null">
+                #{paystatus},
+            </if>
+            <if test="withholdstatus != null">
+                #{withholdstatus},
+            </if>
+            <if test="withholdfailreason != null">
+                #{withholdfailreason},
+            </if>
+            <if test="contactname != null">
+                #{contactname},
+            </if>
+            <if test="contactphone != null">
+                #{contactphone},
+            </if>
+            <if test="contactemail != null">
+                #{contactemail},
+            </if>
+            <if test="customertotalamount != null">
+                #{customertotalamount},
+            </if>
+            <if test="customertotalpaid != null">
+                #{customertotalpaid},
+            </if>
+            <if test="tickettotalprice != null">
+                #{tickettotalprice},
+            </if>
+            <if test="reduceamount != null">
+                #{reduceamount},
+            </if>
+            <if test="discountamount != null">
+                #{discountamount},
+            </if>
+            <if test="bookflag != null">
+                #{bookflag},
+            </if>
+            <if test="extendcontent != null">
+                #{extendcontent},
+            </if>
+            <if test="usercreatedate != null">
+                #{usercreatedate},
+            </if>
+            <if test="createdate != null">
+                #{createdate},
+            </if>
+            <if test="createuser != null">
+                #{createuser},
+            </if>
+            <if test="updatedate != null">
+                #{updatedate},
+            </if>
+            <if test="updateuser != null">
+                #{updateuser},
+            </if>
+        </trim>
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update union_order.main_order
+        <set>
+            <if test="orderno != null and orderno != ''">
+                orderNo = #{orderno},
+            </if>
+            <if test="memberid != null">
+                memberId = #{memberid},
+            </if>
+            <if test="unionid != null and unionid != ''">
+                UnionId = #{unionid},
+            </if>
+            <if test="openid != null and openid != ''">
+                OpenId = #{openid},
+            </if>
+            <if test="supplierorderno != null and supplierorderno != ''">
+                SupplierOrderNo = #{supplierorderno},
+            </if>
+            <if test="directpay != null">
+                DirectPay = #{directpay},
+            </if>
+            <if test="issueflag != null">
+                IssueFlag = #{issueflag},
+            </if>
+            <if test="paymenttype != null">
+                paymentType = #{paymenttype},
+            </if>
+            <if test="validpaytime != null">
+                ValidPayTime = #{validpaytime},
+            </if>
+            <if test="unionpay != null">
+                UnionPay = #{unionpay},
+            </if>
+            <if test="checkstatus != null">
+                CheckStatus = #{checkstatus},
+            </if>
+            <if test="orderstatus != null">
+                orderStatus = #{orderstatus},
+            </if>
+            <if test="mailflag != null">
+                MailFlag = #{mailflag},
+            </if>
+            <if test="paystatus != null">
+                payStatus = #{paystatus},
+            </if>
+            <if test="withholdstatus != null">
+                WithholdStatus = #{withholdstatus},
+            </if>
+            <if test="withholdfailreason != null and withholdfailreason != ''">
+                WithholdFailReason = #{withholdfailreason},
+            </if>
+            <if test="contactname != null and contactname != ''">
+                ContactName = #{contactname},
+            </if>
+            <if test="contactphone != null and contactphone != ''">
+                ContactPhone = #{contactphone},
+            </if>
+            <if test="contactemail != null and contactemail != ''">
+                ContactEmail = #{contactemail},
+            </if>
+            <if test="customertotalamount != null">
+                CustomerTotalAmount = #{customertotalamount},
+            </if>
+            <if test="customertotalpaid != null">
+                CustomerTotalPaid = #{customertotalpaid},
+            </if>
+            <if test="tickettotalprice != null">
+                TicketTotalPrice = #{tickettotalprice},
+            </if>
+            <if test="reduceamount != null">
+                reduceAmount = #{reduceamount},
+            </if>
+            <if test="discountamount != null">
+                discountAmount = #{discountamount},
+            </if>
+            <if test="bookflag != null">
+                BookFlag = #{bookflag},
+            </if>
+            <if test="extendcontent != null and extendcontent != ''">
+                extendContent = #{extendcontent},
+            </if>
+            <if test="usercreatedate != null">
+                UserCreateDate = #{usercreatedate},
+            </if>
+            <if test="createdate != null">
+                CreateDate = #{createdate},
+            </if>
+            <if test="createuser != null and createuser != ''">
+                CreateUser = #{createuser},
+            </if>
+            <if test="updatedate != null">
+                UpdateDate = #{updatedate},
+            </if>
+            <if test="updateuser != null and updateuser != ''">
+                UpdateUser = #{updateuser},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from union_order.main_order where id = #{id}
+    </delete>
+
+</mapper>
