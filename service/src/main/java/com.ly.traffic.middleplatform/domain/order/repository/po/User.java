@@ -6,6 +6,7 @@ import lombok.Getter;
 /**
  * @author gaowei.liu
  */
+@Deprecated
 @Getter
 public class User {
     private long id;

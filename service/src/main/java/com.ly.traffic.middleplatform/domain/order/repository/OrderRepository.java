@@ -1,20 +1,20 @@
-package com.ly.traffic.middleplatform.service;
+package com.ly.traffic.middleplatform.domain.order.repository;
 
 import com.ly.traffic.middleplatform.domain.order.repository.mapper.MainOrderMapper;
-import com.ly.traffic.middleplatform.domain.order.repository.po.UMainOrder;
+import com.ly.traffic.middleplatform.domain.order.repository.po.UMainOrderPO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * 主订单表(UMainOrder)表服务实现类
+ * 主订单表(UMainOrderPO)表服务实现类
  *
  * @author makejava
  * @since 2020-08-07 17:29:26
  */
 @Service
-public class MainOrderService {
+public class OrderRepository {
     @Resource
     private MainOrderMapper mainOrderDao;
 
@@ -24,7 +24,7 @@ public class MainOrderService {
      * @param id 主键
      * @return 实例对象
      */
-    public UMainOrder queryById(Integer id) {
+    public UMainOrderPO queryById(Integer id) {
         return this.mainOrderDao.queryById(id);
     }
 
@@ -35,30 +35,30 @@ public class MainOrderService {
      * @param limit 查询条数
      * @return 对象列表
      */
-    public List<UMainOrder> queryAllByLimit(int offset, int limit) {
+    public List<UMainOrderPO> queryAllByLimit(int offset, int limit) {
         return this.mainOrderDao.queryAllByLimit(offset, limit);
     }
 
     /**
      * 新增数据
      *
-     * @param UMainOrder 实例对象
+     * @param UMainOrderPO 实例对象
      * @return 实例对象
      */
-    public UMainOrder insert(UMainOrder UMainOrder) {
-        this.mainOrderDao.insert(UMainOrder);
-        return UMainOrder;
+    public UMainOrderPO insert(UMainOrderPO UMainOrderPO) {
+        this.mainOrderDao.insert(UMainOrderPO);
+        return UMainOrderPO;
     }
 
     /**
      * 修改数据
      *
-     * @param UMainOrder 实例对象
+     * @param UMainOrderPO 实例对象
      * @return 实例对象
      */
-    public UMainOrder update(UMainOrder UMainOrder) {
-        this.mainOrderDao.update(UMainOrder);
-        return this.queryById(UMainOrder.getId());
+    public UMainOrderPO update(UMainOrderPO UMainOrderPO) {
+        this.mainOrderDao.update(UMainOrderPO);
+        return this.queryById(UMainOrderPO.getId());
     }
 
     /**

@@ -129,10 +129,7 @@ public class MainOrder implements Serializable {
     * 预订标识，1-正常，2-收单
     */
     private Integer bookflag;
-    /**
-    * 扩展信息
-    */
-    private String extendcontent;
+
     /**
     * 点击预定按钮时间
     */
@@ -155,7 +152,7 @@ public class MainOrder implements Serializable {
     private String updateuser;
 
 
-    public String translate() {
+    private String translate() {
         try {
             return ObjectValue.getJSONString(this.getClass(), this);
         } catch (IllegalAccessException e) {
