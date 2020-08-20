@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 主订单表(MainOrder)实体类
@@ -120,14 +121,14 @@ public class MainOrder {
      6-汽车直达， 8-用车直达，9-城际接驳直达）
      */
     private Integer productType;
-    /**
-     * 微信代扣状态 0-微信支付 1，2-微信代扣 3-微信代扣转微信支付
-     */
-    private Integer withHoldStatus;
-    /**
-     * 代扣失败原因
-     */
-    private String withHoldFailReason;
+//    /**
+//     * 微信代扣状态 0-微信支付 1，2-微信代扣 3-微信代扣转微信支付
+//     */
+//    private Integer withHoldStatus;
+//    /**
+//     * 代扣失败原因
+//     */
+//    private String withHoldFailReason;
     /**
      * refid
      */
@@ -161,6 +162,21 @@ public class MainOrder {
      * 更新人
      */
     private String updateUser;
+
+    /**
+     * 订单出行信息
+     */
+    private TripOrderInfo tripOrderInfo;
+
+    /**
+     * 权益消费申请信息
+     */
+    private List<ResourceConsumerOrder> resourceConsumerOrderList;
+
+    /**
+     * 订单营收商品列表
+     */
+    private List<RevenueOrderInfo> revenueOrderInfoList;
 
 
     private String translate() {

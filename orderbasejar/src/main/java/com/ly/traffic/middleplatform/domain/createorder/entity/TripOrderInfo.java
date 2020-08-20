@@ -6,11 +6,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 订单出行信息表(TripOrderInfoPO)实体类
  *
- * @author makejava
+ *  已注释创单时不需要关心的属性 - 不对外暴露
+ * @author gaowei.liu
  * @since 2020-08-20 14:11:35
  */
 @Getter
@@ -20,20 +22,25 @@ public class TripOrderInfo {
     * 自增id
     */
     private Long id;
-    /**
-    * 主订单流水号
-    */
-    private String mainOrderNo;
+//    /**
+//    * 主订单流水号
+//    */
+//    private String mainOrderNo;
+
     /**
     * 出行订单流水号
     */
     private String tripOrderNo;
+
     /**
     * 关联具体的行程信息：行程流水号
     */
     private TripInfoVO tripInfoVO;
 
-
+    /**
+     * 乘客信息
+     */
+    private List<TripPassengerOrderInfo> tripPassengerOrderInfoList;
 
     /**
     * 此订单在行程中的顺序(默认0)
@@ -79,51 +86,51 @@ public class TripOrderInfo {
     * 是否合单支付: 0--非合单支付, 1--合单支付
     */
     private Integer unionPay;
-    /**
-    * 微信代扣状态 0-微信支付 1，2-微信代扣 3-微信代扣转微信支付
-    */
-    private Integer withHoldStatus;
-    /**
-    * 代扣失败原因
-    */
-    private String withHoldFailReason;
-    /**
-    * 申请占座时间
-    */
-    private Date applyPlaceTime;
-    /**
-    * 占座回写时间
-    */
-    private Date placeCallbackTime;
-    /**
-    * 申请出票时间
-    */
-    private Date applyIssueTime;
-    /**
-    * 出票时间
-    */
-    private Date issueTime;
-    /**
-    * 占座或出票失败原因
-    */
-    private String rejectApplyRemark;
-
-    /**
-    * 创建日期
-    */
-    private Date createDate;
-    /**
-    * 创建人
-    */
-    private String createUser;
-    /**
-    * 更新日期
-    */
-    private Date updateDate;
-    /**
-    * 更新人
-    */
-    private String updateUser;
+//    /**
+//    * 微信代扣状态 0-微信支付 1，2-微信代扣 3-微信代扣转微信支付
+//    */
+//    private Integer withHoldStatus;
+//    /**
+//    * 代扣失败原因
+//    */
+//    private String withHoldFailReason;
+//    /**
+//    * 申请占座时间
+//    */
+//    private Date applyPlaceTime;
+//    /**
+//    * 占座回写时间
+//    */
+//    private Date placeCallbackTime;
+//    /**
+//    * 申请出票时间
+//    */
+//    private Date applyIssueTime;
+//    /**
+//    * 出票时间
+//    */
+//    private Date issueTime;
+//    /**
+//    * 占座或出票失败原因
+//    */
+//    private String rejectApplyRemark;
+//
+//    /**
+//    * 创建日期
+//    */
+//    private Date createDate;
+//    /**
+//    * 创建人
+//    */
+//    private String createUser;
+//    /**
+//    * 更新日期
+//    */
+//    private Date updateDate;
+//    /**
+//    * 更新人
+//    */
+//    private String updateUser;
 
     private String translate() {
         try {

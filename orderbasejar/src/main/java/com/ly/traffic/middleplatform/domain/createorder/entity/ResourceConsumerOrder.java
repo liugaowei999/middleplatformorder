@@ -18,10 +18,10 @@ public class ResourceConsumerOrder {
     * id
     */
     private Long id;
-    /**
-    * 主订单号
-    */
-    private String mainorderno;
+//    /**
+//    * 主订单号
+//    */
+//    private String mainorderno;
     /**
     * 优惠的行程订单号
     */
