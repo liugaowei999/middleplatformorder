@@ -1,7 +1,7 @@
-package com.ly.traffic.middleplatform.domain.createorder.repository;
+package com.ly.traffic.middleplatform.domain.order.repository;
 
-import com.ly.traffic.middleplatform.domain.createorder.repository.mapper.MainOrderMapper;
-import com.ly.traffic.middleplatform.domain.createorder.repository.po.MainOrderPO;
+import com.ly.traffic.middleplatform.domain.order.repository.mapper.MainOrderMapper;
+import com.ly.traffic.middleplatform.domain.order.repository.po.MainOrderPO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

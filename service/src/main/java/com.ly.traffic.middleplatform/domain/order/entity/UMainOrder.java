@@ -1,5 +1,6 @@
-package com.ly.traffic.middleplatform.domain.createorder.entity;
+package com.ly.traffic.middleplatform.domain.order.entity;
 
+import com.ly.traffic.middleplatform.domain.createorder.entity.MainOrder;
 import lombok.Getter;
 
 /**

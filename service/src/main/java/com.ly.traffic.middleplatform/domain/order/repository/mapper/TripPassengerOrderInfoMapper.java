@@ -1,6 +1,6 @@
-package com.ly.traffic.middleplatform.domain.createorder.repository.mapper;
+package com.ly.traffic.middleplatform.domain.order.repository.mapper;
 
-import com.ly.traffic.middleplatform.domain.createorder.repository.po.TripPassengerOrderInfoPO;
+import com.ly.traffic.middleplatform.domain.order.repository.po.TripPassengerOrderInfoPO;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 

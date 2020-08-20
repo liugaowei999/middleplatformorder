@@ -1,4 +1,4 @@
-package com.ly.traffic.middleplatform.domain.createorder.entity;
+package com.ly.traffic.middleplatform.domain.order.entity;
 
 
 import lombok.Getter;

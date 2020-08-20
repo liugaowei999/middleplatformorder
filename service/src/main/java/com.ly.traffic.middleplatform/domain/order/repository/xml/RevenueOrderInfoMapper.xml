@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ly.traffic.middleplatform.domain.createorder.repository.mapper.RevenueOrderInfoMapper">
+<mapper namespace="com.ly.traffic.middleplatform.domain.order.repository.mapper.RevenueOrderInfoMapper">
 
-    <resultMap type="com.ly.traffic.middleplatform.domain.createorder.repository.po.RevenueOrderInfoPO" id="RevenueOrderInfoMap">
+    <resultMap type="com.ly.traffic.middleplatform.domain.order.repository.po.RevenueOrderInfoPO" id="RevenueOrderInfoMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="mainorderno" column="mainOrderNo" jdbcType="VARCHAR"/>
         <result property="revenueorderno" column="revenueOrderNo" jdbcType="VARCHAR"/>
