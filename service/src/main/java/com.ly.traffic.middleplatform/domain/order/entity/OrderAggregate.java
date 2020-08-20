@@ -1,9 +1,7 @@
-package com.ly.traffic.middleplatform.domain.order.entity;
+package com.ly.traffic.middleplatform.domain.createorder.entity;
 
 
 import lombok.Getter;
-
-import java.util.List;
 
 /**
  * @author liugw

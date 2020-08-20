@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ly.traffic.middleplatform.domain.order.repository.mapper.UserMapper">
-    <resultMap id="BaseResultMap" type="com.ly.traffic.middleplatform.domain.order.repository.po.User">
+<mapper namespace="com.ly.traffic.middleplatform.domain.createorder.repository.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.ly.traffic.middleplatform.domain.createorder.repository.po.User">
         <constructor>
             <idArg column="id" javaType="_long" jdbcType="BIGINT" />
             <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />

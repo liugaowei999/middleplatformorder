@@ -2,9 +2,8 @@ package com.ly.traffic.middleplatform.orderdbtest;
 import java.util.Date;
 
 import com.alibaba.fastjson.JSON;
-import com.ly.traffic.middleplatform.domain.order.repository.OrderRepository;
-import com.ly.traffic.middleplatform.domain.order.repository.mapper.MainOrderMapper;
-import com.ly.traffic.middleplatform.domain.order.repository.po.MainOrderPO;
+import com.ly.traffic.middleplatform.domain.createorder.repository.mapper.MainOrderMapper;
+import com.ly.traffic.middleplatform.domain.createorder.repository.po.MainOrderPO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

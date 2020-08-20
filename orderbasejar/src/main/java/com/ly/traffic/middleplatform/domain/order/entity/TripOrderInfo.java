@@ -1,9 +1,10 @@
-package com.ly.traffic.middleplatform.domain.order.entity;
+package com.ly.traffic.middleplatform.domain.createorder.entity;
 
+import com.ly.traffic.middleplatform.domain.createorder.vo.TripInfoVO;
+import com.ly.traffic.middleplatform.utils.object.ObjectValue;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -30,7 +31,10 @@ public class TripOrderInfo {
     /**
     * 关联具体的行程信息：行程流水号
     */
-    private String tripSerial;
+    private TripInfoVO tripInfoVO;
+
+
+
     /**
     * 此订单在行程中的顺序(默认0)
     */
@@ -103,10 +107,7 @@ public class TripOrderInfo {
     * 占座或出票失败原因
     */
     private String rejectApplyRemark;
-    /**
-    * 扩展信息
-    */
-    private String extendContent;
+
     /**
     * 创建日期
     */
@@ -124,5 +125,17 @@ public class TripOrderInfo {
     */
     private String updateUser;
 
+    private String translate() {
+        try {
+            return ObjectValue.getJSONString(this.getClass(), this);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return super.toString();
+    }
+    @Override
+    public String toString() {
+        return translate();
+    }
 
 }

@@ -1,9 +1,8 @@
-package com.ly.traffic.middleplatform.domain.order.entity;
+package com.ly.traffic.middleplatform.domain.createorder.entity;
 
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -31,10 +30,7 @@ public class TripPassengerOrderInfo {
     * 出行订单流水号
     */
     private String passengerOrderNo;
-    /**
-    * 关联具体的行程信息：行程流水号
-    */
-    private String tripSerial;
+
     /**
     * 车票的状态 0:未出票 1:已出票
     */

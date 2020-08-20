@@ -1,28 +1,19 @@
-package com.ly.traffic.middleplatform.domain.order.entity;
+package com.ly.traffic.middleplatform.domain.createorder.vo;
 
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 火车行程信息表(TrainTripInfoPO)实体类
+ * 火车行程信息(TrainTripInfo)
  *
- * @author makejava
+ * @author gaowei.liu
  * @since 2020-08-20 14:11:35
  */
 @Getter
 @Setter
-public class TrainTripInfo {
-    /**
-    * 自增id
-    */
-    private Long id;
-    /**
-    * 行程流水号
-    */
-    private String tripSerial;
+public class TrainTripInfoVO  extends TripInfoVO {
     /**
     * 列车班次号
     */

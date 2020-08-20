@@ -1,6 +1,5 @@
-package com.ly.traffic.middleplatform.domain.order.repository.po;
+package com.ly.traffic.middleplatform.domain.createorder.repository.po;
 
-import com.ly.traffic.middleplatform.domain.order.entity.MainOrder;
 import lombok.Getter;
 import lombok.Setter;
 

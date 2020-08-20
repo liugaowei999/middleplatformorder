@@ -1,13 +1,9 @@
-package com.ly.traffic.middleplatform.domain.order.entity;
+package com.ly.traffic.middleplatform.domain.createorder.entity;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.ly.traffic.middleplatform.utils.object.ObjectValue;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -144,10 +140,7 @@ public class MainOrder {
      * openid，微信平台订票时有值
      */
     private String openId;
-    /**
-     * 扩展信息
-     */
-    private String extendContent;
+
     /**
      * 点击预定按钮时间
      */

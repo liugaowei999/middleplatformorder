@@ -1,28 +1,19 @@
-package com.ly.traffic.middleplatform.domain.order.entity;
+package com.ly.traffic.middleplatform.domain.createorder.vo;
 
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 汽车行程信息表(BusTripInfoPO)实体类
+ * 汽车行程信息表(BusTripInfoPO)
  *
- * @author makejava
+ * @author gaowei.liu
  * @since 2020-08-20 14:11:35
  */
 @Getter
 @Setter
-public class BusTripInfo {
-    /**
-    * 自增id
-    */
-    private Long id;
-    /**
-    * 行程流水号
-    */
-    private String tripSerial;
+public class BusTripInfoVO extends TripInfoVO {
     /**
     * 出发城市
     */

@@ -1,27 +1,17 @@
-package com.ly.traffic.middleplatform.domain.order.entity;
+package com.ly.traffic.middleplatform.domain.createorder.vo;
 
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.Serializable;
-
 /**
- * 票信息表(TicketInfoPO)实体类
+ * 票信息(TicketInfoPO)
  *
- * @author makejava
+ * @author gaowei.liu
  * @since 2020-08-20 14:11:35
  */
 @Getter
 @Setter
-public class TicketInfo {
-    /**
-    * 自增id
-    */
-    private Long id;
-    /**
-    * 票记录信息流水号
-    */
-    private String ticketSerial;
+public class TicketInfoVO {
     /**
     * 客票号/取票号
     */

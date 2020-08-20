@@ -1,6 +1,6 @@
-package com.ly.traffic.middleplatform.domain.order.repository.mapper;
+package com.ly.traffic.middleplatform.domain.createorder.repository.mapper;
 
-import com.ly.traffic.middleplatform.domain.order.repository.po.ResourceConsumerOrderPO;
+import com.ly.traffic.middleplatform.domain.createorder.repository.po.ResourceConsumerOrderPO;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
