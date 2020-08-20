@@ -1,14 +1,14 @@
 package com.ly.traffic.middleplatform.domain.order.repository;
 
 import com.ly.traffic.middleplatform.domain.order.repository.mapper.MainOrderMapper;
-import com.ly.traffic.middleplatform.domain.order.repository.po.UMainOrderPO;
+import com.ly.traffic.middleplatform.domain.order.repository.po.MainOrderPO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * 主订单表(UMainOrderPO)表服务实现类
+ * 主订单表(MainOrderPO)表服务实现类
  *
  * @author makejava
  * @since 2020-08-07 17:29:26
@@ -24,7 +24,7 @@ public class OrderRepository {
      * @param id 主键
      * @return 实例对象
      */
-    public UMainOrderPO queryById(Integer id) {
+    public MainOrderPO queryById(Integer id) {
         return this.mainOrderDao.queryById(id);
     }
 
@@ -35,30 +35,30 @@ public class OrderRepository {
      * @param limit 查询条数
      * @return 对象列表
      */
-    public List<UMainOrderPO> queryAllByLimit(int offset, int limit) {
+    public List<MainOrderPO> queryAllByLimit(int offset, int limit) {
         return this.mainOrderDao.queryAllByLimit(offset, limit);
     }
 
     /**
      * 新增数据
      *
-     * @param UMainOrderPO 实例对象
+     * @param MainOrderPO 实例对象
      * @return 实例对象
      */
-    public UMainOrderPO insert(UMainOrderPO UMainOrderPO) {
-        this.mainOrderDao.insert(UMainOrderPO);
-        return UMainOrderPO;
+    public MainOrderPO insert(MainOrderPO MainOrderPO) {
+        this.mainOrderDao.insert(MainOrderPO);
+        return MainOrderPO;
     }
 
     /**
      * 修改数据
      *
-     * @param UMainOrderPO 实例对象
+     * @param MainOrderPO 实例对象
      * @return 实例对象
      */
-    public UMainOrderPO update(UMainOrderPO UMainOrderPO) {
-        this.mainOrderDao.update(UMainOrderPO);
-        return this.queryById(UMainOrderPO.getId());
+    public MainOrderPO update(MainOrderPO MainOrderPO) {
+        this.mainOrderDao.update(MainOrderPO);
+        return this.queryById(MainOrderPO.getId());
     }
 
     /**

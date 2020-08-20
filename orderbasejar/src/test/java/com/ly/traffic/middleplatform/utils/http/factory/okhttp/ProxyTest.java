@@ -27,7 +27,7 @@ public class ProxyTest {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         //代理对象
 //        HttpHost proxy = new HttpHost("127.0.0.1", 8888, "http");
-        HttpHost proxy = new HttpHost("113.194.30.158", 9999, "http");
+        HttpHost proxy = new HttpHost("175.42.68.169", 9999, "http");
 
         //配置对象
         RequestConfig config = RequestConfig.custom().setProxy(proxy).build();
