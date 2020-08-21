@@ -297,7 +297,7 @@
                 #{endDateTime},
             </if>
             <if test="bothTime != null and bothTime != ''">
-                {bothTime},
+                #{bothTime},
             </if>
             <if test="departureStation != null and departureStation != ''">
                 #{departureStation},
