@@ -24,7 +24,7 @@ public class TripPassengerOrderInfo {
 //    /**
 //    * 主订单流水号
 //    */
-//    private String mainOrderInfo;
+//    private String mainOrderNo;
 //    /**
 //    * 出行订单流水号
 //    */

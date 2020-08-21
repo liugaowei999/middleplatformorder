@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author liugw
@@ -24,6 +25,11 @@ public class UTripOrderInfo extends TripOrderInfo {
      * 关联具体的行程信息：行程流水号
      */
     private String tripSerial;
+
+//    /**
+//     * 乘客信息
+//     */
+//    private List<UTripPassengerOrderInfo> tripPassengerOrderInfoList;
 
     /**
     * 微信代扣状态 0-微信支付 1，2-微信代扣 3-微信代扣转微信支付

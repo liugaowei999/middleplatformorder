@@ -27,6 +27,7 @@ D:\work\code\middleplatform\middleplatform\order\service\src\main\java\com.ly.tr
 D:\work\code\middleplatform\middleplatform\order\service\src\main\java\com.ly.traffic.middleplatform\domain\order\repository\mapper\TripOrderInfoMapper.java
 D:\work\code\middleplatform\middleplatform\order\service\src\main\java\com.ly.traffic.middleplatform\domain\order\repository\po\BusTripInfoPO.java
 D:\work\code\middleplatform\middleplatform\order\service\src\main\java\com.ly.traffic.middleplatform\infrastructure\eventbus\LocalEventBusImpl.java
+D:\work\code\middleplatform\middleplatform\order\service\src\main\java\com.ly.traffic.middleplatform\domain\order\entity\UTripPassengerOrderInfo.java
 D:\work\code\middleplatform\middleplatform\order\service\src\main\java\com.ly.traffic.middleplatform\domain\order\entity\OrderAggregate.java
 D:\work\code\middleplatform\middleplatform\order\service\src\main\java\com.ly.traffic.middleplatform\domain\order\repository\po\RevenueOrderInfoPO.java
 D:\work\code\middleplatform\middleplatform\order\service\src\main\java\com.ly.traffic.middleplatform\infrastructure\eventbus\LocalEventBus.java

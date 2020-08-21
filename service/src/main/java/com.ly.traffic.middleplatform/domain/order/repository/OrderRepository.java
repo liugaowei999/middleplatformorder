@@ -2,16 +2,12 @@ package com.ly.traffic.middleplatform.domain.order.repository;
 
 import com.alibaba.fastjson.JSON;
 import com.ly.traffic.middleplatform.domain.order.entity.OrderAggregate;
-import com.ly.traffic.middleplatform.domain.order.repository.mapper.BusTripInfoMapper;
-import com.ly.traffic.middleplatform.domain.order.repository.mapper.MainOrderMapper;
-import com.ly.traffic.middleplatform.domain.order.repository.mapper.TrainTripInfoMapper;
-import com.ly.traffic.middleplatform.domain.order.repository.mapper.TripOrderInfoMapper;
-import com.ly.traffic.middleplatform.domain.order.repository.po.BusTripInfoPO;
-import com.ly.traffic.middleplatform.domain.order.repository.po.MainOrderPO;
-import com.ly.traffic.middleplatform.domain.order.repository.po.TrainTripInfoPO;
-import com.ly.traffic.middleplatform.domain.order.repository.po.TripOrderInfoPO;
+import com.ly.traffic.middleplatform.domain.order.repository.mapper.*;
+import com.ly.traffic.middleplatform.domain.order.repository.po.*;
 import com.ly.traffic.middleplatform.interfaces.OrderFactory;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -35,6 +31,9 @@ public class OrderRepository {
 
     @Resource
     private TripOrderInfoMapper tripOrderInfoMapper;
+
+    @Resource
+    private TripPassengerOrderInfoMapper tripPassengerOrderInfoMapper;
 
     /**
      * 通过ID查询单条数据
@@ -89,6 +88,7 @@ public class OrderRepository {
         return this.mainOrderDao.deleteById(id) > 0;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public int insert(OrderAggregate orderAggregate) {
         int count = 0;
         MainOrderPO mainOrderPO = OrderFactory.getMainOrderPO(orderAggregate);
@@ -109,6 +109,13 @@ public class OrderRepository {
 
         if (tripOrderInfoPO != null) {
             count += tripOrderInfoMapper.insert(tripOrderInfoPO);
+        }
+
+        List<TripPassengerOrderInfoPO> tripPassengerOrderInfoPOList = OrderFactory.getTripPassengerOrderInfoPO(orderAggregate);
+        if (CollectionUtils.isNotEmpty(tripPassengerOrderInfoPOList)) {
+            for (TripPassengerOrderInfoPO passengerOrderInfoPO : tripPassengerOrderInfoPOList) {
+                count += tripPassengerOrderInfoMapper.insert(passengerOrderInfoPO);
+            }
         }
 
         return count;

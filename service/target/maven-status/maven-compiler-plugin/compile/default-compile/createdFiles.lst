@@ -20,6 +20,7 @@ com\ly\traffic\middleplatform\infrastructure\configure\SqlSessionFactoryBeanAdap
 com\ly\traffic\middleplatform\infrastructure\eventbus\LocalEventBus.class
 com\ly\traffic\middleplatform\domain\order\repository\mapper\ResourceConsumerOrderMapper.class
 com\ly\traffic\middleplatform\interfaces\OrderFactory.class
+com\ly\traffic\middleplatform\domain\order\entity\UTripPassengerOrderInfo.class
 com\ly\traffic\middleplatform\domain\order\repository\mapper\TrainTripInfoMapper.class
 com\ly\traffic\middleplatform\domain\order\repository\mapper\TripPassengerOrderInfoMapper.class
 com\ly\traffic\middleplatform\domain\order\repository\po\MainOrderPO.class

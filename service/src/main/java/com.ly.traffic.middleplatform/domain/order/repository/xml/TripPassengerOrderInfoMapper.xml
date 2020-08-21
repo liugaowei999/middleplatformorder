@@ -4,7 +4,7 @@
 
     <resultMap type="com.ly.traffic.middleplatform.domain.order.repository.po.TripPassengerOrderInfoPO" id="TripPassengerOrderInfoMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
-        <result property="mainOrderInfo" column="main_order_info" jdbcType="VARCHAR"/>
+        <result property="mainOrderNo" column="main_order_no" jdbcType="VARCHAR"/>
         <result property="tripOrderNo" column="trip_order_no" jdbcType="VARCHAR"/>
         <result property="passengerOrderNo" column="passenger_order_no" jdbcType="VARCHAR"/>
         <result property="tripSerial" column="trip_serial" jdbcType="VARCHAR"/>
@@ -24,12 +24,13 @@
         <result property="createUser" column="create_user" jdbcType="VARCHAR"/>
         <result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
         <result property="updateUser" column="update_user" jdbcType="VARCHAR"/>
+        <result property="extendContent" column="extend_content" jdbcType="VARCHAR"/>
     </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="TripPassengerOrderInfoMap">
         select
-          id, main_order_info, trip_order_no, passenger_order_no, trip_serial, ticket_flag, passenger_serial_no, passenger_name, passenger_type, certificate_type, certificate_no, sex, ticket_serial, ticket_summary, refund_status, is_change_ticket, order_change_type, create_date, create_user, update_date, update_user
+          id, main_order_no, trip_order_no, passenger_order_no, trip_serial, ticket_flag, passenger_serial_no, passenger_name, passenger_type, certificate_type, certificate_no, sex, ticket_serial, ticket_summary, refund_status, is_change_ticket, order_change_type, create_date, create_user, update_date, update_user
         from union_order.trip_passenger_order_info
         where id = #{id}
     </select>
@@ -37,7 +38,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="TripPassengerOrderInfoMap">
         select
-          id, main_order_info, trip_order_no, passenger_order_no, trip_serial, ticket_flag, passenger_serial_no, passenger_name, passenger_type, certificate_type, certificate_no, sex, ticket_serial, ticket_summary, refund_status, is_change_ticket, order_change_type, create_date, create_user, update_date, update_user
+          id, main_order_no, trip_order_no, passenger_order_no, trip_serial, ticket_flag, passenger_serial_no, passenger_name, passenger_type, certificate_type, certificate_no, sex, ticket_serial, ticket_summary, refund_status, is_change_ticket, order_change_type, create_date, create_user, update_date, update_user
         from union_order.trip_passenger_order_info
         limit #{offset}, #{limit}
     </select>
@@ -45,14 +46,14 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="TripPassengerOrderInfoMap">
         select
-          id, main_order_info, trip_order_no, passenger_order_no, trip_serial, ticket_flag, passenger_serial_no, passenger_name, passenger_type, certificate_type, certificate_no, sex, ticket_serial, ticket_summary, refund_status, is_change_ticket, order_change_type, create_date, create_user, update_date, update_user
+          id, main_order_no, trip_order_no, passenger_order_no, trip_serial, ticket_flag, passenger_serial_no, passenger_name, passenger_type, certificate_type, certificate_no, sex, ticket_serial, ticket_summary, refund_status, is_change_ticket, order_change_type, create_date, create_user, update_date, update_user
         from union_order.trip_passenger_order_info
         <where>
             <if test="id != null">
                 and id = #{id}
             </if>
-            <if test="mainOrderInfo != null and mainOrderInfo != ''">
-                and main_order_info = #{mainOrderInfo}
+            <if test="mainOrderNo != null and mainOrderNo != ''">
+                and main_order_no = #{mainOrderNo}
             </if>
             <if test="tripOrderNo != null and tripOrderNo != ''">
                 and trip_order_no = #{tripOrderNo}
@@ -116,9 +117,10 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into union_order.trip_passenger_order_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="mainOrderInfo != null and mainOrderInfo != ''">
-                main_order_info,
+            <if test="mainOrderNo != null and mainOrderNo != ''">
+                main_order_no,
             </if>
             <if test="tripOrderNo != null and tripOrderNo != ''">
                 trip_order_no,
@@ -177,10 +179,13 @@
             <if test="updateUser != null and updateUser != ''">
                 update_user,
             </if>
+            <if test="extendContent != null">
+                extend_content,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="mainOrderInfo != null and mainOrderInfo != ''">
-                #{mainOrderInfo},
+            <if test="mainOrderNo != null and mainOrderNo != ''">
+                #{mainOrderNo},
             </if>
             <if test="tripOrderNo != null and tripOrderNo != ''">
                 #{tripOrderNo},
@@ -242,6 +247,9 @@
             <if test="updateUser != null and updateUser != ''">
                 #{updateUser},
             </if>
+            <if test="extendContent != null">
+                #{extendContent},
+            </if>
         </trim>
     </insert>
 
@@ -249,8 +257,8 @@
     <update id="update">
         update union_order.trip_passenger_order_info
         <set>
-            <if test="mainOrderInfo != null and mainOrderInfo != ''">
-                main_order_info = #{mainOrderInfo},
+            <if test="mainOrderNo != null and mainOrderNo != ''">
+                main_order_no = #{mainOrderNo},
             </if>
             <if test="tripOrderNo != null and tripOrderNo != ''">
                 trip_order_no = #{tripOrderNo},

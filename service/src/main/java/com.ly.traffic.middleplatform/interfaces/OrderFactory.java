@@ -3,23 +3,22 @@ package com.ly.traffic.middleplatform.interfaces;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.ly.traffic.middleplatform.domain.createorder.entity.TripOrderInfo;
+import com.google.common.collect.Lists;
 import com.ly.traffic.middleplatform.domain.createorder.entity.TripPassengerOrderInfo;
 import com.ly.traffic.middleplatform.domain.createorder.vo.BusTripInfoVO;
 import com.ly.traffic.middleplatform.domain.createorder.vo.TrainTripInfoVO;
 import com.ly.traffic.middleplatform.domain.createorder.vo.TripInfoVO;
 import com.ly.traffic.middleplatform.domain.order.entity.OrderAggregate;
 import com.ly.traffic.middleplatform.domain.order.entity.UTripOrderInfo;
-import com.ly.traffic.middleplatform.domain.order.repository.po.BusTripInfoPO;
-import com.ly.traffic.middleplatform.domain.order.repository.po.MainOrderPO;
-import com.ly.traffic.middleplatform.domain.order.repository.po.TrainTripInfoPO;
-import com.ly.traffic.middleplatform.domain.order.repository.po.TripOrderInfoPO;
+import com.ly.traffic.middleplatform.domain.order.entity.UTripPassengerOrderInfo;
+import com.ly.traffic.middleplatform.domain.order.repository.po.*;
 import com.ly.traffic.middleplatform.interfaces.dto.CreateOrderRequestDto;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * @author liugw
@@ -44,7 +43,7 @@ public class OrderFactory {
         if (tripInfoVO != null && tripInfoVO instanceof TrainTripInfoVO) {
             TrainTripInfoPO trainTripInfoPO = new TrainTripInfoPO();
             BeanUtils.copyProperties((TrainTripInfoVO)tripInfoVO, trainTripInfoPO);
-            trainTripInfoPO.setTripSerial(UUID.randomUUID().toString());
+            trainTripInfoPO.setTripSerial("TRIP"+System.currentTimeMillis());
             return trainTripInfoPO;
         }
         return null;
@@ -60,7 +59,7 @@ public class OrderFactory {
         if (tripInfoVO != null && tripInfoVO instanceof BusTripInfoVO) {
             BusTripInfoPO busTripInfoPO = new BusTripInfoPO();
             BeanUtils.copyProperties((BusTripInfoVO)tripInfoVO, busTripInfoPO);
-            busTripInfoPO.setTripSerial(UUID.randomUUID().toString());
+            busTripInfoPO.setTripSerial("TRIP"+System.currentTimeMillis());
             return busTripInfoPO;
         }
         return null;
@@ -68,23 +67,48 @@ public class OrderFactory {
 
     public static TripOrderInfoPO tripOrderInfo(OrderAggregate orderAggregate) {
         UTripOrderInfo tripOrderInfo = orderAggregate.getTripOrderInfo();
-        if (tripOrderInfo != null) {
-            TripOrderInfoPO tripOrderInfoPO = new TripOrderInfoPO();
-            BeanUtils.copyProperties(tripOrderInfo, tripOrderInfoPO);
-            return tripOrderInfoPO;
+        if (tripOrderInfo == null) {
+            return null;
         }
-        return null;
+
+        TripOrderInfoPO tripOrderInfoPO = new TripOrderInfoPO();
+        BeanUtils.copyProperties(tripOrderInfo, tripOrderInfoPO);
+        return tripOrderInfoPO;
+    }
+
+    public static List<TripPassengerOrderInfoPO> getTripPassengerOrderInfoPO(OrderAggregate orderAggregate) {
+        UTripOrderInfo tripOrderInfo = orderAggregate.getTripOrderInfo();
+        if (tripOrderInfo == null) {
+            return null;
+        }
+
+        List<TripPassengerOrderInfoPO> tripPassengerOrderInfoPOList = Lists.newArrayList();
+        List<TripPassengerOrderInfo> tripPassengerOrderInfoList = tripOrderInfo.getTripPassengerOrderInfoList();
+        if (CollectionUtils.isNotEmpty(tripPassengerOrderInfoList)) {
+            for (TripPassengerOrderInfo passengerOrderInfo : tripPassengerOrderInfoList) {
+                TripPassengerOrderInfoPO tripPassengerOrderInfoPO = new TripPassengerOrderInfoPO();
+                if (passengerOrderInfo instanceof UTripPassengerOrderInfo) {
+                    BeanUtils.copyProperties((UTripPassengerOrderInfo)passengerOrderInfo, tripPassengerOrderInfoPO);
+                } else {
+                    BeanUtils.copyProperties(passengerOrderInfo, tripPassengerOrderInfoPO);
+                }
+                tripPassengerOrderInfoPOList.add(tripPassengerOrderInfoPO);
+            }
+        }
+        return tripPassengerOrderInfoPOList;
     }
 
     public static OrderAggregate dtoToDo(CreateOrderRequestDto createOrderRequestDto) {
         OrderAggregate orderAggregate = new OrderAggregate();
         BeanUtils.copyProperties(createOrderRequestDto,orderAggregate);
+        long sequenceNo = System.currentTimeMillis();
 
         JSONObject tripJson = JSON.parseObject(createOrderRequestDto.getTripOrderInfo());
         JSONArray tripPassengerOrderInfoList = tripJson.getJSONArray("tripPassengerOrderInfoList");
         tripJson.remove("tripPassengerOrderInfoList");
         UTripOrderInfo tripOrderInfo = tripJson.toJavaObject(UTripOrderInfo.class);
         tripOrderInfo.setMainOrderNo(orderAggregate.getOrderNo());
+        tripOrderInfo.setTripOrderNo(StringUtils.isBlank(tripOrderInfo.getTripOrderNo()) ? "TD"+sequenceNo : tripOrderInfo.getTripOrderNo());
 
         String tripName = TrainTripInfoVO.class.getName();
         if (tripJson.containsKey(tripName)) {
@@ -102,7 +126,10 @@ public class OrderFactory {
             int size = tripPassengerOrderInfoList.size();
             List<TripPassengerOrderInfo> passengerOrderInfoList = new ArrayList<>(size);
             for (int i = 0; i < size; i++) {
-                TripPassengerOrderInfo tripPassengerOrderInfo = JSONObject.parseObject(tripPassengerOrderInfoList.getString(i), TripPassengerOrderInfo.class);
+                UTripPassengerOrderInfo tripPassengerOrderInfo = JSONObject.parseObject(tripPassengerOrderInfoList.getString(i), UTripPassengerOrderInfo.class);
+                tripPassengerOrderInfo.setMainOrderNo(orderAggregate.getOrderNo());
+                tripPassengerOrderInfo.setTripOrderNo(tripOrderInfo.getTripOrderNo());
+                tripPassengerOrderInfo.setPassengerOrderNo(StringUtils.isBlank(tripPassengerOrderInfo.getPassengerOrderNo()) ? "TPD"+sequenceNo : tripPassengerOrderInfo.getPassengerOrderNo());
                 passengerOrderInfoList.add(tripPassengerOrderInfo);
             }
             tripOrderInfo.setTripPassengerOrderInfoList(passengerOrderInfoList);

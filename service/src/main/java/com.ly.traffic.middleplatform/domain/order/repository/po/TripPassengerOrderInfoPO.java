@@ -1,5 +1,7 @@
 package com.ly.traffic.middleplatform.domain.order.repository.po;
 
+import lombok.Data;
+
 import java.util.Date;
 import java.io.Serializable;
 
@@ -9,6 +11,7 @@ import java.io.Serializable;
  * @author makejava
  * @since 2020-08-20 14:11:35
  */
+@Data
 public class TripPassengerOrderInfoPO implements Serializable {
     private static final long serialVersionUID = 904386893143175383L;
     /**
@@ -18,7 +21,7 @@ public class TripPassengerOrderInfoPO implements Serializable {
     /**
     * 主订单流水号
     */
-    private String mainOrderInfo;
+    private String mainOrderNo;
     /**
     * 出行订单流水号
     */
@@ -96,6 +99,11 @@ public class TripPassengerOrderInfoPO implements Serializable {
     */
     private String updateUser;
 
+    /**
+     * 扩展信息
+     */
+    private String extendContent;
+
 
     public Long getId() {
         return id;
@@ -105,12 +113,12 @@ public class TripPassengerOrderInfoPO implements Serializable {
         this.id = id;
     }
 
-    public String getMainOrderInfo() {
-        return mainOrderInfo;
+    public String getMainOrderNo() {
+        return mainOrderNo;
     }
 
-    public void setMainOrderInfo(String mainOrderInfo) {
-        this.mainOrderInfo = mainOrderInfo;
+    public void setMainOrderNo(String mainOrderNo) {
+        this.mainOrderNo = mainOrderNo;
     }
 
     public String getTripOrderNo() {

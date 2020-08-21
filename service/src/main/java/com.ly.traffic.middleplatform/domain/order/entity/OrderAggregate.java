@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.util.CollectionUtils;
 
+import java.util.List;
+
 /**
  * @author liugw
  * @Package com.ly.traffic.middleplatform.domain.order
