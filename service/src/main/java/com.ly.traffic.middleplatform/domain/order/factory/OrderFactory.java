@@ -43,7 +43,7 @@ public class OrderFactory {
         if (tripInfoVO != null && tripInfoVO instanceof TrainTripInfoVO) {
             TrainTripInfoPO trainTripInfoPO = new TrainTripInfoPO();
             BeanUtils.copyProperties((TrainTripInfoVO)tripInfoVO, trainTripInfoPO);
-            trainTripInfoPO.setTripSerial("TRIP"+System.currentTimeMillis());
+            trainTripInfoPO.setTripSerial(tripOrderInfo.getTripSerial());
             return trainTripInfoPO;
         }
         return null;
@@ -62,7 +62,7 @@ public class OrderFactory {
         if (tripInfoVO != null && tripInfoVO instanceof BusTripInfoVO) {
             BusTripInfoPO busTripInfoPO = new BusTripInfoPO();
             BeanUtils.copyProperties((BusTripInfoVO)tripInfoVO, busTripInfoPO);
-            busTripInfoPO.setTripSerial("TRIP"+System.currentTimeMillis());
+            busTripInfoPO.setTripSerial(tripOrderInfo.getTripSerial());
             return busTripInfoPO;
         }
         return null;

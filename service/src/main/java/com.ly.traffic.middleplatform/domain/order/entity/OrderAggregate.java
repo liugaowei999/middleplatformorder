@@ -2,9 +2,12 @@ package com.ly.traffic.middleplatform.domain.order.entity;
 
 
 import com.ly.traffic.middleplatform.domain.createorder.entity.MainOrder;
+import com.ly.traffic.middleplatform.domain.createorder.entity.TripPassengerOrderInfo;
 import com.ly.traffic.middleplatform.domain.order.repository.IOrderRepository;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -12,7 +15,7 @@ import java.util.List;
 /**
  * @author liugw
  * @Package com.ly.traffic.middleplatform.domain.order
- * @Description: ${TODO}
+ * @Description: 订单聚合-聚合根
  * @date 2020/7/6 15:00
  */
 @Getter
@@ -38,8 +41,44 @@ public class OrderAggregate extends MainOrder {
      */
     private UTripOrderInfo tripOrderInfo;
 
-    public int saveToDB(IOrderRepository orderRepository) {
-        this.setCreateDate(new Date());
+
+    /**
+     * 聚合创建 ： 聚合数据准备
+     * @throws Exception 1
+     */
+    public void create() throws Exception {
+        if (StringUtils.isEmpty(this.getOrderNo())) {
+            throw new Exception("主订单号不能为空！");
+        }
+
+        tripOrderInfo.setMainOrderNo(this.getOrderNo());
+        long sequenceNo = System.currentTimeMillis();
+        tripOrderInfo.setTripOrderNo(StringUtils.isBlank(tripOrderInfo.getTripOrderNo()) ? "TD"+sequenceNo : tripOrderInfo.getTripOrderNo());
+        tripOrderInfo.setTripSerial(StringUtils.isBlank(tripOrderInfo.getTripSerial()) ? "TRIP"+sequenceNo : tripOrderInfo.getTripSerial());
+
+        List<TripPassengerOrderInfo> tripPassengerOrderInfoList = tripOrderInfo.getTripPassengerOrderInfoList();
+        for (TripPassengerOrderInfo passengerOrderInfo : tripPassengerOrderInfoList) {
+            if (passengerOrderInfo instanceof UTripPassengerOrderInfo) {
+                UTripPassengerOrderInfo upo = (UTripPassengerOrderInfo) passengerOrderInfo;
+                upo.setMainOrderNo(this.getOrderNo());
+                upo.setTripOrderNo(tripOrderInfo.getTripOrderNo());
+                upo.setPassengerOrderNo(StringUtils.isBlank(upo.getPassengerOrderNo()) ? "TPD" + sequenceNo : upo.getPassengerOrderNo());
+            }
+        }
+
+        this.setCreateDate(ObjectUtils.allNotNull(getCreateDate()) ? getCreateDate() : new Date());
+        this.setCreateUser(ObjectUtils.allNotNull(getCreateUser()) ? getCreateUser() : "system");
+    }
+
+    /**
+     * 不推荐的持久化方式： 领域对象 耦合了 仓储
+     *
+     * @param orderRepository 1
+     * @return 1
+     * @throws Exception 1
+     */
+    public int saveToDB(IOrderRepository orderRepository) throws Exception {
+        create();
 
         return orderRepository.save(this);
     }

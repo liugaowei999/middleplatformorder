@@ -10,6 +10,6 @@ import com.ly.traffic.middleplatform.interfaces.dto.CreateOrderRequestDto;
  */
 public class ParamCheck {
     public static boolean isNotValid(CreateOrderRequestDto order) {
-        return true;
+        return false;
     }
 }

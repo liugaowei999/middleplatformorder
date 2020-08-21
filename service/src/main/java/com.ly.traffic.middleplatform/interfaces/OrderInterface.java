@@ -39,11 +39,6 @@ public class OrderInterface {
         return result;
     }
 
-    @RequestMapping(value="/selectOne2", method=RequestMethod.POST)
-    public Result queryByIdPost(@RequestBody OrderAggregate order) {
-        return queryById(order.getId());
-    }
-
     @RequestMapping(value="/save", method=RequestMethod.POST)
     public Result createOrder(@RequestBody CreateOrderRequestDto order) {
         Result result = new Result(ResultCode.OK);
@@ -53,7 +48,13 @@ public class OrderInterface {
             result.setFail(ResultCode.PARAM_INVALID.val(), "参数非法！");
             return result;
         }
-        int count = orderApplicationService.createOrder(order);
+        int count = 0;
+        try {
+            count = orderApplicationService.createOrder(order);
+        } catch (Exception e) {
+            result.setMsg("创建订单失败！reason:" + e.getMessage());
+            return result;
+        }
         if (count <= 0) {
             result.setMsg("创建订单失败！");
         }

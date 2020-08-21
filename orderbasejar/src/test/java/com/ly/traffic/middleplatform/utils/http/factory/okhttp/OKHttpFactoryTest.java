@@ -35,19 +35,20 @@ public class OKHttpFactoryTest {
 
   @Test
   public void testGetOrderInfo() {
-    Map<String, String> map = new HashMap<>();
-    map.put("id", "1");
-/*    RequestContext requestContext = new RequestContext("http://localhost:8096/order/selectOne");
+//    Map<String, String> map = new HashMap<>();
+//    map.put("id", "23");
+    RequestContext requestContext = new RequestContext("http://localhost:8096/order/selectOne?id=23");
 
-    requestContext.setParameters(map);
-    CompletableFuture<String> result = HttpFactory.okHttpFactory.get(requestContext);*/
+//    requestContext.setParameters(map);
+    CompletableFuture<String> result = HttpFactory.okHttpFactory.get(requestContext);
 
-    RequestContext requestContext = new RequestContext("http://localhost:8096/order/selectOne2");
+    /*RequestContext requestContext = new RequestContext("http://localhost:8096/order/selectOne2");
     JSONObject body = new JSONObject();
-    body.put("id", 1);
+    body.put("id", 23);
     System.out.println(body.toJSONString());
     requestContext.setRequestBody(body.toJSONString());
-    CompletableFuture<String> result = HttpFactory.httpAsyncClientFactory.post(requestContext);
+    CompletableFuture<String> result = HttpFactory.httpAsyncClientFactory.post(requestContext);*/
+
     result.whenComplete((r,e) -> {
       System.out.println("结果：" + r);
       if (e != null) {

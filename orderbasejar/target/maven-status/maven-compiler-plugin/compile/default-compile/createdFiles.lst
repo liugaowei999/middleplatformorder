@@ -3,6 +3,7 @@ com\ly\traffic\middleplatform\utils\http\config\FlowerHttpConfig.class
 com\ly\traffic\middleplatform\utils\http\HttpFactory.class
 com\ly\traffic\middleplatform\domain\createorder\entity\TripPassengerOrderInfo.class
 com\ly\traffic\middleplatform\utils\http\factory\httpasyncclient\HttpAsyncClientFactory$1.class
+com\ly\traffic\middleplatform\domain\createorder\repository\ICreateOrderRepository.class
 com\ly\traffic\middleplatform\domain\createorder\vo\TripInfoVO.class
 com\ly\traffic\middleplatform\utils\http\HttpFactory$OKHttpFactoryHodler.class
 com\ly\traffic\middleplatform\utils\http\factory\httpasyncclient\HttpAsyncClientFactory.class
@@ -15,7 +16,6 @@ com\ly\traffic\middleplatform\domain\createorder\vo\TrainTripInfoVO.class
 com\ly\traffic\middleplatform\utils\http\HttpFactory$HttpClientFactoryHodler.class
 com\ly\traffic\middleplatform\domain\createorder\entity\MainOrder.class
 com\ly\traffic\middleplatform\domain\createorder\entity\TripOrderInfo.class
-com\ly\traffic\middleplatform\domain\createorder\repository\IOrderRepository.class
 com\ly\traffic\middleplatform\utils\http\util\NamedThreadFactory.class
 com\ly\traffic\middleplatform\utils\http\config\RequestContext.class
 com\ly\traffic\middleplatform\utils\http\factory\httpasyncclient\HttpClientCallback.class

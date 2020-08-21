@@ -10,7 +10,6 @@ import com.ly.traffic.middleplatform.domain.order.entity.OrderAggregate;
 import com.ly.traffic.middleplatform.domain.order.entity.UTripOrderInfo;
 import com.ly.traffic.middleplatform.domain.order.entity.UTripPassengerOrderInfo;
 import com.ly.traffic.middleplatform.interfaces.dto.CreateOrderRequestDto;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 
 import java.util.ArrayList;
@@ -31,14 +30,11 @@ public class OrderAssembler {
     public static OrderAggregate dtoToDo(CreateOrderRequestDto createOrderRequestDto) {
         OrderAggregate orderAggregate = new OrderAggregate();
         BeanUtils.copyProperties(createOrderRequestDto,orderAggregate);
-        long sequenceNo = System.currentTimeMillis();
 
         JSONObject tripJson = JSON.parseObject(createOrderRequestDto.getTripOrderInfo());
         JSONArray tripPassengerOrderInfoList = tripJson.getJSONArray("tripPassengerOrderInfoList");
         tripJson.remove("tripPassengerOrderInfoList");
         UTripOrderInfo tripOrderInfo = tripJson.toJavaObject(UTripOrderInfo.class);
-        tripOrderInfo.setMainOrderNo(orderAggregate.getOrderNo());
-        tripOrderInfo.setTripOrderNo(StringUtils.isBlank(tripOrderInfo.getTripOrderNo()) ? "TD"+sequenceNo : tripOrderInfo.getTripOrderNo());
 
         String tripName = TrainTripInfoVO.class.getName();
         if (tripJson.containsKey(tripName)) {
@@ -57,9 +53,6 @@ public class OrderAssembler {
             List<TripPassengerOrderInfo> passengerOrderInfoList = new ArrayList<>(size);
             for (int i = 0; i < size; i++) {
                 UTripPassengerOrderInfo tripPassengerOrderInfo = JSONObject.parseObject(tripPassengerOrderInfoList.getString(i), UTripPassengerOrderInfo.class);
-                tripPassengerOrderInfo.setMainOrderNo(orderAggregate.getOrderNo());
-                tripPassengerOrderInfo.setTripOrderNo(tripOrderInfo.getTripOrderNo());
-                tripPassengerOrderInfo.setPassengerOrderNo(StringUtils.isBlank(tripPassengerOrderInfo.getPassengerOrderNo()) ? "TPD"+sequenceNo : tripPassengerOrderInfo.getPassengerOrderNo());
                 passengerOrderInfoList.add(tripPassengerOrderInfo);
             }
             tripOrderInfo.setTripPassengerOrderInfoList(passengerOrderInfoList);
