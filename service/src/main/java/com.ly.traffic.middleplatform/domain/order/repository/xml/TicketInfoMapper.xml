@@ -84,8 +84,83 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into union_order.ticket_info(ticket_serial, ticket_no, ticket_price, carriage_no, seat_no, seat_class, sms, ticket_password, ticket_verify_code, ticket_order_num, ticket_phone, checkin_nos)
-        values (#{ticketSerial}, #{ticketNo}, #{ticketPrice}, #{carriageNo}, #{seatNo}, #{seatClass}, #{sms}, #{ticketPassword}, #{ticketVerifyCode}, #{ticketOrderNum}, #{ticketPhone}, #{checkinNos})
+        insert into union_order.ticket_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="ticketSerial != null and ticketSerial != ''">
+                ticket_serial ,
+            </if>
+            <if test="ticketNo != null and ticketNo != ''">
+                ticket_no ,
+            </if>
+            <if test="ticketPrice != null">
+                ticket_price,
+            </if>
+            <if test="carriageNo != null and carriageNo != ''">
+                carriage_no ,
+            </if>
+            <if test="seatNo != null and seatNo != ''">
+                seat_no ,
+            </if>
+            <if test="seatClass != null">
+                seat_class ,
+            </if>
+            <if test="sms != null and sms != ''">
+                sms ,
+            </if>
+            <if test="ticketPassword != null and ticketPassword != ''">
+                ticket_password ,
+            </if>
+            <if test="ticketVerifyCode != null and ticketVerifyCode != ''">
+                ticket_verify_code ,
+            </if>
+            <if test="ticketOrderNum != null and ticketOrderNum != ''">
+                ticket_order_num ,
+            </if>
+            <if test="ticketPhone != null and ticketPhone != ''">
+                ticket_phone,
+            </if>
+            <if test="checkinNos != null and checkinNos != ''">
+                checkin_nos,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="ticketSerial != null and ticketSerial != ''">
+                #{ticketSerial},
+            </if>
+            <if test="ticketNo != null and ticketNo != ''">
+                #{ticketNo},
+            </if>
+            <if test="ticketPrice != null">
+                #{ticketPrice},
+            </if>
+            <if test="carriageNo != null and carriageNo != ''">
+                #{carriageNo},
+            </if>
+            <if test="seatNo != null and seatNo != ''">
+                #{seatNo},
+            </if>
+            <if test="seatClass != null">
+                #{seatClass},
+            </if>
+            <if test="sms != null and sms != ''">
+                #{sms},
+            </if>
+            <if test="ticketPassword != null and ticketPassword != ''">
+                #{ticketPassword},
+            </if>
+            <if test="ticketVerifyCode != null and ticketVerifyCode != ''">
+                 #{ticketVerifyCode},
+            </if>
+            <if test="ticketOrderNum != null and ticketOrderNum != ''">
+                #{ticketOrderNum},
+            </if>
+            <if test="ticketPhone != null and ticketPhone != ''">
+                #{ticketPhone},
+            </if>
+            <if test="checkinNos != null and checkinNos != ''">
+                #{checkinNos},
+            </if>
+        </trim>
     </insert>
 
     <!--通过主键修改数据-->

@@ -92,8 +92,96 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into union_order.resource_consumer_order(mainOrderNo, tripOrderNo, cardId, cardNo, cardType, memberId, useStatus, reason, occupyTime, writeoffTime, createTime, createUser, updateTime, updateUser)
-        values (#{mainorderno}, #{triporderno}, #{cardid}, #{cardno}, #{cardtype}, #{memberid}, #{usestatus}, #{reason}, #{occupytime}, #{writeofftime}, #{createtime}, #{createuser}, #{updatetime}, #{updateuser})
+        insert into union_order.resource_consumer_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="mainorderno != null and mainorderno != ''">
+                mainOrderNo ,
+            </if>
+            <if test="triporderno != null and triporderno != ''">
+                tripOrderNo ,
+            </if>
+            <if test="cardid != null and cardid != ''">
+                cardId ,
+            </if>
+            <if test="cardno != null and cardno != ''">
+                cardNo ,
+            </if>
+            <if test="cardtype != null">
+                cardType ,
+            </if>
+            <if test="memberid != null and memberid != ''">
+                memberId,
+            </if>
+            <if test="usestatus != null">
+                useStatus,
+            </if>
+            <if test="reason != null and reason != ''">
+                reason,
+            </if>
+            <if test="occupytime != null">
+                occupyTime,
+            </if>
+            <if test="writeofftime != null">
+                writeoffTime,
+            </if>
+
+                createTime,
+
+            <if test="createuser != null and createuser != ''">
+                createUser,
+            </if>
+            <if test="updatetime != null">
+                updateTime,
+            </if>
+            <if test="updateuser != null and updateuser != ''">
+                updateUser,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="mainorderno != null and mainorderno != ''">
+                #{mainorderno},
+            </if>
+            <if test="triporderno != null and triporderno != ''">
+                #{triporderno},
+            </if>
+            <if test="cardid != null and cardid != ''">
+                #{cardid},
+            </if>
+            <if test="cardno != null and cardno != ''">
+                #{cardno},
+            </if>
+            <if test="cardtype != null">
+                #{cardtype},
+            </if>
+            <if test="memberid != null and memberid != ''">
+                #{memberid},
+            </if>
+            <if test="usestatus != null">
+                #{usestatus},
+            </if>
+            <if test="reason != null and reason != ''">
+                #{reason},
+            </if>
+            <if test="occupytime != null">
+                #{occupytime},
+            </if>
+            <if test="writeofftime != null">
+                #{writeofftime},
+            </if>
+
+                now(),
+
+            <if test="createuser != null and createuser != ''">
+                #{createuser},
+            </if>
+            <if test="updatetime != null">
+                #{updatetime},
+            </if>
+            <if test="updateuser != null and updateuser != ''">
+                #{updateuser},
+            </if>
+        </trim>
+
     </insert>
 
     <!--通过主键修改数据-->

@@ -117,10 +117,131 @@
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
         <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="mainOrderInfo != null and mainOrderInfo != ''">
+                main_order_info,
+            </if>
+            <if test="tripOrderNo != null and tripOrderNo != ''">
+                trip_order_no,
+            </if>
+            <if test="passengerOrderNo != null and passengerOrderNo != ''">
+                passenger_order_no,
+            </if>
+            <if test="tripSerial != null and tripSerial != ''">
+                trip_serial,
+            </if>
+            <if test="ticketFlag != null">
+                ticket_flag,
+            </if>
+            <if test="passengerSerialNo != null and passengerSerialNo != ''">
+                passenger_serial_no,
+            </if>
+            <if test="passengerName != null and passengerName != ''">
+                passenger_name,
+            </if>
+            <if test="passengerType != null">
+                passenger_type,
+            </if>
+            <if test="certificateType != null">
+                certificate_type,
+            </if>
+            <if test="certificateNo != null and certificateNo != ''">
+                certificate_no,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="ticketSerial != null and ticketSerial != ''">
+                ticket_serial,
+            </if>
+            <if test="ticketSummary != null and ticketSummary != ''">
+                ticket_summary,
+            </if>
+            <if test="refundStatus != null and refundStatus != ''">
+                refund_status,
+            </if>
+            <if test="isChangeTicket != null">
+                is_change_ticket,
+            </if>
+            <if test="orderChangeType != null">
+                order_change_type,
+            </if>
 
+                create_date,
+
+            <if test="createUser != null and createUser != ''">
+                create_user,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="updateUser != null and updateUser != ''">
+                update_user,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-
+            <if test="mainOrderInfo != null and mainOrderInfo != ''">
+                #{mainOrderInfo},
+            </if>
+            <if test="tripOrderNo != null and tripOrderNo != ''">
+                #{tripOrderNo},
+            </if>
+            <if test="passengerOrderNo != null and passengerOrderNo != ''">
+                #{passengerOrderNo},
+            </if>
+            <if test="tripSerial != null and tripSerial != ''">
+                #{tripSerial},
+            </if>
+            <if test="ticketFlag != null">
+                #{ticketFlag},
+            </if>
+            <if test="passengerSerialNo != null and passengerSerialNo != ''">
+                #{passengerSerialNo},
+            </if>
+            <if test="passengerName != null and passengerName != ''">
+                #{passengerName},
+            </if>
+            <if test="passengerType != null">
+                #{passengerType},
+            </if>
+            <if test="certificateType != null">
+                #{certificateType},
+            </if>
+            <if test="certificateNo != null and certificateNo != ''">
+                #{certificateNo},
+            </if>
+            <if test="sex != null">
+                #{sex},
+            </if>
+            <if test="ticketSerial != null and ticketSerial != ''">
+                #{ticketSerial},
+            </if>
+            <if test="ticketSummary != null and ticketSummary != ''">
+                #{ticketSummary},
+            </if>
+            <if test="refundStatus != null and refundStatus != ''">
+                #{refundStatus},
+            </if>
+            <if test="isChangeTicket != null">
+                #{isChangeTicket},
+            </if>
+            <if test="orderChangeType != null">
+                #{orderChangeType},
+            </if>
+            <if test="createDate != null">
+                #{createDate},
+            </if>
+            <if test="createDate == null">
+                now(),
+            </if>
+            <if test="createUser != null and createUser != ''">
+                #{createUser},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate},
+            </if>
+            <if test="updateUser != null and updateUser != ''">
+                #{updateUser},
+            </if>
         </trim>
     </insert>
 
