@@ -1,10 +1,10 @@
-package com.ly.traffic.middleplatform.domain.order.repository;
+package com.ly.traffic.middleplatform.domain.order.repository.persistence;
 
-import com.alibaba.fastjson.JSON;
 import com.ly.traffic.middleplatform.domain.order.entity.OrderAggregate;
+import com.ly.traffic.middleplatform.domain.order.repository.IOrderRepository;
 import com.ly.traffic.middleplatform.domain.order.repository.mapper.*;
 import com.ly.traffic.middleplatform.domain.order.repository.po.*;
-import com.ly.traffic.middleplatform.interfaces.OrderFactory;
+import com.ly.traffic.middleplatform.domain.order.factory.OrderFactory;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,9 +19,9 @@ import java.util.List;
  * @since 2020-08-07 17:29:26
  */
 @Service
-public class OrderRepository {
+public class OrderRepository implements IOrderRepository {
     @Resource
-    private MainOrderMapper mainOrderDao;
+    private MainOrderMapper mainOrderMapper;
 
     @Resource
     private TrainTripInfoMapper trainTripInfoMapper;
@@ -41,59 +41,22 @@ public class OrderRepository {
      * @param id 主键
      * @return 实例对象
      */
+    @Override
     public MainOrderPO queryById(Integer id) {
-        return this.mainOrderDao.queryById(id);
+        return this.mainOrderMapper.queryById(id);
     }
 
     /**
-     * 查询多条数据
-     *
-     * @param offset 查询起始位置
-     * @param limit 查询条数
-     * @return 对象列表
+     * 仓储持久化订单数据
+     * @param orderAggregate 1
+     * @return 1
      */
-    public List<MainOrderPO> queryAllByLimit(int offset, int limit) {
-        return this.mainOrderDao.queryAllByLimit(offset, limit);
-    }
-
-    /**
-     * 新增数据
-     *
-     * @param MainOrderPO 实例对象
-     * @return 实例对象
-     */
-    public MainOrderPO insert(MainOrderPO MainOrderPO) {
-        this.mainOrderDao.insert(MainOrderPO);
-        return MainOrderPO;
-    }
-
-    /**
-     * 修改数据
-     *
-     * @param MainOrderPO 实例对象
-     * @return 实例对象
-     */
-    public MainOrderPO update(MainOrderPO MainOrderPO) {
-        this.mainOrderDao.update(MainOrderPO);
-        return this.queryById(MainOrderPO.getId());
-    }
-
-    /**
-     * 通过主键删除数据
-     *
-     * @param id 主键
-     * @return 是否成功
-     */
-    public boolean deleteById(Integer id) {
-        return this.mainOrderDao.deleteById(id) > 0;
-    }
-
     @Transactional(rollbackFor = Exception.class)
-    public int insert(OrderAggregate orderAggregate) {
+    @Override
+    public int save(OrderAggregate orderAggregate) {
         int count = 0;
         MainOrderPO mainOrderPO = OrderFactory.getMainOrderPO(orderAggregate);
-        System.out.println("factory:" + JSON.toJSONString(mainOrderPO));
-        count += mainOrderDao.insert(mainOrderPO);
+        count += mainOrderMapper.insert(mainOrderPO);
 
         TrainTripInfoPO trainTripInfoPO = OrderFactory.getTrainTripInfoPO(orderAggregate);
         BusTripInfoPO busTripInfoPO = OrderFactory.getBusTripInfoPO(orderAggregate);
@@ -119,5 +82,16 @@ public class OrderRepository {
         }
 
         return count;
+    }
+
+    /**
+     * 修改数据
+     *
+     * @param MainOrderPO 实例对象
+     * @return 实例对象
+     */
+    public MainOrderPO update(MainOrderPO MainOrderPO) {
+        this.mainOrderMapper.update(MainOrderPO);
+        return this.queryById(MainOrderPO.getId());
     }
 }

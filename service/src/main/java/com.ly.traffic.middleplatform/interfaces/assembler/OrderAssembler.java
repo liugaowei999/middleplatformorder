@@ -1,19 +1,15 @@
-package com.ly.traffic.middleplatform.interfaces;
+package com.ly.traffic.middleplatform.interfaces.assembler;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.google.common.collect.Lists;
 import com.ly.traffic.middleplatform.domain.createorder.entity.TripPassengerOrderInfo;
 import com.ly.traffic.middleplatform.domain.createorder.vo.BusTripInfoVO;
 import com.ly.traffic.middleplatform.domain.createorder.vo.TrainTripInfoVO;
-import com.ly.traffic.middleplatform.domain.createorder.vo.TripInfoVO;
 import com.ly.traffic.middleplatform.domain.order.entity.OrderAggregate;
 import com.ly.traffic.middleplatform.domain.order.entity.UTripOrderInfo;
 import com.ly.traffic.middleplatform.domain.order.entity.UTripPassengerOrderInfo;
-import com.ly.traffic.middleplatform.domain.order.repository.po.*;
 import com.ly.traffic.middleplatform.interfaces.dto.CreateOrderRequestDto;
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 
@@ -22,82 +18,16 @@ import java.util.List;
 
 /**
  * @author liugw
- * @Package com.ly.traffic.middleplatform.interfaces
+ * @Package com.ly.traffic.middleplatform.interfaces.assembler
  * @Description: ${TODO}
- * @date 2020/8/20 17:10
+ * @date 2020/8/21 15:34
  */
-public class OrderFactory {
-    public static MainOrderPO getMainOrderPO(OrderAggregate order) {
-        MainOrderPO mainOrderPO = new MainOrderPO();
-        BeanUtils.copyProperties(order, mainOrderPO);
-        return mainOrderPO;
-    }
-
-    public static TrainTripInfoPO getTrainTripInfoPO(OrderAggregate orderAggregate) {
-        UTripOrderInfo tripOrderInfo = orderAggregate.getTripOrderInfo();
-        if (tripOrderInfo == null) {
-            return null;
-        }
-
-        TripInfoVO tripInfoVO = tripOrderInfo.getTripInfoVO();
-        if (tripInfoVO != null && tripInfoVO instanceof TrainTripInfoVO) {
-            TrainTripInfoPO trainTripInfoPO = new TrainTripInfoPO();
-            BeanUtils.copyProperties((TrainTripInfoVO)tripInfoVO, trainTripInfoPO);
-            trainTripInfoPO.setTripSerial("TRIP"+System.currentTimeMillis());
-            return trainTripInfoPO;
-        }
-        return null;
-    }
-
-    public static BusTripInfoPO getBusTripInfoPO(OrderAggregate orderAggregate) {
-        UTripOrderInfo tripOrderInfo = orderAggregate.getTripOrderInfo();
-        if (tripOrderInfo == null) {
-            return null;
-        }
-
-        TripInfoVO tripInfoVO = tripOrderInfo.getTripInfoVO();
-        if (tripInfoVO != null && tripInfoVO instanceof BusTripInfoVO) {
-            BusTripInfoPO busTripInfoPO = new BusTripInfoPO();
-            BeanUtils.copyProperties((BusTripInfoVO)tripInfoVO, busTripInfoPO);
-            busTripInfoPO.setTripSerial("TRIP"+System.currentTimeMillis());
-            return busTripInfoPO;
-        }
-        return null;
-    }
-
-    public static TripOrderInfoPO tripOrderInfo(OrderAggregate orderAggregate) {
-        UTripOrderInfo tripOrderInfo = orderAggregate.getTripOrderInfo();
-        if (tripOrderInfo == null) {
-            return null;
-        }
-
-        TripOrderInfoPO tripOrderInfoPO = new TripOrderInfoPO();
-        BeanUtils.copyProperties(tripOrderInfo, tripOrderInfoPO);
-        return tripOrderInfoPO;
-    }
-
-    public static List<TripPassengerOrderInfoPO> getTripPassengerOrderInfoPO(OrderAggregate orderAggregate) {
-        UTripOrderInfo tripOrderInfo = orderAggregate.getTripOrderInfo();
-        if (tripOrderInfo == null) {
-            return null;
-        }
-
-        List<TripPassengerOrderInfoPO> tripPassengerOrderInfoPOList = Lists.newArrayList();
-        List<TripPassengerOrderInfo> tripPassengerOrderInfoList = tripOrderInfo.getTripPassengerOrderInfoList();
-        if (CollectionUtils.isNotEmpty(tripPassengerOrderInfoList)) {
-            for (TripPassengerOrderInfo passengerOrderInfo : tripPassengerOrderInfoList) {
-                TripPassengerOrderInfoPO tripPassengerOrderInfoPO = new TripPassengerOrderInfoPO();
-                if (passengerOrderInfo instanceof UTripPassengerOrderInfo) {
-                    BeanUtils.copyProperties((UTripPassengerOrderInfo)passengerOrderInfo, tripPassengerOrderInfoPO);
-                } else {
-                    BeanUtils.copyProperties(passengerOrderInfo, tripPassengerOrderInfoPO);
-                }
-                tripPassengerOrderInfoPOList.add(tripPassengerOrderInfoPO);
-            }
-        }
-        return tripPassengerOrderInfoPOList;
-    }
-
+public class OrderAssembler {
+    /**
+     * DTO 转 OrderAggregate领域对象
+     * @param createOrderRequestDto 1
+     * @return 1
+     */
     public static OrderAggregate dtoToDo(CreateOrderRequestDto createOrderRequestDto) {
         OrderAggregate orderAggregate = new OrderAggregate();
         BeanUtils.copyProperties(createOrderRequestDto,orderAggregate);

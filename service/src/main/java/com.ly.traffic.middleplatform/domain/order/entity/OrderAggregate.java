@@ -2,11 +2,11 @@ package com.ly.traffic.middleplatform.domain.order.entity;
 
 
 import com.ly.traffic.middleplatform.domain.createorder.entity.MainOrder;
-import com.ly.traffic.middleplatform.domain.createorder.entity.TripOrderInfo;
+import com.ly.traffic.middleplatform.domain.order.repository.IOrderRepository;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.util.CollectionUtils;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,5 +37,11 @@ public class OrderAggregate extends MainOrder {
      * 订单出行信息
      */
     private UTripOrderInfo tripOrderInfo;
+
+    public int saveToDB(IOrderRepository orderRepository) {
+        this.setCreateDate(new Date());
+
+        return orderRepository.save(this);
+    }
 
 }
