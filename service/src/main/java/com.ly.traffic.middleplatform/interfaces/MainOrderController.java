@@ -1,8 +1,10 @@
 package com.ly.traffic.middleplatform.interfaces;
 
 import com.alibaba.fastjson.JSON;
+import com.ly.traffic.middleplatform.domain.order.entity.OrderAggregate;
 import com.ly.traffic.middleplatform.domain.order.repository.OrderRepository;
 import com.ly.traffic.middleplatform.domain.order.repository.po.MainOrderPO;
+import com.ly.traffic.middleplatform.interfaces.dto.CreateOrderRequestDto;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -36,17 +38,19 @@ public class MainOrderController {
     }
 
     @RequestMapping(value="/selectOne2", method=RequestMethod.POST)
-    public MainOrderPO selectOnePost(@RequestBody MainOrderPO order) {
+    public MainOrderPO selectOnePost(@RequestBody OrderAggregate order) {
         MainOrderPO MainOrderPO = this.orderRepository.queryById(order.getId());
         System.out.println(JSON.toJSONString(MainOrderPO));
         return MainOrderPO;
     }
 
     @RequestMapping(value="/save", method=RequestMethod.POST)
-    public MainOrderPO save(@RequestBody MainOrderPO order) {
-        MainOrderPO MainOrderPO = this.orderRepository.insert(order);
-        System.out.println(JSON.toJSONString(MainOrderPO));
-        return MainOrderPO;
+    public int save(@RequestBody CreateOrderRequestDto order) {
+        System.out.println(JSON.toJSONString(order));
+        OrderAggregate orderAggregate = OrderFactory.dtoToDo(order);
+
+        int count = this.orderRepository.insert(orderAggregate);
+        return count;
     }
 
 }

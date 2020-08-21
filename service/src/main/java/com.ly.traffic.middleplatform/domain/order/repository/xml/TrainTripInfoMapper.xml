@@ -152,8 +152,189 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into union_order.train_trip_info(trip_serial, train_no, seat_class, start_station_code, start_station_name, start_station_state, end_station_code, end_station_name, end_station_state, place_order_for_night, user_name, password, bind_phone, choose_seats, acceptnoseat, grab_end_time, begin_sale_time, self_select, from_city, to_city, start_date_time, end_date_time, from_city_id, to_city_id, traffic_no, create_date, create_user, update_date, update_user)
-        values (#{tripSerial}, #{trainNo}, #{seatClass}, #{startStationCode}, #{startStationName}, #{startStationState}, #{endStationCode}, #{endStationName}, #{endStationState}, #{placeOrderForNight}, #{userName}, #{password}, #{bindPhone}, #{chooseSeats}, #{acceptnoseat}, #{grabEndTime}, #{beginSaleTime}, #{selfSelect}, #{fromCity}, #{toCity}, #{startDateTime}, #{endDateTime}, #{fromCityId}, #{toCityId}, #{trafficNo}, #{createDate}, #{createUser}, #{updateDate}, #{updateUser})
+        insert into union_order.train_trip_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tripSerial != null and tripSerial != ''">
+                trip_serial,
+            </if>
+            <if test="trainNo != null and trainNo != ''">
+                train_no,
+            </if>
+            <if test="seatClass != null">
+                seat_class,
+            </if>
+            <if test="startStationCode != null and startStationCode != ''">
+                start_station_code,
+            </if>
+            <if test="startStationName != null and startStationName != ''">
+                start_station_name,
+            </if>
+            <if test="startStationState != null">
+                start_station_state ,
+            </if>
+            <if test="endStationCode != null and endStationCode != ''">
+                end_station_code ,
+            </if>
+            <if test="endStationName != null and endStationName != ''">
+                end_station_name ,
+            </if>
+            <if test="endStationState != null">
+                end_station_state,
+            </if>
+            <if test="placeOrderForNight != null">
+                place_order_for_night ,
+            </if>
+            <if test="userName != null and userName != ''">
+                user_name ,
+            </if>
+            <if test="password != null and password != ''">
+                password ,
+            </if>
+            <if test="bindPhone != null and bindPhone != ''">
+                bind_phone ,
+            </if>
+            <if test="chooseSeats != null and chooseSeats != ''">
+                choose_seats ,
+            </if>
+            <if test="acceptnoseat != null">
+                acceptnoseat ,
+            </if>
+            <if test="grabEndTime != null">
+                grab_end_time ,
+            </if>
+            <if test="beginSaleTime != null and beginSaleTime != ''">
+                begin_sale_time ,
+            </if>
+            <if test="selfSelect != null">
+                self_select ,
+            </if>
+            <if test="fromCity != null and fromCity != ''">
+                from_city ,
+            </if>
+            <if test="toCity != null and toCity != ''">
+                to_city ,
+            </if>
+            <if test="startDateTime != null">
+                start_date_time ,
+            </if>
+            <if test="endDateTime != null">
+                end_date_time ,
+            </if>
+            <if test="fromCityId != null">
+                from_city_id ,
+            </if>
+            <if test="toCityId != null">
+                to_city_id ,
+            </if>
+            <if test="trafficNo != null and trafficNo != ''">
+                traffic_no ,
+            </if>
+
+                create_date ,
+
+            <if test="createUser != null and createUser != ''">
+                create_user ,
+            </if>
+            <if test="updateDate != null">
+                update_date ,
+            </if>
+            <if test="updateUser != null and updateUser != ''">
+                update_user ,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="tripSerial != null and tripSerial != ''">
+                #{tripSerial},
+            </if>
+            <if test="trainNo != null and trainNo != ''">
+                #{trainNo},
+            </if>
+            <if test="seatClass != null">
+                #{seatClass},
+            </if>
+            <if test="startStationCode != null and startStationCode != ''">
+                #{startStationCode},
+            </if>
+            <if test="startStationName != null and startStationName != ''">
+                #{startStationName},
+            </if>
+            <if test="startStationState != null">
+                #{startStationState},
+            </if>
+            <if test="endStationCode != null and endStationCode != ''">
+                #{endStationCode},
+            </if>
+            <if test="endStationName != null and endStationName != ''">
+                #{endStationName},
+            </if>
+            <if test="endStationState != null">
+                #{endStationState},
+            </if>
+            <if test="placeOrderForNight != null">
+                #{placeOrderForNight},
+            </if>
+            <if test="userName != null and userName != ''">
+                #{userName},
+            </if>
+            <if test="password != null and password != ''">
+                #{password},
+            </if>
+            <if test="bindPhone != null and bindPhone != ''">
+                #{bindPhone},
+            </if>
+            <if test="chooseSeats != null and chooseSeats != ''">
+                #{chooseSeats},
+            </if>
+            <if test="acceptnoseat != null">
+                #{acceptnoseat},
+            </if>
+            <if test="grabEndTime != null">
+                #{grabEndTime},
+            </if>
+            <if test="beginSaleTime != null and beginSaleTime != ''">
+                #{beginSaleTime},
+            </if>
+            <if test="selfSelect != null">
+                #{selfSelect},
+            </if>
+            <if test="fromCity != null and fromCity != ''">
+                #{fromCity},
+            </if>
+            <if test="toCity != null and toCity != ''">
+                #{toCity},
+            </if>
+            <if test="startDateTime != null">
+                #{startDateTime},
+            </if>
+            <if test="endDateTime != null">
+                #{endDateTime},
+            </if>
+            <if test="fromCityId != null">
+                #{fromCityId},
+            </if>
+            <if test="toCityId != null">
+                #{toCityId},
+            </if>
+            <if test="trafficNo != null and trafficNo != ''">
+                #{trafficNo},
+            </if>
+            <if test="createDate != null">
+                #{createDate},
+            </if>
+            <if test="createDate == null">
+                now(),
+            </if>
+            <if test="createUser != null and createUser != ''">
+                #{createUser},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate},
+            </if>
+            <if test="updateUser != null and updateUser != ''">
+                #{updateUser},
+            </if>
+        </trim>
+
     </insert>
 
     <!--通过主键修改数据-->

@@ -1,3 +1,4 @@
+D:\work\code\middleplatform\middleplatform\order\service\src\main\java\com.ly.traffic.middleplatform\interfaces\dto\CreateOrderRequestDto.java
 D:\work\code\middleplatform\middleplatform\order\service\src\main\java\com.ly.traffic.middleplatform\service\OrderApplicationService.java
 D:\work\code\middleplatform\middleplatform\order\service\src\main\java\com.ly.traffic.middleplatform\infrastructure\eventbus\EventBusConfig.java
 D:\work\code\middleplatform\middleplatform\order\service\src\main\java\com.ly.traffic.middleplatform\infrastructure\configure\SqlSessionFactoryBeanAdaptor.java
@@ -11,12 +12,13 @@ D:\work\code\middleplatform\middleplatform\order\service\src\main\java\com.ly.tr
 D:\work\code\middleplatform\middleplatform\order\service\src\main\java\com.ly.traffic.middleplatform\domain\order\repository\mapper\TicketInfoMapper.java
 D:\work\code\middleplatform\middleplatform\order\service\src\main\java\com.ly.traffic.middleplatform\domain\order\repository\po\TicketInfoPO.java
 D:\work\code\middleplatform\middleplatform\order\service\src\main\java\com.ly.traffic.middleplatform\infrastructure\GenerateField.java
+D:\work\code\middleplatform\middleplatform\order\service\src\main\java\com.ly.traffic.middleplatform\interfaces\OrderFactory.java
 D:\work\code\middleplatform\middleplatform\order\service\src\main\java\com.ly.traffic.middleplatform\domain\order\repository\po\TripOrderInfoPO.java
 D:\work\code\middleplatform\middleplatform\order\service\src\main\java\com.ly.traffic.middleplatform\infrastructure\configure\DruidConfig.java
-D:\work\code\middleplatform\middleplatform\order\service\src\main\java\com.ly.traffic.middleplatform\domain\order\entity\UMainOrder.java
 D:\work\code\middleplatform\middleplatform\order\service\src\main\java\com.ly.traffic.middleplatform\domain\order\repository\mapper\TrainTripInfoMapper.java
 D:\work\code\middleplatform\middleplatform\order\service\src\main\java\com.ly.traffic.middleplatform\domain\order\repository\po\TripPassengerOrderInfoPO.java
 D:\work\code\middleplatform\middleplatform\order\service\src\main\java\com.ly.traffic.middleplatform\infrastructure\FieldGenerateProcessor.java
+D:\work\code\middleplatform\middleplatform\order\service\src\main\java\com.ly.traffic.middleplatform\domain\order\entity\UTripOrderInfo.java
 D:\work\code\middleplatform\middleplatform\order\service\src\main\java\com.ly.traffic.middleplatform\domain\order\repository\package-info.java
 D:\work\code\middleplatform\middleplatform\order\service\src\main\java\com.ly.traffic.middleplatform\domain\order\repository\mapper\BusTripInfoMapper.java
 D:\work\code\middleplatform\middleplatform\order\service\src\main\java\com.ly.traffic.middleplatform\domain\order\repository\po\ResourceConsumerOrderPO.java

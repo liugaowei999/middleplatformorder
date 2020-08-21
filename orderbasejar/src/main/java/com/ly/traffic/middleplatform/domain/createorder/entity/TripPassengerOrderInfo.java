@@ -1,5 +1,6 @@
 package com.ly.traffic.middleplatform.domain.createorder.entity;
 
+import com.ly.traffic.middleplatform.utils.object.ObjectValue;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -98,5 +99,16 @@ public class TripPassengerOrderInfo {
 //    */
 //    private String updateUser;
 
-
+    private String translate() {
+        try {
+            return ObjectValue.getJSONString(this.getClass(), this);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return super.toString();
+    }
+    @Override
+    public String toString() {
+        return translate();
+    }
 }

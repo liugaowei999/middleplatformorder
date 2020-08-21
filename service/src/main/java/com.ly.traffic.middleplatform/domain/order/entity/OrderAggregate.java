@@ -1,7 +1,11 @@
 package com.ly.traffic.middleplatform.domain.order.entity;
 
 
+import com.ly.traffic.middleplatform.domain.createorder.entity.MainOrder;
+import com.ly.traffic.middleplatform.domain.createorder.entity.TripOrderInfo;
 import lombok.Getter;
+import lombok.Setter;
+import org.springframework.util.CollectionUtils;
 
 /**
  * @author liugw
@@ -10,16 +14,26 @@ import lombok.Getter;
  * @date 2020/7/6 15:00
  */
 @Getter
-public class OrderAggregate {
-    private String orderSerialId;
-
-    private UMainOrder uMainOrder;
+@Setter
+public class OrderAggregate extends MainOrder {
 
     /**
-     * MainOrder对象工厂方法
-     * @return MainOrder对象
+     * 微信代扣状态 0-微信支付 1，2-微信代扣 3-微信代扣转微信支付
      */
-    public UMainOrder getMainOrder() {
-        return null;
-    }
+    private Integer withHoldStatus;
+    /**
+     * 代扣失败原因
+     */
+    private String withHoldFailReason;
+
+    /**
+     * 扩展信息
+     */
+    private String extendContent;
+
+    /**
+     * 订单出行信息
+     */
+    private UTripOrderInfo tripOrderInfo;
+
 }

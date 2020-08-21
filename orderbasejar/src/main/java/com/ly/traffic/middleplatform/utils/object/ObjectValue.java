@@ -2,10 +2,18 @@ package com.ly.traffic.middleplatform.utils.object;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.ly.traffic.middleplatform.domain.createorder.entity.TripOrderInfo;
+import com.ly.traffic.middleplatform.domain.createorder.entity.TripPassengerOrderInfo;
+import com.ly.traffic.middleplatform.domain.createorder.vo.BusTripInfoVO;
+import com.ly.traffic.middleplatform.domain.createorder.vo.TrainTripInfoVO;
+import com.ly.traffic.middleplatform.domain.createorder.vo.TripInfoVO;
+import org.apache.commons.collections4.CollectionUtils;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,7 +27,7 @@ public class ObjectValue {
         Map<String,Object> sonMapValues = getMapValues(clazz, obj);
         Map<String,Object> parentMapValues = getMapValues(clazz.getSuperclass(), obj);
 
-        parentMapValues.put("extendcontent", JSON.toJSONString(sonMapValues));
+        parentMapValues.put("extendContent", JSON.toJSONString(sonMapValues));
         return JSON.toJSONString(parentMapValues);
     }
 
@@ -44,12 +52,37 @@ public class ObjectValue {
         Map<String,Object> sonMapValues = Maps.newHashMap();
         for ( Map.Entry<String, Field> entry : map.entrySet ( ) ){
 //            System.out.println ( "<field=" + entry.getKey().toString ( ) + "> <Type=" + map.get ( entry.getKey() ) + ">" );
-            if (entry.getValue().get(obj) == null) {
-//                System.out.println("未设置");
-            } else {
-                sonMapValues.put(entry.getKey().toString (), entry.getValue().get(obj));
+            if (entry.getValue().get(obj) != null) {
+                Object o = entry.getValue().get(obj);
+                if (o instanceof TripOrderInfo && o != obj) {
+                    TripOrderInfo tripOrderInfo = (TripOrderInfo)o;
+                    sonMapValues.put(entry.getKey().toString (), tripOrderInfo.toString());
+                } else if (o instanceof List && o != obj) {
+                    List<Object> objectList = (List)o;
+                    if (CollectionUtils.isNotEmpty(objectList)) {
+                        List<String> strList = Lists.newArrayList();
+                        for (Object o1 : objectList) {
+                            if (o1 instanceof TripPassengerOrderInfo && o1 != obj) {
+                                TripPassengerOrderInfo passengerOrderInfo = (TripPassengerOrderInfo)o1;
+//                                System.out.println("passengerOrder.toStr:" +passengerOrderInfo.toString());
+                                strList.add(passengerOrderInfo.toString());
+                            }
+                        }
+                        if (CollectionUtils.isNotEmpty(strList)) {
+                            sonMapValues.put(entry.getKey().toString(), strList);
+                        }
+                    }
+                } else {
+                    if (o instanceof TripInfoVO) {
+                        sonMapValues.put(o.getClass().getName(), o);
+                    } else {
+                        sonMapValues.put(entry.getKey().toString(), o);
+                    }
+                }
 //                System.out.println("value:" + entry.getValue().get(obj));
-            }
+            } //else {
+                //System.out.println("未设置");
+            //}
         }
 
         return sonMapValues;

@@ -1,5 +1,6 @@
 com\ly\traffic\middleplatform\domain\order\entity\OrderAggregate.class
 com\ly\traffic\middleplatform\domain\order\repository\po\TripPassengerOrderInfoPO.class
+com\ly\traffic\middleplatform\domain\order\entity\UTripOrderInfo.class
 com\ly\traffic\middleplatform\infrastructure\eventbus\EventBusConfig.class
 com\ly\traffic\middleplatform\domain\order\repository\po\ResourceConsumerOrderPO.class
 com\ly\traffic\middleplatform\infrastructure\configure\DruidConfig.class
@@ -9,7 +10,6 @@ com\ly\traffic\middleplatform\domain\order\repository\po\RevenueOrderInfoPO.clas
 com\ly\traffic\middleplatform\RunApplication.class
 com\ly\traffic\middleplatform\domain\order\repository\po\TicketInfoPO.class
 com\ly\traffic\middleplatform\infrastructure\TestAno.class
-com\ly\traffic\middleplatform\domain\order\entity\UMainOrder.class
 com\ly\traffic\middleplatform\service\OrderApplicationService.class
 com\ly\traffic\middleplatform\infrastructure\eventbus\LocalEventBusImpl.class
 com\ly\traffic\middleplatform\infrastructure\GenerateField.class
@@ -19,6 +19,7 @@ com\ly\traffic\middleplatform\infrastructure\eventbus\Event.class
 com\ly\traffic\middleplatform\infrastructure\configure\SqlSessionFactoryBeanAdaptor.class
 com\ly\traffic\middleplatform\infrastructure\eventbus\LocalEventBus.class
 com\ly\traffic\middleplatform\domain\order\repository\mapper\ResourceConsumerOrderMapper.class
+com\ly\traffic\middleplatform\interfaces\OrderFactory.class
 com\ly\traffic\middleplatform\domain\order\repository\mapper\TrainTripInfoMapper.class
 com\ly\traffic\middleplatform\domain\order\repository\mapper\TripPassengerOrderInfoMapper.class
 com\ly\traffic\middleplatform\domain\order\repository\po\MainOrderPO.class
@@ -30,5 +31,6 @@ com\ly\traffic\train\infrastructure\IOrderCreate.class
 com\ly\traffic\middleplatform\domain\order\repository\po\TripOrderInfoPO.class
 com\ly\traffic\middleplatform\domain\order\repository\po\BusTripInfoPO.class
 com\ly\traffic\middleplatform\domain\order\repository\mapper\TicketInfoMapper.class
+com\ly\traffic\middleplatform\interfaces\dto\CreateOrderRequestDto.class
 com\ly\traffic\middleplatform\domain\order\repository\mapper\TripOrderInfoMapper.class
 com\ly\traffic\middleplatform\domain\order\repository\OrderRepository.class

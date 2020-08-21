@@ -116,8 +116,12 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into union_order.trip_passenger_order_info(main_order_info, trip_order_no, passenger_order_no, trip_serial, ticket_flag, passenger_serial_no, passenger_name, passenger_type, certificate_type, certificate_no, sex, ticket_serial, ticket_summary, refund_status, is_change_ticket, order_change_type, create_date, create_user, update_date, update_user)
-        values (#{mainOrderInfo}, #{tripOrderNo}, #{passengerOrderNo}, #{tripSerial}, #{ticketFlag}, #{passengerSerialNo}, #{passengerName}, #{passengerType}, #{certificateType}, #{certificateNo}, #{sex}, #{ticketSerial}, #{ticketSummary}, #{refundStatus}, #{isChangeTicket}, #{orderChangeType}, #{createDate}, #{createUser}, #{updateDate}, #{updateUser})
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+
+        </trim>
     </insert>
 
     <!--通过主键修改数据-->

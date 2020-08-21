@@ -1,7 +1,16 @@
 package com.ly.traffic.middleplatform.domain.order.repository;
 
+import com.alibaba.fastjson.JSON;
+import com.ly.traffic.middleplatform.domain.order.entity.OrderAggregate;
+import com.ly.traffic.middleplatform.domain.order.repository.mapper.BusTripInfoMapper;
 import com.ly.traffic.middleplatform.domain.order.repository.mapper.MainOrderMapper;
+import com.ly.traffic.middleplatform.domain.order.repository.mapper.TrainTripInfoMapper;
+import com.ly.traffic.middleplatform.domain.order.repository.mapper.TripOrderInfoMapper;
+import com.ly.traffic.middleplatform.domain.order.repository.po.BusTripInfoPO;
 import com.ly.traffic.middleplatform.domain.order.repository.po.MainOrderPO;
+import com.ly.traffic.middleplatform.domain.order.repository.po.TrainTripInfoPO;
+import com.ly.traffic.middleplatform.domain.order.repository.po.TripOrderInfoPO;
+import com.ly.traffic.middleplatform.interfaces.OrderFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -17,6 +26,15 @@ import java.util.List;
 public class OrderRepository {
     @Resource
     private MainOrderMapper mainOrderDao;
+
+    @Resource
+    private TrainTripInfoMapper trainTripInfoMapper;
+
+    @Resource
+    private BusTripInfoMapper busTripInfoMapper;
+
+    @Resource
+    private TripOrderInfoMapper tripOrderInfoMapper;
 
     /**
      * 通过ID查询单条数据
@@ -69,5 +87,30 @@ public class OrderRepository {
      */
     public boolean deleteById(Integer id) {
         return this.mainOrderDao.deleteById(id) > 0;
+    }
+
+    public int insert(OrderAggregate orderAggregate) {
+        int count = 0;
+        MainOrderPO mainOrderPO = OrderFactory.getMainOrderPO(orderAggregate);
+        System.out.println("factory:" + JSON.toJSONString(mainOrderPO));
+        count += mainOrderDao.insert(mainOrderPO);
+
+        TrainTripInfoPO trainTripInfoPO = OrderFactory.getTrainTripInfoPO(orderAggregate);
+        BusTripInfoPO busTripInfoPO = OrderFactory.getBusTripInfoPO(orderAggregate);
+        TripOrderInfoPO tripOrderInfoPO = OrderFactory.tripOrderInfo(orderAggregate);
+        if (trainTripInfoPO != null) {
+            tripOrderInfoPO.setTripSerial(trainTripInfoPO.getTripSerial());
+            count += trainTripInfoMapper.insert(trainTripInfoPO);
+
+        } else if (busTripInfoPO != null) {
+            tripOrderInfoPO.setTripSerial(busTripInfoPO.getTripSerial());
+            count += busTripInfoMapper.insert(busTripInfoPO);
+        }
+
+        if (tripOrderInfoPO != null) {
+            count += tripOrderInfoMapper.insert(tripOrderInfoPO);
+        }
+
+        return count;
     }
 }
