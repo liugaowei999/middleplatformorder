@@ -70,6 +70,8 @@ public class ObjectValue {
                         }
                         if (CollectionUtils.isNotEmpty(strList)) {
                             sonMapValues.put(entry.getKey().toString(), strList);
+                        } else {
+                            sonMapValues.put(entry.getKey().toString(), o);
                         }
                     }
                 } else {

@@ -18,14 +18,14 @@ public class RevenueOrderInfo {
     * id
     */
     private Long id;
-//    /**
-//    * 主订单号
-//    */
-//    private String mainorderno;
-//    /**
-//    * 营收商品订单号
-//    */
-//    private String revenueorderno;
+    /**
+    * 主订单号
+    */
+    private String mainorderno;
+    /**
+    * 营收商品订单号
+    */
+    private String revenueorderno;
     /**
     * 营收商品ID
     */

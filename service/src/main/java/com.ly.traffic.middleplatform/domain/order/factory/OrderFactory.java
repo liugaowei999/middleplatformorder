@@ -1,6 +1,8 @@
 package com.ly.traffic.middleplatform.domain.order.factory;
 
 import com.google.common.collect.Lists;
+import com.ly.traffic.middleplatform.domain.createorder.entity.ResourceConsumerOrder;
+import com.ly.traffic.middleplatform.domain.createorder.entity.RevenueOrderInfo;
 import com.ly.traffic.middleplatform.domain.createorder.entity.TripPassengerOrderInfo;
 import com.ly.traffic.middleplatform.domain.createorder.vo.BusTripInfoVO;
 import com.ly.traffic.middleplatform.domain.createorder.vo.TrainTripInfoVO;
@@ -108,4 +110,29 @@ public class OrderFactory {
     }
 
 
+    public static List<ResourceConsumerOrderPO> getConsumerOrder(OrderAggregate orderAggregate) {
+        List<ResourceConsumerOrderPO> resourceConsumerOrderPOList = Lists.newArrayList();
+        List<ResourceConsumerOrder> resourceConsumerOrderList = orderAggregate.getResourceConsumerOrderList();
+        if (CollectionUtils.isNotEmpty(resourceConsumerOrderList)) {
+            for (ResourceConsumerOrder resourceConsumerOrder : resourceConsumerOrderList) {
+                ResourceConsumerOrderPO resourceConsumerOrderPO = new ResourceConsumerOrderPO();
+                BeanUtils.copyProperties(resourceConsumerOrder, resourceConsumerOrderPO);
+                resourceConsumerOrderPOList.add(resourceConsumerOrderPO);
+            }
+        }
+        return resourceConsumerOrderPOList;
+    }
+
+    public static List<RevenueOrderInfoPO> getRevenuBuyOrder(OrderAggregate orderAggregate) {
+        List<RevenueOrderInfoPO> revenueOrderInfoPOList = Lists.newArrayList();
+        List<RevenueOrderInfo> revenueOrderInfoList = orderAggregate.getRevenueOrderInfoList();
+        if (CollectionUtils.isNotEmpty(revenueOrderInfoList)) {
+            for (RevenueOrderInfo revenueOrderInfo : revenueOrderInfoList) {
+                RevenueOrderInfoPO revenueOrderInfoPO = new RevenueOrderInfoPO();
+                BeanUtils.copyProperties(revenueOrderInfo, revenueOrderInfoPO);
+                revenueOrderInfoPOList.add(revenueOrderInfoPO);
+            }
+        }
+        return revenueOrderInfoPOList;
+    }
 }

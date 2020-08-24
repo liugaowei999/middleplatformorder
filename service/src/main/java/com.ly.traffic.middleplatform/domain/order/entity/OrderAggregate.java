@@ -1,7 +1,10 @@
 package com.ly.traffic.middleplatform.domain.order.entity;
 
 
+import com.google.common.collect.Lists;
 import com.ly.traffic.middleplatform.domain.createorder.entity.MainOrder;
+import com.ly.traffic.middleplatform.domain.createorder.entity.ResourceConsumerOrder;
+import com.ly.traffic.middleplatform.domain.createorder.entity.RevenueOrderInfo;
 import com.ly.traffic.middleplatform.domain.createorder.entity.TripPassengerOrderInfo;
 import com.ly.traffic.middleplatform.domain.order.repository.IOrderRepository;
 import lombok.Getter;
@@ -11,6 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author liugw
@@ -65,8 +69,19 @@ public class OrderAggregate extends MainOrder {
                 upo.setPassengerOrderNo(StringUtils.isBlank(upo.getPassengerOrderNo()) ? "TPD" + sequenceNo : upo.getPassengerOrderNo());
             }
         }
+        List<ResourceConsumerOrder> resourceConsumerOrderList = Optional.ofNullable(this.getResourceConsumerOrderList()).orElse(Lists.newArrayList());
+        for (ResourceConsumerOrder resourceConsumerOrder : resourceConsumerOrderList) {
+            resourceConsumerOrder.setMainorderno(this.getOrderNo());
+            resourceConsumerOrder.setTriporderno(tripOrderInfo.getTripOrderNo());
+        }
 
-        this.setCreateDate(ObjectUtils.allNotNull(getCreateDate()) ? getCreateDate() : new Date());
+        List<RevenueOrderInfo> revenueOrderInfoList = Optional.ofNullable(this.getRevenueOrderInfoList()).orElse(Lists.newArrayList());
+        for (RevenueOrderInfo revenueOrderInfo : revenueOrderInfoList) {
+            revenueOrderInfo.setMainorderno(this.getOrderNo());
+            revenueOrderInfo.setRevenueorderno(StringUtils.isBlank(revenueOrderInfo.getRevenueorderno()) ? "REVD"+sequenceNo : revenueOrderInfo.getRevenueorderno());
+        }
+
+        this.setCreateDate(Optional.ofNullable(this.getCreateDate()).orElse(new Date()));
         this.setCreateUser(ObjectUtils.allNotNull(getCreateUser()) ? getCreateUser() : "system");
     }
 

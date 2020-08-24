@@ -1,5 +1,7 @@
 package com.ly.traffic.middleplatform.domain.order.repository.persistence;
 
+import com.ly.traffic.middleplatform.domain.createorder.entity.ResourceConsumerOrder;
+import com.ly.traffic.middleplatform.domain.createorder.entity.RevenueOrderInfo;
 import com.ly.traffic.middleplatform.domain.order.entity.OrderAggregate;
 import com.ly.traffic.middleplatform.domain.order.repository.IOrderRepository;
 import com.ly.traffic.middleplatform.domain.order.repository.mapper.*;
@@ -35,6 +37,12 @@ public class OrderRepository implements IOrderRepository {
     @Resource
     private TripPassengerOrderInfoMapper tripPassengerOrderInfoMapper;
 
+    @Resource
+    private ResourceConsumerOrderMapper resourceConsumerOrderMapper;
+
+    @Resource
+    private RevenueOrderInfoMapper revenueOrderInfoMapper;
+
     /**
      * 通过ID查询单条数据
      *
@@ -55,25 +63,31 @@ public class OrderRepository implements IOrderRepository {
     @Override
     public int save(OrderAggregate orderAggregate) {
         int count = 0;
+
+        // 1. 主订单
         MainOrderPO mainOrderPO = OrderFactory.getMainOrderPO(orderAggregate);
         count += mainOrderMapper.insert(mainOrderPO);
 
+        // 2. 行程信息
         TrainTripInfoPO trainTripInfoPO = OrderFactory.getTrainTripInfoPO(orderAggregate);
         BusTripInfoPO busTripInfoPO = OrderFactory.getBusTripInfoPO(orderAggregate);
         TripOrderInfoPO tripOrderInfoPO = OrderFactory.tripOrderInfo(orderAggregate);
         if (trainTripInfoPO != null) {
             tripOrderInfoPO.setTripSerial(trainTripInfoPO.getTripSerial());
             count += trainTripInfoMapper.insert(trainTripInfoPO);
+        }
 
-        } else if (busTripInfoPO != null) {
+        if (busTripInfoPO != null) {
             tripOrderInfoPO.setTripSerial(busTripInfoPO.getTripSerial());
             count += busTripInfoMapper.insert(busTripInfoPO);
         }
 
+        // 3. 出行子订单
         if (tripOrderInfoPO != null) {
             count += tripOrderInfoMapper.insert(tripOrderInfoPO);
         }
 
+        // 4. 乘客纬度出行子订单
         List<TripPassengerOrderInfoPO> tripPassengerOrderInfoPOList = OrderFactory.getTripPassengerOrderInfoPO(orderAggregate);
         if (CollectionUtils.isNotEmpty(tripPassengerOrderInfoPOList)) {
             for (TripPassengerOrderInfoPO passengerOrderInfoPO : tripPassengerOrderInfoPOList) {
@@ -81,6 +95,17 @@ public class OrderRepository implements IOrderRepository {
             }
         }
 
+        // 5. 权益消费子订单
+        List<ResourceConsumerOrderPO> resourceConsumerOrderPOList = OrderFactory.getConsumerOrder(orderAggregate);
+        for (ResourceConsumerOrderPO resourceConsumerOrderPO : resourceConsumerOrderPOList) {
+            count += resourceConsumerOrderMapper.insert(resourceConsumerOrderPO);
+        }
+
+        // 6. 营收商品购买子订单
+        List<RevenueOrderInfoPO> revenueOrderInfoPOList = OrderFactory.getRevenuBuyOrder(orderAggregate);
+        for (RevenueOrderInfoPO revenueOrderInfoPO : revenueOrderInfoPOList) {
+            count += revenueOrderInfoMapper.insert(revenueOrderInfoPO);
+        }
         return count;
     }
 
