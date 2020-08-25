@@ -13,5 +13,5 @@ public interface IOrderRepository {
     public int save(OrderAggregate orderAggregate);
     public MainOrderPO queryById(Integer id);
 
-    int cancelUpdate(MainOrderPO updateInfo);
+    int cancelUpdate(OrderAggregate orderAggregate);
 }

@@ -27,7 +27,9 @@ public class CancelOrderTest {
     @Test
     public void cancelOrderTest() {
         CancelOrderRequestDto dto = new CancelOrderRequestDto();
-        dto.setMainOrderNo("MD1598000510484");
+//        dto.setMainOrderNo("MD1598000510484");
+        dto.setMainOrderNo("MD1598003401236");
+
         dto.setType(0);
         dto.setReasonCode(99);
         dto.setReason("购买重复");

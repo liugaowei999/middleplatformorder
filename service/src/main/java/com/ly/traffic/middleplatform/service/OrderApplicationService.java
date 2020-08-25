@@ -10,6 +10,7 @@ import com.ly.traffic.middleplatform.domain.order.repository.po.MainOrderPO;
 import com.ly.traffic.middleplatform.domain.order.service.OrderDomainService;
 import com.ly.traffic.middleplatform.infrastructure.common.Result;
 import com.ly.traffic.middleplatform.infrastructure.common.ResultCode;
+import com.ly.traffic.middleplatform.interfaces.dto.PaidInfoDto;
 import com.ly.traffic.middleplatform.service.assembler.OrderAssembler;
 import com.ly.traffic.middleplatform.interfaces.dto.CancelOrderRequestDto;
 import com.ly.traffic.middleplatform.interfaces.dto.CreateOrderRequestDto;
@@ -45,6 +46,21 @@ public class OrderApplicationService {
         OrderAggregate orderAggregate = OrderAssembler.dtoToDo(order);
 
         return orderDomainService.create(orderAggregate);
+    }
+
+    /**
+     * 更新购买订单的支付状态
+     * @param paidInfoDto 1
+     * @return 1
+     * @throws Exception 1
+     */
+    public Result updatePayInfo(PaidInfoDto paidInfoDto) throws Exception {
+        Result result = new Result(ResultCode.OK);
+        result.setMsg("更新支付信息成功");
+
+        // 获取购买订单聚合根信息
+        OrderAggregate orderAggregate = orderRepository.queryByMainOrderNo(paidInfoDto.getMainOrderNo());
+        orderDomainService.updatePayInfo();
     }
 
 

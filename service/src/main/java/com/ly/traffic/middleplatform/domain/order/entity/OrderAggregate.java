@@ -117,9 +117,38 @@ public class OrderAggregate extends MainOrder {
     }
 
     public int cancel(OrderRepository orderRepository) {
-        MainOrderPO updateInfo = new MainOrderPO();
-        updateInfo.setOrderNo(getOrderNo());
-        updateInfo.setOrderStatus(62);
-        return orderRepository.cancelUpdate(updateInfo);
+        setOrderStatus(62);
+
+        return orderRepository.cancelUpdate(this);
+    }
+
+    /**
+     * 更新占座信息
+     *
+     * @return 1
+     */
+    public int updateSeatInfo(OrderRepository orderRepository) {
+        // 占座成功
+        setOrderStatus(22);
+
+        return orderRepository.updateSeatInfo(this);
+    }
+
+    /**
+     * 更新票信息
+     *
+     * @return 1
+     */
+    public int updateTicketInfo() {
+        return 0;
+    }
+
+    /**
+     * 更支付信息
+     *
+     * @return 1
+     */
+    public int updatePayInfo(OrderRepository orderRepository) {
+        return 0;
     }
 }

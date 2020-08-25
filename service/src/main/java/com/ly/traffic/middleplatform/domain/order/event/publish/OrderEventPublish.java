@@ -1,9 +1,10 @@
 package com.ly.traffic.middleplatform.domain.order.event.publish;
 
 
+import com.alibaba.fastjson.JSON;
 import com.google.common.eventbus.EventBus;
+import com.ly.traffic.middleplatform.demo.OrderEventListenerExample;
 import com.ly.traffic.middleplatform.domain.order.event.OrderEvent;
-import com.ly.traffic.middleplatform.test.simulator.OrderEventListenerExample;
 import com.ly.traffic.middleplatform.test.simulator.TicketServiceListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +29,8 @@ public class OrderEventPublish {
     }
 
     public void publish(OrderEvent orderEvent) {
-        eventBus.post(orderEvent);
+//        eventBus.post(orderEvent);
+        eventBus.post(JSON.toJSONString(orderEvent));
     }
 
 }

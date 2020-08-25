@@ -62,7 +62,10 @@ public class OrderRepository implements IOrderRepository {
     }
 
     @Override
-    public int cancelUpdate(MainOrderPO updateInfo) {
+    public int cancelUpdate(OrderAggregate orderAggregate) {
+        MainOrderPO updateInfo = new MainOrderPO();
+        updateInfo.setOrderNo(orderAggregate.getOrderNo());
+        updateInfo.setOrderStatus(orderAggregate.getOrderStatus());
         return mainOrderMapper.cancelUpdate(updateInfo);
     }
 
@@ -158,5 +161,13 @@ public class OrderRepository implements IOrderRepository {
             return orderAggregate;
         }
         return null;
+    }
+
+    public int updateSeatInfo(OrderAggregate orderAggregate) {
+        MainOrderPO updateInfo = new MainOrderPO();
+        updateInfo.setId(orderAggregate.getId());
+        updateInfo.setOrderNo(orderAggregate.getOrderNo());
+        updateInfo.setOrderStatus(orderAggregate.getOrderStatus());
+        return mainOrderMapper.update(updateInfo);
     }
 }

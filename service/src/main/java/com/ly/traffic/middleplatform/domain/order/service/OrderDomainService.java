@@ -26,27 +26,6 @@ public class OrderDomainService {
     @Resource
     private OrderEventPublish orderEventPublish;
 
-
-    public int cancel(OrderAggregate orderAggregate) {
-        int count = orderAggregate.cancel(orderRepository);
-        if (count <= 0) {
-            return count;
-        }
-
-        // 取消成功事件发布
-        // 领域事件持久化
-        OrderEvent orderEvent = OrderEvent.create("cancel")
-                .setOrderNo(orderAggregate.getOrderNo())
-                .setDataSnapshot(JSON.toJSONString(orderAggregate))
-                .setEventType(EventType.CANCELED);
-        orderRepository.saveOrderEvent(orderEvent);
-
-        // 事件发布
-        log.info("发布事件:类型：{}， 内容:{}", orderEvent.getEventType(), JSON.toJSONString(orderEvent));
-        orderEventPublish.publish(orderEvent);
-        return count;
-    }
-
     /**
      * 创建订单
      * @param orderAggregate 1
@@ -76,4 +55,82 @@ public class OrderDomainService {
         orderEventPublish.publish(orderEvent);
         return saveCount;
     }
+
+    /**
+     * 更新购买订单占座信息
+     * @param orderAggregate 1
+     * @return 1
+     * @throws Exception 1
+     */
+    public int updateSeatInfo(OrderAggregate orderAggregate) throws Exception {
+        int saveCount = orderAggregate.updateSeatInfo(orderRepository);
+
+        if (saveCount <= 0) {
+            return saveCount;
+        }
+        // 领域事件持久化
+        OrderEvent orderEvent = OrderEvent.create("createOrder")
+                .setOrderNo(orderAggregate.getOrderNo())
+                .setDataSnapshot(JSON.toJSONString(orderAggregate))
+                .setEventType(EventType.LOCK_SUCCESS);
+        orderRepository.saveOrderEvent(orderEvent);
+
+        // 事件发布
+        log.info("发布事件:类型：{}， 内容:{}", orderEvent.getEventType(), JSON.toJSONString(orderEvent));
+        orderEventPublish.publish(orderEvent);
+        return saveCount;
+    }
+
+    /**
+     * 更新购买订单的支付状态
+     * @param orderAggregate 1
+     * @return 1
+     * @throws Exception 1
+     */
+    public int updatePayInfo(OrderAggregate orderAggregate) throws Exception {
+        int saveCount = orderAggregate.updatePayInfo(orderRepository);
+
+        if (saveCount <= 0) {
+            return saveCount;
+        }
+        // 领域事件持久化
+        OrderEvent orderEvent = OrderEvent.create("createOrder")
+                .setOrderNo(orderAggregate.getOrderNo())
+                .setDataSnapshot(JSON.toJSONString(orderAggregate))
+                .setEventType(EventType.PAID_SUCCESS);
+        orderRepository.saveOrderEvent(orderEvent);
+
+        // 事件发布
+        log.info("发布事件:类型：{}， 内容:{}", orderEvent.getEventType(), JSON.toJSONString(orderEvent));
+        orderEventPublish.publish(orderEvent);
+        return saveCount;
+    }
+
+    /**
+     * 更新购买订单为取消状态
+     * @param orderAggregate   1
+     * @return 1
+     */
+    public int cancel(OrderAggregate orderAggregate) {
+        int count = orderAggregate.cancel(orderRepository);
+        if (count <= 0) {
+            // 已发起占座或出票等票务操作时，状态无法更新为取消
+            return count;
+        }
+
+        // 取消成功事件发布
+        // 领域事件持久化
+        OrderEvent orderEvent = OrderEvent.create("cancel")
+                .setOrderNo(orderAggregate.getOrderNo())
+                .setDataSnapshot(JSON.toJSONString(orderAggregate))
+                .setEventType(EventType.CANCELED);
+        orderRepository.saveOrderEvent(orderEvent);
+
+        // 事件发布
+        log.info("发布事件:类型：{}， 内容:{}", orderEvent.getEventType(), JSON.toJSONString(orderEvent));
+        orderEventPublish.publish(orderEvent);
+        return count;
+    }
+
+
 }
