@@ -2,8 +2,11 @@ package com.ly.traffic.middleplatform.orderdbtest;
 import java.util.Date;
 
 import com.alibaba.fastjson.JSON;
+import com.ly.traffic.middleplatform.domain.order.entity.OrderAggregate;
 import com.ly.traffic.middleplatform.domain.order.repository.mapper.MainOrderMapper;
+import com.ly.traffic.middleplatform.domain.order.repository.persistence.OrderRepository;
 import com.ly.traffic.middleplatform.domain.order.repository.po.MainOrderPO;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,6 +25,16 @@ import javax.annotation.Resource;
 public class MainOrderTest {
     @Resource
     private MainOrderMapper mainOrderDao;
+
+    @Resource
+    private OrderRepository orderRepository;
+
+    @Test
+    public void getOrderByOrderNo() {
+        OrderAggregate orderAggregate = orderRepository.queryByMainOrderNo("MD1598324518088");
+        System.out.println(JSON.toJSONString(orderAggregate));
+        Assert.assertTrue(orderAggregate.getOrderNo().equals("MD1598324518088"));
+    }
 
     @Test
     public void testCreateOrder() {

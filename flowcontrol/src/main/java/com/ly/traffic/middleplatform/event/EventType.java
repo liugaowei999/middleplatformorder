@@ -14,6 +14,7 @@ public enum EventType {
     PAID_SUCCESS(1, "支付成功"),
     LOCK_SUCCESS(20, "锁定成功"),
     LOCK_FAILED(21, "锁定失败"),
+    CANCELED(62, "订单已取消"),
     ;
 
 
