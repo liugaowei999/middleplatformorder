@@ -22,11 +22,11 @@ public class SecondProcessorListener {
     @Subscribe
     public void messageCenterService(String event) throws InterruptedException {
         OrderEvent orderEvent = JSONObject.parseObject(event, OrderEvent.class);
-        log.info("[消息中心] 收到订单事件，事件类型：{}, 内容:{}", orderEvent.getEventType(), JSON.toJSONString(orderEvent));
+        log.info("[消息中心微服务模拟] 收到订单事件，事件类型：{}, 内容:{}", orderEvent.getEventType(), JSON.toJSONString(orderEvent));
         Thread.sleep(RandomUtils.nextInt(1000,5000));
-        log.info("[消息中心] 开始发送通知..., ThreadId:{}", Thread.currentThread().getId());
+        log.info("[消息中心微服务模拟] 开始发送通知..., ThreadId:{}", Thread.currentThread().getId());
         Thread.sleep(RandomUtils.nextInt(1000,5000));
-        log.info("[消息中心] 发送通知成功, ThreadId:{}", Thread.currentThread().getId());
+        log.info("[消息中心微服务模拟] 发送通知成功, ThreadId:{}", Thread.currentThread().getId());
     }
 
     @Subscribe
@@ -35,11 +35,11 @@ public class SecondProcessorListener {
         if (orderEvent.getEventType() != EventType.PAID_SUCCESS && orderEvent.getEventType() != EventType.CANCELED) {
             return;
         }
-        log.info("[财务中心] 收到订单事件，事件类型：{}, 内容:{}", orderEvent.getEventType(), JSON.toJSONString(orderEvent));
+        log.info("[财务中心微服务模拟] 收到订单事件，事件类型：{}, 内容:{}", orderEvent.getEventType(), JSON.toJSONString(orderEvent));
         Thread.sleep(RandomUtils.nextInt(1000,5000));
-        log.info("[财务中心] 开始同步财务..., ThreadId:{}", Thread.currentThread().getId());
+        log.info("[财务中心微服务模拟] 开始同步财务..., ThreadId:{}", Thread.currentThread().getId());
         Thread.sleep(RandomUtils.nextInt(1000,5000));
-        log.info("[财务中心] 同步财务成功, ThreadId:{}", Thread.currentThread().getId());
+        log.info("[财务中心微服务模拟] 同步财务成功, ThreadId:{}", Thread.currentThread().getId());
     }
 
     public static void main(String[] args) {

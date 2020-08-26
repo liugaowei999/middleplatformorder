@@ -38,7 +38,7 @@ public class PaidSuccessPublish {
     }
 
     public void publish(PayWriteBackLog payWriteBackLog) {
-        log.info("[支付回调处理] - 异步发布订单更新支付信息命令");
+        log.info("[支付回调聚合] - 异步发布订单更新支付信息命令");
         eventBus.post(JSON.toJSONString(payWriteBackLog));
     }
 

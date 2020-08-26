@@ -20,8 +20,8 @@ public class PayCallBackDomainService {
     private PaidSuccessPublish paidSuccessPublish;
 
     public void payLog(PayWriteBackLog payWriteBackLog) {
-        log.info("[支付回调处理] - 记录支付日志完成！");
-        log.info("[支付回调处理] - 发送更新订单支付信息通知 ...");
+        log.info("[支付回调聚合] - 记录支付日志完成！");
+        log.info("[支付回调聚合] - 发送更新订单支付信息通知 ...");
 
         // 发布更新订单支付信息命令通知
         paidSuccessPublish.publish(payWriteBackLog);

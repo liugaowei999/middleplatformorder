@@ -37,9 +37,6 @@ public class OrderApplicationService {
     private OrderRepository orderRepository;
 
     @Resource
-    private CancelRepository cancelRepository;
-
-    @Resource
     private OrderDomainService orderDomainService;
 
     @Resource
@@ -85,7 +82,7 @@ public class OrderApplicationService {
      */
     public Result payCallBack(PaidInfoDto paidInfoDto) throws Exception {
         Result result = new Result(ResultCode.OK);
-        log.info("[支付回调] - 记录支付记录日志完成");
+        log.info("[支付回调聚合] - 记录支付记录日志完成");
 
         PayWriteBackLog payWriteBackLog = PayBackAssembler.dtoToDo(paidInfoDto);
 
@@ -107,28 +104,7 @@ public class OrderApplicationService {
         Result result = new Result(ResultCode.OK);
         result.setMsg("订单取消中 ...");
         CancelAggregate cancelAggregate = OrderAssembler.dtoToDo(cancelOrderRequestDto);
-        // 申请取消
-        cancelAggregate.setStatus(0);
-
-        // 获取购买订单聚合根信息
-        OrderAggregate orderAggregate = orderRepository.queryByMainOrderNo(cancelAggregate.getMainOrderNo());
-        if (orderAggregate.canCancelImmediately()) {
-            // 可以立即取消
-            int count = orderDomainService.cancel(orderAggregate);
-            if (count > 0) {
-                // 取消成功
-                cancelAggregate.setStatus(2);
-                result.setMsg("取消成功");
-            }
-        } else {
-            // 不能立即做取消操作， 异步处理状态：取消中
-            cancelAggregate.setStatus(1);
-            // 异步发起取消票务任务
-            log.info("异步发起取消票务任务");
-            cancelDomainService.cancelTicketTaskAsync(cancelAggregate);
-        }
-        cancelRepository.save(cancelAggregate);
-
+        result = cancelDomainService.doCancelOrder(cancelAggregate);
         return result;
     }
 

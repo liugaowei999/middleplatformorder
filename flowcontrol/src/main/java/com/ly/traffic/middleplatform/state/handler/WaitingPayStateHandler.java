@@ -16,6 +16,6 @@ public class WaitingPayStateHandler extends AbstractStateHandler {
     @Override
     public void handler(UnionOrderEntity orderEntity) {
         // do nothing
-        log.info("等待用户支付完成...");
+        log.info("[流程引擎-主流程] 等待用户支付完成...");
     }
 }

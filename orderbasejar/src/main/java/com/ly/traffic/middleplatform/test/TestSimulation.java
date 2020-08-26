@@ -34,4 +34,20 @@ public interface TestSimulation {
         });
 //        return null;
     }
+
+    static void cancelOrderTest(Map<String, Object> map) {
+
+//        HttpUill.post(url, data)
+
+        RequestContext requestContext = new RequestContext("http://localhost:8096/order/cancel");
+        requestContext.setRequestBody(JSON.toJSONString(map));
+        CompletableFuture<String> result = HttpFactory.httpAsyncClientFactory.post(requestContext);
+        result.whenComplete((r,e) -> {
+            System.out.println("结果：" + r);
+            if (e != null) {
+                e.printStackTrace();
+            }
+        });
+//        return null;
+    }
 }

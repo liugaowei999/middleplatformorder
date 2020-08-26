@@ -33,6 +33,7 @@ public class OrderDomainService {
      * @throws Exception 1
      */
     public int create(OrderAggregate orderAggregate) throws Exception {
+        log.info("[订单聚合-创建订单] 创建订单聚合根实体...");
         // 持久化方式1：
         orderAggregate.create();
         int saveCount = orderRepository.save(orderAggregate);
@@ -43,6 +44,8 @@ public class OrderDomainService {
         if (saveCount <= 0) {
             return saveCount;
         }
+        log.info("[订单聚合-创建订单] 持久化订单聚合根实体...");
+        log.info("[订单聚合-创建订单] 持久化订单创建事件快照信息...");
         // 领域事件持久化
         OrderEvent orderEvent = OrderEvent.create("createOrder")
                 .setOrderNo(orderAggregate.getOrderNo())
@@ -51,7 +54,7 @@ public class OrderDomainService {
         orderRepository.saveOrderEvent(orderEvent);
 
         // 事件发布
-        log.info("发布事件:类型：{}， 内容:{}", orderEvent.getEventType(), JSON.toJSONString(orderEvent));
+        log.info("[订单聚合-创建订单] 发布创单成功事件:类型：{}， 内容:{}", orderEvent.getEventType(), JSON.toJSONString(orderEvent));
         orderEventPublish.publish(orderEvent);
         return saveCount;
     }
@@ -93,7 +96,7 @@ public class OrderDomainService {
         if (saveCount <= 0) {
             return saveCount;
         }
-        log.info("[订单-更新支付信息] 更新支付信息成功");
+        log.info("[订单聚合-更新支付信息] 更新支付信息成功");
         // 领域事件持久化
         OrderEvent orderEvent = OrderEvent.create("updatePayInfo")
                 .setOrderNo(orderAggregate.getOrderNo())
@@ -102,7 +105,7 @@ public class OrderDomainService {
         orderRepository.saveOrderEvent(orderEvent);
 
         // 支付成功事件发布
-        log.info("[订单-更新支付信息] 发布支付成功事件:类型：{}， 内容:{}", orderEvent.getEventType(), JSON.toJSONString(orderEvent));
+        log.info("[订单聚合-更新支付信息] 发布支付成功事件:类型：{}， 内容:{}", orderEvent.getEventType(), JSON.toJSONString(orderEvent));
         orderEventPublish.publish(orderEvent);
         return saveCount;
     }
@@ -113,14 +116,17 @@ public class OrderDomainService {
      * @return 1
      */
     public int cancel(OrderAggregate orderAggregate) {
+        log.info("[订单聚合 - 取消更新] - 开始更新订单状态为取消...");
         int count = orderAggregate.cancel(orderRepository);
         if (count <= 0) {
             // 已发起占座或出票等票务操作时，状态无法更新为取消
             return count;
         }
+        log.info("[订单聚合 - 取消更新] - 更新订单状态为取消成功...");
 
         // 取消成功事件发布
         // 领域事件持久化
+        log.info("[订单聚合 - 取消更新] - 持久化订单取消事件快照...");
         OrderEvent orderEvent = OrderEvent.create("cancel")
                 .setOrderNo(orderAggregate.getOrderNo())
                 .setDataSnapshot(JSON.toJSONString(orderAggregate))
@@ -128,7 +134,7 @@ public class OrderDomainService {
         orderRepository.saveOrderEvent(orderEvent);
 
         // 事件发布
-        log.info("发布事件:类型：{}， 内容:{}", orderEvent.getEventType(), JSON.toJSONString(orderEvent));
+        log.info("[订单聚合 - 取消更新] 发布订单成功取消事件:类型：{}， 内容:{}", orderEvent.getEventType(), JSON.toJSONString(orderEvent));
         orderEventPublish.publish(orderEvent);
         return count;
     }

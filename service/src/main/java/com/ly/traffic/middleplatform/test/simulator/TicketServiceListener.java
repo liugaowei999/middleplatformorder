@@ -6,6 +6,7 @@ import com.google.common.eventbus.Subscribe;
 import com.ly.traffic.middleplatform.demo.OrderEvent;
 import com.ly.traffic.middleplatform.domain.cancelorder.entity.CancelAggregate;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.RandomUtils;
 
 /**
  * @author liugw
@@ -17,8 +18,19 @@ import lombok.extern.slf4j.Slf4j;
 public class TicketServiceListener {
 
     @Subscribe
-    public void cancelTicketTask(CancelAggregate event) {
-        log.info("[票务中心-取消占座或出票任务] 收到取消票务任务请求，内容:{}", JSON.toJSONString(event));
+    public void cancelTicketTask(CancelAggregate event) throws InterruptedException {
+        log.info("[票务中心微服务模拟] 收到取消票务任务请求(取消占座或出票任务)，内容:{}", JSON.toJSONString(event));
+        boolean out = RandomUtils.nextBoolean();
+        log.info("[票务中心微服务模拟] - 通知供应商取消出票任务");
+
+        Thread.sleep(RandomUtils.nextInt(1000,5000));
+
+        if (out) {
+            log.info("[票务中心微服务模拟] - 订单已经出票不能取消， 开始回调通知【取消任务订单聚合】");
+        } else {
+            log.info("[票务中心微服务模拟] - 收到供应商取消出票任务成功");
+            log.info("[票务中心微服务模拟] - 票务任务已成功取消， 开始回调通知【取消任务订单聚合】进行取消");
+        }
     }
 
 

@@ -20,6 +20,6 @@ public class UnknownStateHandler extends AbstractStateHandler {
     @Override
     public void handler(UnionOrderEntity orderEntity) {
         // 写入“死信队列” 记录异常日志
-        log.error("未知状态：写入“死信队列” 记录异常日志, orderNo:{}, status:{}", orderEntity.getOrderNo(), orderEntity.getOrderStatus());
+        log.error("【流程引擎-主流程】未知状态：写入“死信队列” 记录异常日志, orderNo:{}, status:{}", orderEntity.getOrderNo(), orderEntity.getOrderStatus());
     }
 }

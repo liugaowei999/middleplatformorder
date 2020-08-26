@@ -44,7 +44,7 @@ public class OrderInterface {
     @RequestMapping(value="/save", method=RequestMethod.POST)
     public Result createOrder(@RequestBody CreateOrderRequestDto order) {
         Result result = new Result(ResultCode.OK);
-        result.setMsg("创建订单成功！");
+        result.setMsg("创建订单成功！订单号：" + order.getOrderNo());
         // check
         if (ParamCheck.isNotValid(order)) {
             result.setFail(ResultCode.PARAM_INVALID.val(), "参数非法！");

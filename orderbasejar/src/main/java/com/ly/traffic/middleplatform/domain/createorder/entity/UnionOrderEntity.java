@@ -1,12 +1,14 @@
 package com.ly.traffic.middleplatform.domain.createorder.entity;
 
 
+import com.ly.traffic.middleplatform.annotation.Aggregate;
 import com.ly.traffic.middleplatform.domain.createorder.repository.IUnionOrderRepository;
 import com.ly.traffic.middleplatform.utils.http.HttpFactory;
 import com.ly.traffic.middleplatform.utils.http.config.RequestContext;
 import com.ly.traffic.middleplatform.utils.object.ObjectValue;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Date;
 import java.util.List;
@@ -19,6 +21,8 @@ import java.util.concurrent.CompletableFuture;
  */
 @Getter
 @Setter
+@Aggregate
+@Slf4j
 public class UnionOrderEntity {
     /**
      * 订单自增id（主键）
@@ -208,6 +212,7 @@ public class UnionOrderEntity {
         }
 
         // 异步持久化数据到中台
+        log.info("开始异步持久化数据到中台 ......");
         ICreateOrderRepository.save(this);
     }
 

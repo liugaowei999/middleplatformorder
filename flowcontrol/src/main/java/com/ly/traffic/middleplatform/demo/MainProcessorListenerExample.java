@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * @author liugw
  * @Package com.ly.intercity.motor.ddd.order.infrastructure.eventbus
- * @Description: 主流程示例
+ * @Description: 流程引擎-主流程示例
  * @date 2020/3/30 19:27
  */
 @Slf4j
@@ -20,7 +20,7 @@ public class MainProcessorListenerExample {
     @Subscribe
     public void resourceService(String orderEvent) {
         OrderEvent event = JSONObject.parseObject(orderEvent, OrderEvent.class);
-        log.info("[主流程] 收到订单事件，事件类型：{}, 内容:{}", event.getEventType(), JSON.toJSONString(event));
+        log.info("[流程引擎-主流程] 收到订单事件，事件类型：{}, 内容:{}", event.getEventType(), JSON.toJSONString(event));
 
         UnionOrderEntity orderEntity = JSONObject.parseObject(event.getDataSnapshot(), UnionOrderEntity.class);
 
