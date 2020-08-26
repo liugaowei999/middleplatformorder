@@ -1,7 +1,7 @@
 package com.ly.traffic.middleplatform.state.handler;
 
 
-import com.ly.traffic.middleplatform.domain.createorder.entity.MainOrder;
+import com.ly.traffic.middleplatform.domain.createorder.entity.UnionOrderEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomUtils;
 
@@ -15,7 +15,7 @@ import org.apache.commons.lang3.RandomUtils;
 public class WaitingLockSeatStateHandler extends AbstractStateHandler {
 
     @Override
-    public void handler(MainOrder orderEntity) {
+    public void handler(UnionOrderEntity orderEntity) {
         // 需要做的操作
         // 1. 发送票务中心占座命令
         log.info("【主流程】 开始发送票务中心占座命令..., ThreadId:{}", Thread.currentThread().getId());

@@ -1,7 +1,7 @@
 package com.ly.traffic.middleplatform.state.handler;
 
 
-import com.ly.traffic.middleplatform.domain.createorder.entity.MainOrder;
+import com.ly.traffic.middleplatform.domain.createorder.entity.UnionOrderEntity;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -18,7 +18,7 @@ public class UnknownStateHandler extends AbstractStateHandler {
     }
 
     @Override
-    public void handler(MainOrder orderEntity) {
+    public void handler(UnionOrderEntity orderEntity) {
         // 写入“死信队列” 记录异常日志
         log.error("未知状态：写入“死信队列” 记录异常日志, orderNo:{}, status:{}", orderEntity.getOrderNo(), orderEntity.getOrderStatus());
     }

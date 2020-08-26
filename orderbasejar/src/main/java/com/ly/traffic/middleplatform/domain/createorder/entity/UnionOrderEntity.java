@@ -1,20 +1,25 @@
 package com.ly.traffic.middleplatform.domain.createorder.entity;
 
+
+import com.ly.traffic.middleplatform.domain.createorder.repository.IUnionOrderRepository;
+import com.ly.traffic.middleplatform.utils.http.HttpFactory;
+import com.ly.traffic.middleplatform.utils.http.config.RequestContext;
 import com.ly.traffic.middleplatform.utils.object.ObjectValue;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 /**
- * 主订单表(MainOrder)实体类
+ * 主订单表(UnionOrderEntity)实体类
  * @author gaowei.liu
  * @since 2020-08-20
  */
 @Getter
 @Setter
-public class MainOrder {
+public class UnionOrderEntity {
     /**
      * 订单自增id（主键）
      */
@@ -190,5 +195,44 @@ public class MainOrder {
     @Override
     public String toString() {
         return translate();
+    }
+
+    public void save() {
+        save(null);
+    }
+
+    public void save(IUnionOrderRepository orderRepository) {
+        // 业务线内数据持久化
+        if (orderRepository != null) {
+            orderRepository.save(this);
+        }
+
+        // 异步持久化数据到中台
+        ICreateOrderRepository.save(this);
+    }
+
+    interface ICreateOrderRepository {
+        default void save() {
+            save(this);
+//        return null;
+        }
+
+        static void save(Object obj) {
+            String data = obj.toString();
+            System.out.println("create: " + data);
+
+//        HttpUill.post(url, data)
+
+            RequestContext requestContext = new RequestContext("http://localhost:8096/order/save");
+            requestContext.setRequestBody(data);
+            CompletableFuture<String> result = HttpFactory.httpAsyncClientFactory.post(requestContext);
+            result.whenComplete((r,e) -> {
+                System.out.println("结果：" + r);
+                if (e != null) {
+                    e.printStackTrace();
+                }
+            });
+//        return null;
+        }
     }
 }

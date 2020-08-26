@@ -1,7 +1,7 @@
 package com.ly.traffic.middleplatform.strategy.handler;
 
 
-import com.ly.traffic.middleplatform.domain.createorder.entity.MainOrder;
+import com.ly.traffic.middleplatform.domain.createorder.entity.UnionOrderEntity;
 import com.ly.traffic.middleplatform.event.EventType;
 import com.ly.traffic.middleplatform.state.handler.AbstractStateHandler;
 import com.ly.traffic.middleplatform.state.StateHandlerManager;
@@ -16,12 +16,12 @@ import com.ly.traffic.middleplatform.state.handler.UnknownStateHandler;
 public class AbstractStrategyHandler {
     private StateHandlerManager stateHandlerManager = new StateHandlerManager();
 
-    public void process(EventType event, MainOrder orderEntity) {
+    public void process(EventType event, UnionOrderEntity orderEntity) {
         AbstractStateHandler nextHandler = getNextHandler(event, orderEntity);
         nextHandler.handler(orderEntity);
     }
 
-    private AbstractStateHandler getNextHandler(EventType event, MainOrder orderEntity) {
+    private AbstractStateHandler getNextHandler(EventType event, UnionOrderEntity orderEntity) {
         AbstractStateHandler currentStateHandler = stateHandlerManager.getHandlerByStateValue(orderEntity.getOrderStatus());
         if (currentStateHandler == null) {
             return UnknownStateHandler.getInstance();

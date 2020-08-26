@@ -22,7 +22,7 @@ import javax.annotation.Resource;
  */
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class MainOrderTest {
+public class UnionOrderEntityTest {
     @Resource
     private MainOrderMapper mainOrderDao;
 

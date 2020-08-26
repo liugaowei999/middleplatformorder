@@ -3,13 +3,11 @@ package com.ly.traffic.middleplatform.domain.order.entity;
 
 import com.google.common.collect.Lists;
 import com.ly.traffic.middleplatform.annotation.Aggregate;
-import com.ly.traffic.middleplatform.domain.createorder.entity.MainOrder;
+import com.ly.traffic.middleplatform.domain.createorder.entity.UnionOrderEntity;
 import com.ly.traffic.middleplatform.domain.createorder.entity.ResourceConsumerOrder;
 import com.ly.traffic.middleplatform.domain.createorder.entity.RevenueOrderInfo;
 import com.ly.traffic.middleplatform.domain.createorder.entity.TripPassengerOrderInfo;
 import com.ly.traffic.middleplatform.domain.order.repository.IOrderRepository;
-import com.ly.traffic.middleplatform.domain.order.repository.persistence.OrderRepository;
-import com.ly.traffic.middleplatform.domain.order.repository.po.MainOrderPO;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.ObjectUtils;
@@ -28,7 +26,7 @@ import java.util.Optional;
 @Getter
 @Setter
 @Aggregate
-public class OrderAggregate extends MainOrder {
+public class OrderAggregate extends UnionOrderEntity {
 
     /**
      * 微信代扣状态 0-微信支付 1，2-微信代扣 3-微信代扣转微信支付

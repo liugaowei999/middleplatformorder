@@ -2,7 +2,7 @@ package com.ly.traffic.middleplatform.strategy;
 
 
 import com.ly.traffic.middleplatform.condition.ConditionDemo;
-import com.ly.traffic.middleplatform.domain.createorder.entity.MainOrder;
+import com.ly.traffic.middleplatform.domain.createorder.entity.UnionOrderEntity;
 import com.ly.traffic.middleplatform.strategy.handler.AbstractStrategyHandler;
 import com.ly.traffic.middleplatform.strategy.handler.SingleTripPayFirstStrategyHandler;
 
@@ -15,7 +15,7 @@ import com.ly.traffic.middleplatform.strategy.handler.SingleTripPayFirstStrategy
 public class StrategyManger {
     private StrategyManger() {}
 
-    public static AbstractStrategyHandler getStrategy(MainOrder orderEntity) {
+    public static AbstractStrategyHandler getStrategy(UnionOrderEntity orderEntity) {
         Boolean payFirst = ConditionDemo.judgeCondition(orderEntity);
         // 根据条件选择一个策略处理器
         AbstractStrategyHandler testStrategy = null;

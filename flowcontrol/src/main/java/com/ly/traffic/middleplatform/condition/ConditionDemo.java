@@ -1,6 +1,6 @@
 package com.ly.traffic.middleplatform.condition;
 
-import com.ly.traffic.middleplatform.domain.createorder.entity.MainOrder;
+import com.ly.traffic.middleplatform.domain.createorder.entity.UnionOrderEntity;
 
 /**
  * @author liugw
@@ -9,7 +9,7 @@ import com.ly.traffic.middleplatform.domain.createorder.entity.MainOrder;
  * @date 2020/8/26 11:29
  */
 public class ConditionDemo {
-    public static Boolean judgeCondition(MainOrder orderEntity) {
+    public static Boolean judgeCondition(UnionOrderEntity orderEntity) {
         return true;
     }
 }

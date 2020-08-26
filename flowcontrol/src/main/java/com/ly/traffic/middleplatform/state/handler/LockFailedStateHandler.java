@@ -1,7 +1,7 @@
 package com.ly.traffic.middleplatform.state.handler;
 
 
-import com.ly.traffic.middleplatform.domain.createorder.entity.MainOrder;
+import com.ly.traffic.middleplatform.domain.createorder.entity.UnionOrderEntity;
 
 /**
  * @author liugw
@@ -12,7 +12,7 @@ import com.ly.traffic.middleplatform.domain.createorder.entity.MainOrder;
 public class LockFailedStateHandler extends AbstractStateHandler {
 
     @Override
-    public void handler(MainOrder orderEntity) {
+    public void handler(UnionOrderEntity orderEntity) {
 
     }
 }

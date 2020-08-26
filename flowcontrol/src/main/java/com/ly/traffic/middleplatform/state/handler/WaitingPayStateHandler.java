@@ -1,7 +1,7 @@
 package com.ly.traffic.middleplatform.state.handler;
 
 
-import com.ly.traffic.middleplatform.domain.createorder.entity.MainOrder;
+import com.ly.traffic.middleplatform.domain.createorder.entity.UnionOrderEntity;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 public class WaitingPayStateHandler extends AbstractStateHandler {
 
     @Override
-    public void handler(MainOrder orderEntity) {
+    public void handler(UnionOrderEntity orderEntity) {
         // do nothing
         log.info("等待用户支付完成...");
     }
