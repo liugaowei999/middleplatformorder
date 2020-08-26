@@ -163,6 +163,7 @@ public class OrderRepository implements IOrderRepository {
         return null;
     }
 
+    @Override
     public int updateSeatInfo(OrderAggregate orderAggregate) {
         MainOrderPO updateInfo = new MainOrderPO();
         updateInfo.setId(orderAggregate.getId());

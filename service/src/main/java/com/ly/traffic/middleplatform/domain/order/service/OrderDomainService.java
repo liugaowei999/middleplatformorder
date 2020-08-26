@@ -94,13 +94,13 @@ public class OrderDomainService {
             return saveCount;
         }
         // 领域事件持久化
-        OrderEvent orderEvent = OrderEvent.create("createOrder")
+        OrderEvent orderEvent = OrderEvent.create("updatePayInfo")
                 .setOrderNo(orderAggregate.getOrderNo())
-                .setDataSnapshot(JSON.toJSONString(orderAggregate))
+                .setDataSnapshot(JSON.toJSONString(orderAggregate.getPayOrderInfoList()))
                 .setEventType(EventType.PAID_SUCCESS);
         orderRepository.saveOrderEvent(orderEvent);
 
-        // 事件发布
+        // 支付成功事件发布
         log.info("发布事件:类型：{}， 内容:{}", orderEvent.getEventType(), JSON.toJSONString(orderEvent));
         orderEventPublish.publish(orderEvent);
         return saveCount;

@@ -25,7 +25,7 @@ public class CancelOrderTest {
     private OrderInterface orderInterface;
 
     @Test
-    public void cancelOrderTest() {
+    public void cancelOrderTest() throws InterruptedException {
         CancelOrderRequestDto dto = new CancelOrderRequestDto();
 //        dto.setMainOrderNo("MD1598000510484");
         dto.setMainOrderNo("MD1598003401236");
@@ -39,5 +39,7 @@ public class CancelOrderTest {
         dto.setApplyTime(new Date());
         Result result = orderInterface.cancelOrder(dto);
         Assert.assertTrue(result.isOk());
+
+        Thread.sleep(20000);
     }
 }

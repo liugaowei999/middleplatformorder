@@ -1,7 +1,10 @@
 package com.ly.traffic.middleplatform.strategy;
 
 
-import com.ly.traffic.middleplatform.event.EventType;
+import com.ly.traffic.middleplatform.condition.ConditionDemo;
+import com.ly.traffic.middleplatform.domain.createorder.entity.MainOrder;
+import com.ly.traffic.middleplatform.strategy.handler.AbstractStrategyHandler;
+import com.ly.traffic.middleplatform.strategy.handler.SingleTripPayFirstStrategyHandler;
 
 /**
  * @author liugw
@@ -10,21 +13,19 @@ import com.ly.traffic.middleplatform.event.EventType;
  * @date 2020/7/22 14:40
  */
 public class StrategyManger {
+    private StrategyManger() {}
 
-    public static void main(String[] args) {
-        StrategyManger strategyManger = new StrategyManger();
-//        OrderAggregate orderEntity = new OrderAggregate();
-//
-//        // 收到事件消息后， 触发下面的操作
-//        AbstractStrategyHandler strategy = strategyManger.getStrategy(orderEntity);
-//        EventType event = EventType.LOCK_FAILED;
-//
-//        strategy.process(event, orderEntity);
-    }
-
-    private AbstractStrategyHandler getStrategy(Object orderEntity) {
+    public static AbstractStrategyHandler getStrategy(MainOrder orderEntity) {
+        Boolean payFirst = ConditionDemo.judgeCondition(orderEntity);
         // 根据条件选择一个策略处理器
-        AbstractStrategyHandler testStrategy = new SingleTripPayFirstStrategyHandler();
+        AbstractStrategyHandler testStrategy = null;
+        if (payFirst) {
+            // 先支付后占座
+            testStrategy = SingleTripPayFirstStrategyHandler.getInstance();
+        } else {
+            // 先占座后支付
+            testStrategy = SingleTripPayFirstStrategyHandler.getInstance();
+        }
         return testStrategy;
     }
 }

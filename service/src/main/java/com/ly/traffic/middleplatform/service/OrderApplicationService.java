@@ -60,7 +60,14 @@ public class OrderApplicationService {
 
         // 获取购买订单聚合根信息
         OrderAggregate orderAggregate = orderRepository.queryByMainOrderNo(paidInfoDto.getMainOrderNo());
-        orderDomainService.updatePayInfo();
+        if (orderAggregate.isCanceled()) {
+            // 订单已取消， 走退款
+            result.setMsg("订单已取消，");
+            return result;
+        }
+        // 更新支付信息 paidInfoDto
+        orderDomainService.updatePayInfo(orderAggregate);
+        return result;
     }
 
 

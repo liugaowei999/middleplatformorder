@@ -1,11 +1,11 @@
-package com.ly.traffic.middleplatform.strategy;
+package com.ly.traffic.middleplatform.strategy.handler;
 
 
 import com.ly.traffic.middleplatform.event.EventType;
-import com.ly.traffic.middleplatform.state.LockFailedStateHandler;
-import com.ly.traffic.middleplatform.state.WaitingIssueTicketStateHandler;
-import com.ly.traffic.middleplatform.state.WaitingLockSeatStateHandler;
-import com.ly.traffic.middleplatform.state.WaitingPayStateHandler;
+import com.ly.traffic.middleplatform.state.handler.LockFailedStateHandler;
+import com.ly.traffic.middleplatform.state.handler.WaitingIssueTicketStateHandler;
+import com.ly.traffic.middleplatform.state.handler.WaitingLockSeatStateHandler;
+import com.ly.traffic.middleplatform.state.handler.WaitingPayStateHandler;
 
 /**
  * @author liugw
@@ -15,6 +15,11 @@ import com.ly.traffic.middleplatform.state.WaitingPayStateHandler;
  */
 public class SingleTripPayFirstStrategyHandler extends AbstractStrategyHandler{
 
+    private static SingleTripPayFirstStrategyHandler instance = new SingleTripPayFirstStrategyHandler();
+
+    public static SingleTripPayFirstStrategyHandler getInstance() {
+        return instance;
+    }
 
     private void init() {
         // 待出票处理
@@ -41,7 +46,7 @@ public class SingleTripPayFirstStrategyHandler extends AbstractStrategyHandler{
         super.registerHandler(21, waitingLockSeatStateHandler);
     }
 
-    SingleTripPayFirstStrategyHandler () {
+    private SingleTripPayFirstStrategyHandler () {
         init();
     }
 

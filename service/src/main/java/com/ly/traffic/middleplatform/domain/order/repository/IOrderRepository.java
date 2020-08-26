@@ -14,4 +14,6 @@ public interface IOrderRepository {
     public MainOrderPO queryById(Integer id);
 
     int cancelUpdate(OrderAggregate orderAggregate);
+
+    int updateSeatInfo(OrderAggregate orderAggregate);
 }

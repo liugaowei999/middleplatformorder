@@ -1,6 +1,7 @@
-package com.ly.traffic.middleplatform.state;
+package com.ly.traffic.middleplatform.state.handler;
 
 
+import com.ly.traffic.middleplatform.domain.createorder.entity.MainOrder;
 import com.ly.traffic.middleplatform.event.EventType;
 
 import java.util.HashMap;
@@ -38,5 +39,5 @@ public abstract class AbstractStateHandler {
      * 状态处理逻辑，子类实现
      * @param orderEntity 1
      */
-    public abstract void handler(Object orderEntity);
+    public abstract void handler(MainOrder orderEntity);
 }

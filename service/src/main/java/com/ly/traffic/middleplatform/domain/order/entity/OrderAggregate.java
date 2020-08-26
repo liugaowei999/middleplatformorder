@@ -49,6 +49,11 @@ public class OrderAggregate extends MainOrder {
      */
     private UTripOrderInfo tripOrderInfo;
 
+    /**
+     * 订单支付信息列表
+     */
+    private List<PayOrderInfo> payOrderInfoList;
+
 
     /**
      * 聚合创建 ： 聚合数据准备
@@ -116,7 +121,7 @@ public class OrderAggregate extends MainOrder {
         return false;
     }
 
-    public int cancel(OrderRepository orderRepository) {
+    public int cancel(IOrderRepository orderRepository) {
         setOrderStatus(62);
 
         return orderRepository.cancelUpdate(this);
@@ -127,7 +132,7 @@ public class OrderAggregate extends MainOrder {
      *
      * @return 1
      */
-    public int updateSeatInfo(OrderRepository orderRepository) {
+    public int updateSeatInfo(IOrderRepository orderRepository) {
         // 占座成功
         setOrderStatus(22);
 
@@ -139,7 +144,7 @@ public class OrderAggregate extends MainOrder {
      *
      * @return 1
      */
-    public int updateTicketInfo() {
+    public int updateTicketInfo(IOrderRepository orderRepository) {
         return 0;
     }
 
@@ -148,7 +153,15 @@ public class OrderAggregate extends MainOrder {
      *
      * @return 1
      */
-    public int updatePayInfo(OrderRepository orderRepository) {
+    public int updatePayInfo(IOrderRepository orderRepository) {
         return 0;
+    }
+
+    /**
+     * 订单是否已取消
+     * @return
+     */
+    public boolean isCanceled() {
+        return getOrderStatus() == 62;
     }
 }

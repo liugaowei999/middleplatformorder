@@ -2,13 +2,18 @@ package com.ly.traffic.middleplatform.domain.order.event.publish;
 
 
 import com.alibaba.fastjson.JSON;
+import com.google.common.eventbus.AsyncEventBus;
 import com.google.common.eventbus.EventBus;
-import com.ly.traffic.middleplatform.demo.OrderEventListenerExample;
+import com.ly.traffic.middleplatform.demo.MainProcessorListenerExample;
 import com.ly.traffic.middleplatform.domain.order.event.OrderEvent;
+import com.ly.traffic.middleplatform.test.simulator.SecondProcessorListener;
 import com.ly.traffic.middleplatform.test.simulator.TicketServiceListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * 订单事件发送MQ
@@ -20,12 +25,14 @@ import org.springframework.stereotype.Service;
 public class OrderEventPublish {
     private static final Logger logger = LoggerFactory.getLogger(OrderEventPublish.class);
 
-    private EventBus eventBus;
+    private AsyncEventBus eventBus;
 
-    public OrderEventPublish() {
-        eventBus = new EventBus();
-        eventBus.register(new OrderEventListenerExample());
-        eventBus.register(new TicketServiceListener());
+    @Autowired
+    public OrderEventPublish(AsyncEventBus eventBus) {
+        this.eventBus = eventBus;
+        this.eventBus.register(new MainProcessorListenerExample());
+        this.eventBus.register(new TicketServiceListener());
+        this.eventBus.register(new SecondProcessorListener());
     }
 
     public void publish(OrderEvent orderEvent) {
