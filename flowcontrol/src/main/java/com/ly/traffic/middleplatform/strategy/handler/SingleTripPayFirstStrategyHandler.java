@@ -2,10 +2,7 @@ package com.ly.traffic.middleplatform.strategy.handler;
 
 
 import com.ly.traffic.middleplatform.event.EventType;
-import com.ly.traffic.middleplatform.state.handler.LockFailedStateHandler;
-import com.ly.traffic.middleplatform.state.handler.WaitingIssueTicketStateHandler;
-import com.ly.traffic.middleplatform.state.handler.WaitingLockSeatStateHandler;
-import com.ly.traffic.middleplatform.state.handler.WaitingPayStateHandler;
+import com.ly.traffic.middleplatform.state.handler.*;
 
 /**
  * @author liugw
@@ -39,7 +36,11 @@ public class SingleTripPayFirstStrategyHandler extends AbstractStrategyHandler{
         // 占座失败事件 触发 转移到 占座失败处理器
         waitingLockSeatStateHandler.setNextHandler(EventType.LOCK_FAILED, lockFailedStateHandler);
 
-        super.registerHandler(1, waitingPayStateHandler);
+        InitialStateHandler initialStateHandler = new InitialStateHandler();
+        initialStateHandler.setNextHandler(EventType.NEW_CREATED, waitingPayStateHandler);
+        super.registerHandler(0, initialStateHandler);
+        super.registerHandler(11, waitingPayStateHandler);
+        super.registerHandler(12, waitingPayStateHandler);
 
         // 待占座， 占座中 可以使用同一个处理器
         super.registerHandler(20, waitingLockSeatStateHandler);

@@ -8,13 +8,17 @@ import com.ly.traffic.middleplatform.domain.order.entity.OrderAggregate;
 import com.ly.traffic.middleplatform.domain.order.repository.persistence.OrderRepository;
 import com.ly.traffic.middleplatform.domain.order.repository.po.MainOrderPO;
 import com.ly.traffic.middleplatform.domain.order.service.OrderDomainService;
+import com.ly.traffic.middleplatform.domain.paycallback.PayCallBackDomainService;
+import com.ly.traffic.middleplatform.domain.paycallback.entity.PayWriteBackLog;
 import com.ly.traffic.middleplatform.infrastructure.common.Result;
 import com.ly.traffic.middleplatform.infrastructure.common.ResultCode;
 import com.ly.traffic.middleplatform.interfaces.dto.PaidInfoDto;
 import com.ly.traffic.middleplatform.service.assembler.OrderAssembler;
 import com.ly.traffic.middleplatform.interfaces.dto.CancelOrderRequestDto;
 import com.ly.traffic.middleplatform.interfaces.dto.CreateOrderRequestDto;
+import com.ly.traffic.middleplatform.service.assembler.PayBackAssembler;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,6 +44,9 @@ public class OrderApplicationService {
 
     @Resource
     private CancelDomainService cancelDomainService;
+
+    @Resource
+    private PayCallBackDomainService payCallBackDomainService;
 
     @Transactional(rollbackFor = Exception.class)
     public int createOrder(CreateOrderRequestDto order) throws Exception {
@@ -67,6 +74,24 @@ public class OrderApplicationService {
         }
         // 更新支付信息 paidInfoDto
         orderDomainService.updatePayInfo(orderAggregate);
+        return result;
+    }
+
+    /**
+     * 支付回调处理
+     * @param paidInfoDto 1
+     * @return 1
+     * @throws Exception 1
+     */
+    public Result payCallBack(PaidInfoDto paidInfoDto) throws Exception {
+        Result result = new Result(ResultCode.OK);
+        log.info("[支付回调] - 记录支付记录日志完成");
+
+        PayWriteBackLog payWriteBackLog = PayBackAssembler.dtoToDo(paidInfoDto);
+
+        // 记录支付日志，发送支付信息更新通知
+        payCallBackDomainService.payLog(payWriteBackLog);
+
         return result;
     }
 

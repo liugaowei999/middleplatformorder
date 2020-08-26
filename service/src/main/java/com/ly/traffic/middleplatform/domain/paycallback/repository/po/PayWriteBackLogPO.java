@@ -1,4 +1,4 @@
-package com.ly.traffic.middleplatform.domain.payment.repository.po;
+package com.ly.traffic.middleplatform.domain.paycallback.repository.po;
 
 import java.util.Date;
 import java.io.Serializable;

@@ -11,7 +11,7 @@ public enum EventType {
      * 事件定义
      */
     NEW_CREATED(0,"创单成功"),
-    PAID_SUCCESS(1, "支付成功"),
+    PAID_SUCCESS(12, "支付成功"),
     LOCK_SUCCESS(20, "锁定成功"),
     LOCK_FAILED(21, "锁定失败"),
     CANCELED(62, "订单已取消"),

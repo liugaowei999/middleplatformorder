@@ -4,4 +4,4 @@
  * @author liugw
  * @date 2020/8/21 16:18
  */
-package com.ly.traffic.middleplatform.domain.payment;
+package com.ly.traffic.middleplatform.domain.paycallback;

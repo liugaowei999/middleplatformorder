@@ -154,7 +154,8 @@ public class OrderAggregate extends MainOrder {
      * @return 1
      */
     public int updatePayInfo(IOrderRepository orderRepository) {
-        return 0;
+        this.setOrderStatus(12);
+        return 1;
     }
 
     /**

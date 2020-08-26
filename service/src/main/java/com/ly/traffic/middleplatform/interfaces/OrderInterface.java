@@ -7,6 +7,7 @@ import com.ly.traffic.middleplatform.infrastructure.common.ResultCode;
 import com.ly.traffic.middleplatform.interfaces.check.ParamCheck;
 import com.ly.traffic.middleplatform.interfaces.dto.CancelOrderRequestDto;
 import com.ly.traffic.middleplatform.interfaces.dto.CreateOrderRequestDto;
+import com.ly.traffic.middleplatform.interfaces.dto.PaidInfoDto;
 import com.ly.traffic.middleplatform.service.OrderApplicationService;
 import org.springframework.web.bind.annotation.*;
 
@@ -73,6 +74,22 @@ public class OrderInterface {
         }
 
         result = orderApplicationService.cancelOrder(cancelOrderRequestDto);
+
+        return result;
+    }
+
+    /**
+     * 支付回调
+     */
+    @RequestMapping(value="/paidcallback", method=RequestMethod.POST)
+    public Result paidcallback(@RequestBody PaidInfoDto paidInfoDto) {
+        Result result = new Result(ResultCode.OK);
+
+        try {
+            result = orderApplicationService.payCallBack(paidInfoDto);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return result;
     }

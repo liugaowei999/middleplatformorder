@@ -93,15 +93,16 @@ public class OrderDomainService {
         if (saveCount <= 0) {
             return saveCount;
         }
+        log.info("[订单-更新支付信息] 更新支付信息成功");
         // 领域事件持久化
         OrderEvent orderEvent = OrderEvent.create("updatePayInfo")
                 .setOrderNo(orderAggregate.getOrderNo())
-                .setDataSnapshot(JSON.toJSONString(orderAggregate.getPayOrderInfoList()))
+                .setDataSnapshot(JSON.toJSONString(orderAggregate))
                 .setEventType(EventType.PAID_SUCCESS);
         orderRepository.saveOrderEvent(orderEvent);
 
         // 支付成功事件发布
-        log.info("发布事件:类型：{}， 内容:{}", orderEvent.getEventType(), JSON.toJSONString(orderEvent));
+        log.info("[订单-更新支付信息] 发布支付成功事件:类型：{}， 内容:{}", orderEvent.getEventType(), JSON.toJSONString(orderEvent));
         orderEventPublish.publish(orderEvent);
         return saveCount;
     }

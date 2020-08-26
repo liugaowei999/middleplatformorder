@@ -5,6 +5,7 @@ import com.ly.traffic.middleplatform.domain.createorder.entity.MainOrder;
 import com.ly.traffic.middleplatform.event.EventType;
 import com.ly.traffic.middleplatform.state.handler.AbstractStateHandler;
 import com.ly.traffic.middleplatform.state.StateHandlerManager;
+import com.ly.traffic.middleplatform.state.handler.UnknownStateHandler;
 
 /**
  * @author liugw
@@ -16,15 +17,20 @@ public class AbstractStrategyHandler {
     private StateHandlerManager stateHandlerManager = new StateHandlerManager();
 
     public void process(EventType event, MainOrder orderEntity) {
+        AbstractStateHandler nextHandler = getNextHandler(event, orderEntity);
+        nextHandler.handler(orderEntity);
+    }
+
+    private AbstractStateHandler getNextHandler(EventType event, MainOrder orderEntity) {
         AbstractStateHandler currentStateHandler = stateHandlerManager.getHandlerByStateValue(orderEntity.getOrderStatus());
         if (currentStateHandler == null) {
-            return;
+            return UnknownStateHandler.getInstance();
         }
         AbstractStateHandler nextHandler = currentStateHandler.getNextHandler(event);
         if (nextHandler == null) {
-            return;
+            return UnknownStateHandler.getInstance();
         }
-        nextHandler.handler(orderEntity);
+        return nextHandler;
     }
 
     protected void registerHandler(int status, AbstractStateHandler waitingPayStateHandler) {

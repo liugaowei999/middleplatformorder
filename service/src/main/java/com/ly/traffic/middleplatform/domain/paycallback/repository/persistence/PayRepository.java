@@ -1,10 +1,10 @@
-package com.ly.traffic.middleplatform.domain.payment.repository.persistence;
+package com.ly.traffic.middleplatform.domain.paycallback.repository.persistence;
 
 
-import com.ly.traffic.middleplatform.domain.payment.entity.PayWriteBackLog;
-import com.ly.traffic.middleplatform.domain.payment.repository.IPayRepository;
-import com.ly.traffic.middleplatform.domain.payment.repository.mapper.PayWriteBackLogMapper;
-import com.ly.traffic.middleplatform.domain.payment.repository.po.PayWriteBackLogPO;
+import com.ly.traffic.middleplatform.domain.paycallback.entity.PayWriteBackLog;
+import com.ly.traffic.middleplatform.domain.paycallback.repository.IPayRepository;
+import com.ly.traffic.middleplatform.domain.paycallback.repository.mapper.PayWriteBackLogMapper;
+import com.ly.traffic.middleplatform.domain.paycallback.repository.po.PayWriteBackLogPO;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

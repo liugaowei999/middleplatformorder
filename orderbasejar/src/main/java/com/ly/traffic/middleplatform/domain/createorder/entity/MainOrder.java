@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * 主订单表(MainOrder)实体类
  * @author gaowei.liu
- * @since 2020-08-07 17:29:26
+ * @since 2020-08-20
  */
 @Getter
 @Setter

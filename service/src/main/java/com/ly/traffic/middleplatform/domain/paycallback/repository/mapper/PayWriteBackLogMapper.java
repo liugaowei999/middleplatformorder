@@ -1,6 +1,6 @@
-package com.ly.traffic.middleplatform.domain.payment.repository.mapper;
+package com.ly.traffic.middleplatform.domain.paycallback.repository.mapper;
 
-import com.ly.traffic.middleplatform.domain.payment.repository.po.PayWriteBackLogPO;
+import com.ly.traffic.middleplatform.domain.paycallback.repository.po.PayWriteBackLogPO;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 

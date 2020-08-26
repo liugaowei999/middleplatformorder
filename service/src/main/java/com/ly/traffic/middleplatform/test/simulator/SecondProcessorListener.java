@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.eventbus.Subscribe;
 import com.ly.traffic.middleplatform.demo.OrderEvent;
+import com.ly.traffic.middleplatform.event.EventType;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomUtils;
 
@@ -31,6 +32,9 @@ public class SecondProcessorListener {
     @Subscribe
     public void FinanceService(String event) throws InterruptedException {
         OrderEvent orderEvent = JSONObject.parseObject(event, OrderEvent.class);
+        if (orderEvent.getEventType() != EventType.PAID_SUCCESS && orderEvent.getEventType() != EventType.CANCELED) {
+            return;
+        }
         log.info("[财务中心] 收到订单事件，事件类型：{}, 内容:{}", orderEvent.getEventType(), JSON.toJSONString(orderEvent));
         Thread.sleep(RandomUtils.nextInt(1000,5000));
         log.info("[财务中心] 开始同步财务..., ThreadId:{}", Thread.currentThread().getId());

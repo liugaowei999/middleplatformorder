@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.concurrent.Executors;
 
 /**
  * 订单事件发送MQ
@@ -25,11 +26,9 @@ import javax.annotation.Resource;
 public class OrderEventPublish {
     private static final Logger logger = LoggerFactory.getLogger(OrderEventPublish.class);
 
-    private AsyncEventBus eventBus;
+    private AsyncEventBus eventBus = new AsyncEventBus(Executors.newFixedThreadPool(3));
 
-    @Autowired
-    public OrderEventPublish(AsyncEventBus eventBus) {
-        this.eventBus = eventBus;
+    public OrderEventPublish() {
         this.eventBus.register(new MainProcessorListenerExample());
         this.eventBus.register(new TicketServiceListener());
         this.eventBus.register(new SecondProcessorListener());
