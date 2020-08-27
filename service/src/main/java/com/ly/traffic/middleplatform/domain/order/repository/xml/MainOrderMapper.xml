@@ -47,7 +47,7 @@
         select
           id, order_no, plat_id, source_type, member_id, supplier_order_no, check_status, order_status, mail_status, pay_status, contact_name, contact_phone, contact_email, customer_total_amount, customer_total_paid, ticket_total_price, reduce_amount, discount_amount, book_flag, issue_flag, pay_mode, valid_pay_time, payment_type, union_pay, direct_pay, product_type, with_hold_status, with_hold_fail_reason, ref_id, union_id, open_id, extend_content, user_create_date, create_date, create_user, update_date, update_user
         from union_order.main_order
-        where id = #{id}
+        where order_no = #{orderNo}
     </select>
 
     <!--查询指定行数据-->

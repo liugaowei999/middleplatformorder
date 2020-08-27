@@ -13,9 +13,6 @@ import java.util.Map;
  */
 public class StateHandlerManager {
     private Map<Integer, AbstractStateHandler> handlerMap = new HashMap<>();
-//    static {
-//        handlerMap.put(1, new WaitingPayStateHandler());
-//    }
 
     public void registerHandler(Integer status, AbstractStateHandler handler) {
         handlerMap.put(status, handler);

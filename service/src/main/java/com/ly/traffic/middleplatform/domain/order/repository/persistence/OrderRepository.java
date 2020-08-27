@@ -53,12 +53,12 @@ public class OrderRepository implements IOrderRepository {
     /**
      * 通过ID查询单条数据
      *
-     * @param id 主键
+     * @param orderNo 主键
      * @return 实例对象
      */
     @Override
-    public MainOrderPO queryById(Integer id) {
-        return this.mainOrderMapper.queryById(id);
+    public MainOrderPO queryById(String orderNo) {
+        return this.mainOrderMapper.queryById(orderNo);
     }
 
     @Override
@@ -148,7 +148,7 @@ public class OrderRepository implements IOrderRepository {
      */
     public MainOrderPO update(MainOrderPO MainOrderPO) {
         this.mainOrderMapper.update(MainOrderPO);
-        return this.queryById(MainOrderPO.getId());
+        return this.queryById(MainOrderPO.getOrderNo());
     }
 
     public OrderAggregate queryByMainOrderNo(String mainOrderNo) {

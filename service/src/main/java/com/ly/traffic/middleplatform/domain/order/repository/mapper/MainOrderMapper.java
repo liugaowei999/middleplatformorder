@@ -15,10 +15,10 @@ public interface MainOrderMapper {
     /**
      * 通过ID查询单条数据
      *
-     * @param id 主键
+     * @param orderNo 主键
      * @return 实例对象
      */
-    MainOrderPO queryById(Integer id);
+    MainOrderPO queryById(String orderNo);
 
     /**
      * 查询指定行数据

@@ -2,8 +2,10 @@ package com.ly.traffic.middleplatform.domain.order.event.publish;
 
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.google.common.eventbus.AsyncEventBus;
 import com.google.common.eventbus.EventBus;
+import com.ly.traffic.middleplatform.condition.streamcontrol.ByPassFlowControlTest;
 import com.ly.traffic.middleplatform.demo.MainProcessorListenerExample;
 import com.ly.traffic.middleplatform.domain.order.event.OrderEvent;
 import com.ly.traffic.middleplatform.test.simulator.SecondProcessorListener;
@@ -36,7 +38,10 @@ public class OrderEventPublish {
 
     public void publish(OrderEvent orderEvent) {
 //        eventBus.post(orderEvent);
-        eventBus.post(JSON.toJSONString(orderEvent));
+        String whoControl = ByPassFlowControlTest.whoControl(JSONObject.parseObject(JSON.toJSONString(orderEvent), com.ly.traffic.middleplatform.demo.OrderEvent.class));
+        if ("MIDDLE_PLATFORM".equalsIgnoreCase(whoControl)) {
+            eventBus.post(JSON.toJSONString(orderEvent));
+        }
     }
 
 }

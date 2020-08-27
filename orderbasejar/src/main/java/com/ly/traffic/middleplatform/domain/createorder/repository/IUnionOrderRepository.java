@@ -20,8 +20,8 @@ import java.util.concurrent.TimeUnit;
 public interface IUnionOrderRepository<T,R> {
     R save(T orderEntity);
 
-    default String getById(Long id) {
-        RequestContext requestContext = new RequestContext("http://localhost:8096/order/selectOne?id=" + id);
+    default String getByOrderNo(String orderNo) {
+        RequestContext requestContext = new RequestContext("http://localhost:8096/order/selectOne?orderNo=" + orderNo);
 //        JSONObject body = new JSONObject();
 //        body.put("id", id);
 //        System.out.println(body.toJSONString());

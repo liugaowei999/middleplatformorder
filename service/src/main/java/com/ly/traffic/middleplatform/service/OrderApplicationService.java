@@ -109,8 +109,8 @@ public class OrderApplicationService {
     }
 
 
-    public MainOrderPO queryById(Integer id) {
-        MainOrderPO mainOrderPO = orderRepository.queryById(id);
+    public MainOrderPO queryById(String orderNo) {
+        MainOrderPO mainOrderPO = orderRepository.queryById(orderNo);
         System.out.println(JSON.toJSONString(mainOrderPO));
         return mainOrderPO;
     }

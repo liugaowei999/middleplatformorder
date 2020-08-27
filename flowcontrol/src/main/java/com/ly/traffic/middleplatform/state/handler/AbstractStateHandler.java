@@ -1,19 +1,15 @@
 package com.ly.traffic.middleplatform.state.handler;
 
-
-import com.ly.traffic.middleplatform.domain.createorder.entity.UnionOrderEntity;
-import com.ly.traffic.middleplatform.event.EventType;
-
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * @author liugw
  * @Package com.ly.traffic.train.domain.order.State
- * @Description: ${TODO}
- * @date 2020/7/22 15:06
+ * @Description: 泛型状态处理抽象类
+ * @date 2020/8/22 15:06
  */
-public abstract class AbstractStateHandler {
+public abstract class AbstractStateHandler<ORDER, EVENT> {
     /**
      *  当前状态值
      */
@@ -25,13 +21,13 @@ public abstract class AbstractStateHandler {
     /**
      * 下一个状态的处理器
      */
-    private Map<EventType, AbstractStateHandler> nextHandlerMap = new HashMap<>();
+    private Map<EVENT, AbstractStateHandler> nextHandlerMap = new HashMap<>();
 
-    public void setNextHandler(EventType eventType, AbstractStateHandler nextHandler) {
+    public void setNextHandler(EVENT eventType, AbstractStateHandler nextHandler) {
         nextHandlerMap.put(eventType, nextHandler);
     }
 
-    public AbstractStateHandler getNextHandler(EventType eventType) {
+    public AbstractStateHandler getNextHandler(EVENT eventType) {
        return nextHandlerMap.get(eventType);
     }
 
@@ -39,5 +35,5 @@ public abstract class AbstractStateHandler {
      * 状态处理逻辑，子类实现
      * @param orderEntity 1
      */
-    public abstract void handler(UnionOrderEntity orderEntity);
+    public abstract void handler(ORDER orderEntity);
 }

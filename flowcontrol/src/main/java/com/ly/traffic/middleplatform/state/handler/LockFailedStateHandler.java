@@ -2,6 +2,7 @@ package com.ly.traffic.middleplatform.state.handler;
 
 
 import com.ly.traffic.middleplatform.domain.createorder.entity.UnionOrderEntity;
+import com.ly.traffic.middleplatform.event.EventType;
 
 /**
  * @author liugw
@@ -9,7 +10,7 @@ import com.ly.traffic.middleplatform.domain.createorder.entity.UnionOrderEntity;
  * @Description: ${TODO}
  * @date 2020/7/22 15:40
  */
-public class LockFailedStateHandler extends AbstractStateHandler {
+public class LockFailedStateHandler extends AbstractStateHandler<UnionOrderEntity, EventType> {
 
     @Override
     public void handler(UnionOrderEntity orderEntity) {

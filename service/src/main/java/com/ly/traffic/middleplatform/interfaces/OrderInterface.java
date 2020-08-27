@@ -9,6 +9,7 @@ import com.ly.traffic.middleplatform.interfaces.dto.CancelOrderRequestDto;
 import com.ly.traffic.middleplatform.interfaces.dto.CreateOrderRequestDto;
 import com.ly.traffic.middleplatform.interfaces.dto.PaidInfoDto;
 import com.ly.traffic.middleplatform.service.OrderApplicationService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -18,6 +19,7 @@ import javax.annotation.Resource;
  *
  * @author liugw
  */
+@Slf4j
 @RestController
 @RequestMapping(value="order")
 public class OrderInterface {
@@ -26,20 +28,6 @@ public class OrderInterface {
      */
     @Resource
     private OrderApplicationService orderApplicationService;
-
-    /**
-     * 通过主键查询单条数据
-     *
-     * @param id 主键
-     * @return 单条数据
-     */
-    @RequestMapping(value="/selectOne", method=RequestMethod.GET)
-    public Result queryById(@RequestParam Integer id) {
-        Result result = new Result(ResultCode.OK);
-        MainOrderPO mainOrderPO = orderApplicationService.queryById(id);
-        result.setData(mainOrderPO);
-        return result;
-    }
 
     @RequestMapping(value="/save", method=RequestMethod.POST)
     public Result createOrder(@RequestBody CreateOrderRequestDto order) {
@@ -79,7 +67,7 @@ public class OrderInterface {
     }
 
     /**
-     * 支付回调
+     * 支付回调模拟
      */
     @RequestMapping(value="/paidcallback", method=RequestMethod.POST)
     public Result paidcallback(@RequestBody PaidInfoDto paidInfoDto) {
@@ -92,5 +80,28 @@ public class OrderInterface {
         }
 
         return result;
+    }
+
+    /**
+     * 通过主键查询单条数据
+     *
+     * @param orderNo 主键
+     * @return 单条数据
+     */
+    @RequestMapping(value="/selectOne", method=RequestMethod.GET)
+    public Result queryByOrderNo(@RequestParam String orderNo) {
+        Result result = new Result(ResultCode.OK);
+        MainOrderPO mainOrderPO = orderApplicationService.queryById(orderNo);
+        result.setData(mainOrderPO);
+        return result;
+    }
+
+    /**
+     * 消费数据透传数据 模拟
+     */
+    @RequestMapping(value="/consumeData", method=RequestMethod.GET)
+    public void consumeData(@RequestParam String data) {
+        log.info("[中台] - 收到透传数据，内容:{}", data);
+
     }
 }

@@ -19,6 +19,7 @@ import java.util.Date;
 public class OrderEvent extends DomainEvent {
     private EventType eventType;
     private String orderNo;
+    Integer bypassId;
     private int version = 1;
 
     private OrderEvent() {}
@@ -58,6 +59,11 @@ public class OrderEvent extends DomainEvent {
 
     public OrderEvent setOrderNo(String orderNo) {
         this.orderNo = orderNo;
+        return this;
+    }
+
+    public OrderEvent setBypassId(Integer bypassId) {
+        this.bypassId = bypassId;
         return this;
     }
 }

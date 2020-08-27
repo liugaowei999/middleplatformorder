@@ -49,6 +49,7 @@ public class OrderDomainService {
         // 领域事件持久化
         OrderEvent orderEvent = OrderEvent.create("createOrder")
                 .setOrderNo(orderAggregate.getOrderNo())
+                .setBypassId(orderAggregate.getMemberId())
                 .setDataSnapshot(JSON.toJSONString(orderAggregate))
                 .setEventType(EventType.NEW_CREATED);
         orderRepository.saveOrderEvent(orderEvent);
@@ -74,6 +75,7 @@ public class OrderDomainService {
         // 领域事件持久化
         OrderEvent orderEvent = OrderEvent.create("createOrder")
                 .setOrderNo(orderAggregate.getOrderNo())
+                .setBypassId(orderAggregate.getMemberId())
                 .setDataSnapshot(JSON.toJSONString(orderAggregate))
                 .setEventType(EventType.LOCK_SUCCESS);
         orderRepository.saveOrderEvent(orderEvent);
@@ -100,6 +102,7 @@ public class OrderDomainService {
         // 领域事件持久化
         OrderEvent orderEvent = OrderEvent.create("updatePayInfo")
                 .setOrderNo(orderAggregate.getOrderNo())
+                .setBypassId(orderAggregate.getMemberId())
                 .setDataSnapshot(JSON.toJSONString(orderAggregate))
                 .setEventType(EventType.PAID_SUCCESS);
         orderRepository.saveOrderEvent(orderEvent);
@@ -129,6 +132,7 @@ public class OrderDomainService {
         log.info("[订单聚合 - 取消更新] - 持久化订单取消事件快照...");
         OrderEvent orderEvent = OrderEvent.create("cancel")
                 .setOrderNo(orderAggregate.getOrderNo())
+                .setBypassId(orderAggregate.getMemberId())
                 .setDataSnapshot(JSON.toJSONString(orderAggregate))
                 .setEventType(EventType.CANCELED);
         orderRepository.saveOrderEvent(orderEvent);

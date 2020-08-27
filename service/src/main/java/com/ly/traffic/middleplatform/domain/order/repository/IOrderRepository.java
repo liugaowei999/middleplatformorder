@@ -11,7 +11,7 @@ import com.ly.traffic.middleplatform.domain.order.repository.po.MainOrderPO;
  */
 public interface IOrderRepository {
     public int save(OrderAggregate orderAggregate);
-    public MainOrderPO queryById(Integer id);
+    public MainOrderPO queryById(String orderNo);
 
     int cancelUpdate(OrderAggregate orderAggregate);
 

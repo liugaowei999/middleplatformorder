@@ -1,6 +1,7 @@
 package com.ly.traffic.middleplatform.demo;
 
 import com.ly.traffic.middleplatform.event.EventType;
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,7 +33,16 @@ public class OrderEvent {
      * 业务数据快照
      */
     String dataSnapshot;
+
+    Integer bypassId;
+
     private EventType eventType;
     private String orderNo;
     private int version = 1;
+
+    public static void main(String[] args) {
+        Integer bypassId = 1015;
+        System.out.println(bypassId & 1);
+        System.out.println(bypassId % 2);
+    }
 }
