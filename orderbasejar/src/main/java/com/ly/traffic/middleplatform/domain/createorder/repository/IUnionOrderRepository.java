@@ -17,8 +17,8 @@ import java.util.concurrent.TimeUnit;
  * @Description: ${TODO}
  * @date 2020/7/9 10:21
  */
-public interface IUnionOrderRepository {
-    void save(UnionOrderEntity orderEntity);
+public interface IUnionOrderRepository<T,R> {
+    R save(T orderEntity);
 
     default String getById(Long id) {
         RequestContext requestContext = new RequestContext("http://localhost:8096/order/selectOne?id=" + id);

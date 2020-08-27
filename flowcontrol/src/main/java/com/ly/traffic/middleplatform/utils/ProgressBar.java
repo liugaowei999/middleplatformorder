@@ -45,8 +45,14 @@ public class ProgressBar {
         System.out.print('\r');
     }
 
+    public <T> void show(T t) {
+        System.out.println(t);
+    }
+
     public static void main(String[] args) throws InterruptedException {
-//        ProgressBar progressBar = new ProgressBar();
+        ProgressBar progressBar = new ProgressBar();
         ProgressBar.printProgress("同步进度");
+
+        progressBar.show("sss");
     }
 }

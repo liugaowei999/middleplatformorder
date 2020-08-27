@@ -104,7 +104,7 @@ public class ObjectValue {
         Field[] fields = clazz.getDeclaredFields();
         for(Field field:fields){
             ExcludeField annotation = field.getAnnotation(ExcludeField.class);
-            if ((annotation == null) || annotation.exclude()) {
+            if ((annotation == null) || !annotation.exclude()) {
                 //将字段名作为key，field作为value
                 field.setAccessible(true);
                 map.put(field.getName(), field);
