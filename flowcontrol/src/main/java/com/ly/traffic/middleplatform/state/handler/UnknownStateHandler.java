@@ -1,6 +1,7 @@
 package com.ly.traffic.middleplatform.state.handler;
 
 
+import com.ly.traffic.middleplatform.condition.demo.FlowConditionDemo;
 import com.ly.traffic.middleplatform.domain.createorder.entity.UnionOrderEntity;
 import com.ly.traffic.middleplatform.event.EventType;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
  * @date 2020/7/22 13:53
  */
 @Slf4j
-public class UnknownStateHandler extends AbstractStateHandler<UnionOrderEntity, EventType> {
+public class UnknownStateHandler extends AbstractStateHandler<UnionOrderEntity, EventType>  {
     private static UnknownStateHandler instance = new UnknownStateHandler();
     public static UnknownStateHandler getInstance() {
         return instance;

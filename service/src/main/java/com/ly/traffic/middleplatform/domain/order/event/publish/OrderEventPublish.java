@@ -4,7 +4,6 @@ package com.ly.traffic.middleplatform.domain.order.event.publish;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.eventbus.AsyncEventBus;
-import com.google.common.eventbus.EventBus;
 import com.ly.traffic.middleplatform.condition.streamcontrol.ByPassFlowControlTest;
 import com.ly.traffic.middleplatform.demo.MainProcessorListenerExample;
 import com.ly.traffic.middleplatform.domain.order.event.OrderEvent;
@@ -12,10 +11,8 @@ import com.ly.traffic.middleplatform.test.simulator.SecondProcessorListener;
 import com.ly.traffic.middleplatform.test.simulator.TicketServiceListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.concurrent.Executors;
 
 /**

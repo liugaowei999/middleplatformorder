@@ -1,6 +1,7 @@
 package com.ly.traffic.middleplatform.state.handler;
 
 
+import com.ly.traffic.middleplatform.condition.demo.FlowConditionDemo;
 import com.ly.traffic.middleplatform.domain.createorder.entity.UnionOrderEntity;
 import com.ly.traffic.middleplatform.event.EventType;
 
@@ -10,7 +11,7 @@ import com.ly.traffic.middleplatform.event.EventType;
  * @Description: ${TODO}
  * @date 2020/7/22 15:38
  */
-public class WaitingIssueTicketStateHandler extends AbstractStateHandler<UnionOrderEntity, EventType> {
+public class WaitingIssueTicketStateHandler extends AbstractStateHandler<UnionOrderEntity, EventType>  {
 
     @Override
     public void handler(UnionOrderEntity orderEntity) {

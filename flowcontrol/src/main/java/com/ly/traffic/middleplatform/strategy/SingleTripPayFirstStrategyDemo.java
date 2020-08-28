@@ -1,6 +1,7 @@
-package com.ly.traffic.middleplatform.strategy.handler;
+package com.ly.traffic.middleplatform.strategy;
 
 
+import com.ly.traffic.middleplatform.condition.demo.FlowConditionDemo;
 import com.ly.traffic.middleplatform.event.EventType;
 import com.ly.traffic.middleplatform.state.handler.*;
 
@@ -10,15 +11,16 @@ import com.ly.traffic.middleplatform.state.handler.*;
  * @Description: 单一行程先支付再占座策略
  * @date 2020/7/22 14:47
  */
-public class SingleTripPayFirstStrategyHandler extends AbstractStrategyHandler{
+public class SingleTripPayFirstStrategyDemo extends AbstractStrategy {
 
-    private static SingleTripPayFirstStrategyHandler instance = new SingleTripPayFirstStrategyHandler();
+    private static SingleTripPayFirstStrategyDemo instance = new SingleTripPayFirstStrategyDemo();
 
-    public static SingleTripPayFirstStrategyHandler getInstance() {
+    public static SingleTripPayFirstStrategyDemo getInstance() {
         return instance;
     }
 
     private void init() {
+        FlowConditionDemo flowConditionDemo = new FlowConditionDemo();
         // 待出票处理
         WaitingIssueTicketStateHandler waitingIssueTicketStateHandler = new WaitingIssueTicketStateHandler();
         // 占座失败处理器
@@ -44,10 +46,10 @@ public class SingleTripPayFirstStrategyHandler extends AbstractStrategyHandler{
 
         // 待占座， 占座中 可以使用同一个处理器
         super.registerHandler(20, waitingLockSeatStateHandler);
-        super.registerHandler(21, waitingLockSeatStateHandler);
+        registerHandler(21, waitingLockSeatStateHandler);
     }
 
-    private SingleTripPayFirstStrategyHandler () {
+    private SingleTripPayFirstStrategyDemo() {
         init();
     }
 

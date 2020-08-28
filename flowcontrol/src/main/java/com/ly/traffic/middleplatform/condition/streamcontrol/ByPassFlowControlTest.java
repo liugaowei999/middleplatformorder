@@ -1,7 +1,6 @@
 package com.ly.traffic.middleplatform.condition.streamcontrol;
 
 import com.ly.traffic.middleplatform.demo.OrderEvent;
-import org.apache.commons.lang3.RandomUtils;
 
 /**
  * @author liugw

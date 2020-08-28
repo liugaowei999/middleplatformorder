@@ -8,6 +8,10 @@ import com.ly.traffic.middleplatform.domain.cancelorder.entity.CancelAggregate;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomUtils;
 
+import java.util.Collections;
+import java.util.concurrent.locks.Condition;
+import java.util.stream.Collectors;
+
 /**
  * @author liugw
  * @Package com.ly.traffic.middleplatform.test.simulator
@@ -33,5 +37,38 @@ public class TicketServiceListener {
         }
     }
 
+    public static void main(String[] args) {
+        int cnt = 0;
+
+        for (long y = 0; y < 10000000000L; y++) {
+            if ((y & (y-1)) == 0) {
+                System.out.print(y + ",");
+                cnt++;
+            }
+        }
+        System.out.println("\n 共:" + cnt);
+
+        cnt = 0;
+        long nanoTime = System.currentTimeMillis();
+        for (long y = 0; y < 10000000000L; y++) {
+            if ((y & 1) == 0) {
+                cnt++;
+            }
+        }
+        long end = System.currentTimeMillis();
+        System.out.println("cnt=" + cnt + ", cost1:" + (end - nanoTime)/1000);
+
+        cnt = 0;
+        nanoTime = System.currentTimeMillis();
+        for (long y = 0; y < 10000000000L; y++) {
+            if ((y % 2) == 0) {
+                cnt++;
+            }
+        }
+        end = System.currentTimeMillis();
+        System.out.println("cnt=" + cnt + ", cost2:" + (end - nanoTime)/1000);
+
+
+    }
 
 }

@@ -5,8 +5,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.common.eventbus.Subscribe;
 import com.ly.traffic.middleplatform.condition.streamcontrol.ByPassFlowControlTest;
 import com.ly.traffic.middleplatform.domain.createorder.entity.UnionOrderEntity;
-import com.ly.traffic.middleplatform.strategy.handler.AbstractStrategyHandler;
-import com.ly.traffic.middleplatform.strategy.StrategyManger;
+import com.ly.traffic.middleplatform.strategy.AbstractStrategy;
+import com.ly.traffic.middleplatform.strategy.selector.StrategySelectorDemo;
 import com.ly.traffic.middleplatform.test.TestSimulation;
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,7 +35,7 @@ public class MainProcessorListenerExample {
         UnionOrderEntity orderEntity = JSONObject.parseObject(event.getDataSnapshot(), UnionOrderEntity.class);
 
         // 收到事件消息后， 触发下面的操作
-        AbstractStrategyHandler strategy = StrategyManger.getStrategy(orderEntity);
+        AbstractStrategy strategy = StrategySelectorDemo.getInstance().getStrategy(orderEntity);
 
         strategy.process(event.getEventType(), orderEntity);
     }
