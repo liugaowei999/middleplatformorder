@@ -4,7 +4,7 @@ package com.ly.traffic.middleplatform.domain.order.event.publish;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.eventbus.AsyncEventBus;
-import com.ly.traffic.middleplatform.condition.streamcontrol.ByPassFlowControlTest;
+import com.ly.traffic.middleplatform.demo.streamcontrol.ByPassFlowControlTest;
 import com.ly.traffic.middleplatform.demo.MainProcessorListenerExample;
 import com.ly.traffic.middleplatform.domain.order.event.OrderEvent;
 import com.ly.traffic.middleplatform.test.simulator.SecondProcessorListener;

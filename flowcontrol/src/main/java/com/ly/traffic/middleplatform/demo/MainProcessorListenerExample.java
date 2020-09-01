@@ -3,7 +3,7 @@ package com.ly.traffic.middleplatform.demo;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.eventbus.Subscribe;
-import com.ly.traffic.middleplatform.condition.streamcontrol.ByPassFlowControlTest;
+import com.ly.traffic.middleplatform.demo.streamcontrol.ByPassFlowControlTest;
 import com.ly.traffic.middleplatform.domain.createorder.entity.UnionOrderEntity;
 import com.ly.traffic.middleplatform.strategy.AbstractStrategy;
 import com.ly.traffic.middleplatform.strategy.selector.StrategySelectorDemo;

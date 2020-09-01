@@ -1,6 +1,5 @@
-package com.ly.traffic.middleplatform.condition.demo;
+package com.ly.traffic.middleplatform.demo.condition;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.googlecode.aviator.AviatorEvaluator;
 import com.googlecode.aviator.Expression;

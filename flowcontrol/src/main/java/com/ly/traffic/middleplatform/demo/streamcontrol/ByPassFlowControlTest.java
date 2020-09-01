@@ -1,4 +1,4 @@
-package com.ly.traffic.middleplatform.condition.streamcontrol;
+package com.ly.traffic.middleplatform.demo.streamcontrol;
 
 import com.ly.traffic.middleplatform.demo.OrderEvent;
 

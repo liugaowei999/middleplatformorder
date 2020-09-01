@@ -1,7 +1,7 @@
 package com.ly.traffic.middleplatform.strategy.selector;
 
 
-import com.ly.traffic.middleplatform.condition.demo.ConditionDemo;
+import com.ly.traffic.middleplatform.demo.condition.ConditionDemo;
 import com.ly.traffic.middleplatform.domain.createorder.entity.UnionOrderEntity;
 import com.ly.traffic.middleplatform.strategy.AbstractStrategy;
 import com.ly.traffic.middleplatform.strategy.SingleTripPayFirstStrategyDemo;

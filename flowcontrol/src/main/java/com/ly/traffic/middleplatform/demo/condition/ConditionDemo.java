@@ -1,4 +1,4 @@
-package com.ly.traffic.middleplatform.condition.demo;
+package com.ly.traffic.middleplatform.demo.condition;
 
 import com.ly.traffic.middleplatform.condition.IConditionEngine;
 import com.ly.traffic.middleplatform.domain.createorder.entity.UnionOrderEntity;
