@@ -2,7 +2,7 @@ package com.ly.traffic.middleplatform.domain.order.entity;
 
 
 import com.google.common.collect.Lists;
-import com.ly.traffic.middleplatform.annotation.Aggregate;
+import com.ly.traffic.middleplatform.apt.annotation.Aggregate;
 import com.ly.traffic.middleplatform.domain.createorder.entity.UnionOrderEntity;
 import com.ly.traffic.middleplatform.domain.createorder.entity.ResourceConsumerOrder;
 import com.ly.traffic.middleplatform.domain.createorder.entity.RevenueOrderInfo;
@@ -25,7 +25,7 @@ import java.util.Optional;
  */
 @Getter
 @Setter
-@Aggregate
+@Aggregate(forceRewriteSuperField = true)
 public class OrderAggregate extends UnionOrderEntity {
 
     /**

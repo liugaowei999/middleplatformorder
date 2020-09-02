@@ -1,12 +1,11 @@
 package com.ly.traffic.middleplatform.domain.order.entity;
 
-import com.ly.traffic.middleplatform.annotation.Entity;
+import com.ly.traffic.middleplatform.apt.annotation.Entity;
 import com.ly.traffic.middleplatform.domain.createorder.entity.TripOrderInfo;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author liugw

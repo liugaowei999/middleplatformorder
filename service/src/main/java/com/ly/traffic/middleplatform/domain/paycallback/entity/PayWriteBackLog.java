@@ -1,6 +1,6 @@
 package com.ly.traffic.middleplatform.domain.paycallback.entity;
 
-import com.ly.traffic.middleplatform.annotation.Aggregate;
+import com.ly.traffic.middleplatform.apt.annotation.Aggregate;
 import com.ly.traffic.middleplatform.domain.paycallback.repository.po.PayWriteBackLogPO;
 import lombok.Getter;
 import lombok.Setter;

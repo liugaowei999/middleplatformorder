@@ -1,6 +1,6 @@
 package com.ly.traffic.middleplatform.domain.cancelorder.entity;
 
-import com.ly.traffic.middleplatform.annotation.Aggregate;
+import com.ly.traffic.middleplatform.apt.annotation.Aggregate;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;

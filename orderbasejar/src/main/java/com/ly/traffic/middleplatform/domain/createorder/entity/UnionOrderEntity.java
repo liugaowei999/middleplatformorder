@@ -1,7 +1,7 @@
 package com.ly.traffic.middleplatform.domain.createorder.entity;
 
 
-import com.ly.traffic.middleplatform.annotation.Aggregate;
+import com.ly.traffic.middleplatform.apt.annotation.Aggregate;
 import com.ly.traffic.middleplatform.domain.createorder.repository.IUnionOrderRepository;
 import com.ly.traffic.middleplatform.utils.http.HttpFactory;
 import com.ly.traffic.middleplatform.utils.http.config.RequestContext;

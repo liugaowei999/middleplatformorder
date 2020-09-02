@@ -1,7 +1,7 @@
 package com.ly.traffic.middleplatform.domain.refundticket.entity;
 
-import com.ly.traffic.middleplatform.annotation.Aggregate;
-import com.ly.traffic.middleplatform.annotation.Entity;
+
+import com.ly.traffic.middleplatform.apt.annotation.Entity;
 import lombok.Data;
 
 import java.util.Date;

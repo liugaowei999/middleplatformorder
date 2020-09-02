@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.ly.traffic.middleplatform.annotation.ExcludeField;
+import com.ly.traffic.middleplatform.apt.annotation.ExcludeField;
 import com.ly.traffic.middleplatform.domain.createorder.entity.TripOrderInfo;
 import com.ly.traffic.middleplatform.domain.createorder.entity.TripPassengerOrderInfo;
 import com.ly.traffic.middleplatform.domain.createorder.vo.BusTripInfoVO;
@@ -78,7 +78,7 @@ public class ObjectValue {
                     }
                 } else {
                     if (o instanceof TripInfoVO) {
-                        sonMapValues.put(o.getClass().getName(), o);
+                        sonMapValues.put(o.getClass().getCanonicalName(), o);
                     } else {
                         sonMapValues.put(entry.getKey().toString(), o);
                     }

@@ -1,6 +1,6 @@
 package com.ly.traffic.middleplatform.domain.order.entity;
 
-import com.ly.traffic.middleplatform.annotation.Entity;
+import com.ly.traffic.middleplatform.apt.annotation.Entity;
 import com.ly.traffic.middleplatform.domain.createorder.entity.TripPassengerOrderInfo;
 import lombok.Getter;
 import lombok.Setter;
