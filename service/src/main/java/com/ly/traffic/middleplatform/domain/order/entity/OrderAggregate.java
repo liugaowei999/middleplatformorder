@@ -8,6 +8,7 @@ import com.ly.traffic.middleplatform.domain.createorder.entity.ResourceConsumerO
 import com.ly.traffic.middleplatform.domain.createorder.entity.RevenueOrderInfo;
 import com.ly.traffic.middleplatform.domain.createorder.entity.TripPassengerOrderInfo;
 import com.ly.traffic.middleplatform.domain.order.repository.IOrderRepository;
+import com.ly.traffic.middleplatform.domain.order.repository.persistence.OrderRepository;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.ObjectUtils;
@@ -27,6 +28,10 @@ import java.util.Optional;
 @Setter
 @Aggregate(forceRewriteSuperField = true)
 public class OrderAggregate extends UnionOrderEntity {
+    /**
+     * 订单仓储
+     */
+    private OrderRepository orderRepository;
 
     /**
      * 微信代扣状态 0-微信支付 1，2-微信代扣 3-微信代扣转微信支付
@@ -51,6 +56,10 @@ public class OrderAggregate extends UnionOrderEntity {
      * 订单支付信息列表
      */
     private List<PayOrderInfo> payOrderInfoList;
+
+    public OrderAggregate(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
 
 
     /**
@@ -93,15 +102,13 @@ public class OrderAggregate extends UnionOrderEntity {
     }
 
     /**
-     * 不推荐的持久化方式： 领域对象 耦合了 仓储
+     * 持久化
      *
-     * @param orderRepository 1
      * @return 1
      * @throws Exception 1
      */
-    public int saveToDB(IOrderRepository orderRepository) throws Exception {
+    public int saveToDB() throws Exception {
         create();
-
         return orderRepository.save(this);
     }
 
@@ -119,7 +126,7 @@ public class OrderAggregate extends UnionOrderEntity {
         return false;
     }
 
-    public int cancel(IOrderRepository orderRepository) {
+    public int cancel() {
         setOrderStatus(62);
 
         return orderRepository.cancelUpdate(this);
@@ -130,7 +137,7 @@ public class OrderAggregate extends UnionOrderEntity {
      *
      * @return 1
      */
-    public int updateSeatInfo(IOrderRepository orderRepository) {
+    public int updateSeatInfo() {
         // 占座成功
         setOrderStatus(22);
 
@@ -151,8 +158,10 @@ public class OrderAggregate extends UnionOrderEntity {
      *
      * @return 1
      */
-    public int updatePayInfo(IOrderRepository orderRepository) {
+    public int updatePayInfo() {
         this.setOrderStatus(12);
+        // 模拟更新支付信息
+        System.out.println("更新支付信息");
         return 1;
     }
 

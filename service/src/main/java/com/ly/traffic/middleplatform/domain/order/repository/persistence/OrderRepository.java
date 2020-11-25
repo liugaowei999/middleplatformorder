@@ -152,7 +152,7 @@ public class OrderRepository implements IOrderRepository {
     }
 
     public OrderAggregate queryByMainOrderNo(String mainOrderNo) {
-        OrderAggregate orderAggregate = new OrderAggregate();
+        OrderAggregate orderAggregate = new OrderAggregate(this);
         MainOrderPO queryCondition = new MainOrderPO();
         queryCondition.setOrderNo(mainOrderNo);
         List<MainOrderPO> mainOrderPOS = mainOrderMapper.queryAll(queryCondition);

@@ -1,6 +1,7 @@
 package com.ly.traffic.middleplatform.domain.cancelorder.entity;
 
 import com.ly.traffic.middleplatform.apt.annotation.Aggregate;
+import com.ly.traffic.middleplatform.domain.cancelorder.repository.persistence.CancelRepository;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,11 +19,19 @@ import java.math.BigDecimal;
 @Aggregate
 public class CancelAggregate {
     /**
+     * 取消订单任务仓储
+     */
+    private CancelRepository cancelRepository;
+    /**
     * 订单自增ID（主键）
     */
     private Integer id;
 
     private CancelOrder cancelOrder;
+
+    public CancelAggregate(CancelRepository cancelRepository) {
+        this.cancelRepository = cancelRepository;
+    }
 
     public void setStatus(int cancelStatus) {
         cancelOrder.setStatus(cancelStatus);
@@ -47,5 +56,9 @@ public class CancelAggregate {
 
     public String getMainOrderNo() {
         return cancelOrder.getMainOrderNo();
+    }
+
+    public int save() {
+        return cancelRepository.save(this);
     }
 }

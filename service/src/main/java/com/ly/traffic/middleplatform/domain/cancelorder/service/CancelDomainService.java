@@ -77,7 +77,8 @@ public class CancelDomainService {
             log.info("[取消订单任务聚合] -异步发起取消票务任务");
             cancelTicketTaskAsync(cancelAggregate);
         }
-        cancelRepository.save(cancelAggregate);
+        // 持久化取消订单任务记录
+        cancelAggregate.save();
         return result;
     }
 }

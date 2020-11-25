@@ -35,11 +35,7 @@ public class OrderDomainService {
     public int create(OrderAggregate orderAggregate) throws Exception {
         log.info("[订单聚合-创建订单] 创建订单聚合根实体...");
         // 持久化方式1：
-        orderAggregate.create();
-        int saveCount = orderRepository.save(orderAggregate);
-
-        // 持久化方式2：不推荐
-        // int saveCount = orderAggregate.saveToDB(orderRepository);
+        int saveCount = orderAggregate.saveToDB();
 
         if (saveCount <= 0) {
             return saveCount;
@@ -67,8 +63,7 @@ public class OrderDomainService {
      * @throws Exception 1
      */
     public int updateSeatInfo(OrderAggregate orderAggregate) throws Exception {
-        int saveCount = orderAggregate.updateSeatInfo(orderRepository);
-
+        int saveCount = orderAggregate.updateSeatInfo();
         if (saveCount <= 0) {
             return saveCount;
         }
@@ -93,7 +88,7 @@ public class OrderDomainService {
      * @throws Exception 1
      */
     public int updatePayInfo(OrderAggregate orderAggregate) throws Exception {
-        int saveCount = orderAggregate.updatePayInfo(orderRepository);
+        int saveCount = orderAggregate.updatePayInfo();
 
         if (saveCount <= 0) {
             return saveCount;
@@ -120,7 +115,7 @@ public class OrderDomainService {
      */
     public int cancel(OrderAggregate orderAggregate) {
         log.info("[订单聚合 - 取消更新] - 开始更新订单状态为取消...");
-        int count = orderAggregate.cancel(orderRepository);
+        int count = orderAggregate.cancel();
         if (count <= 0) {
             // 已发起占座或出票等票务操作时，状态无法更新为取消
             return count;

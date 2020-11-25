@@ -37,6 +37,9 @@ public class OrderApplicationService {
     private OrderRepository orderRepository;
 
     @Resource
+    private CancelRepository cancelRepository;
+
+    @Resource
     private OrderDomainService orderDomainService;
 
     @Resource
@@ -47,7 +50,8 @@ public class OrderApplicationService {
 
     @Transactional(rollbackFor = Exception.class)
     public int createOrder(CreateOrderRequestDto order) throws Exception {
-        OrderAggregate orderAggregate = OrderAssembler.dtoToDo(order);
+        OrderAggregate orderAggregate = new OrderAggregate(orderRepository);
+        OrderAssembler.dtoToDo(order, orderAggregate);
 
         return orderDomainService.create(orderAggregate);
     }
@@ -103,7 +107,8 @@ public class OrderApplicationService {
     public Result cancelOrder(CancelOrderRequestDto cancelOrderRequestDto) {
         Result result = new Result(ResultCode.OK);
         result.setMsg("订单取消中 ...");
-        CancelAggregate cancelAggregate = OrderAssembler.dtoToDo(cancelOrderRequestDto);
+        CancelAggregate cancelAggregate = new CancelAggregate(cancelRepository);
+        OrderAssembler.dtoToDo(cancelOrderRequestDto, cancelAggregate);
         result = cancelDomainService.doCancelOrder(cancelAggregate);
         return result;
     }
