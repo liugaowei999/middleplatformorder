@@ -4,6 +4,7 @@
 - 中台订单继承自统一订单模型
 
 @Aggregate(forceRewriteSuperField = true)
+
 public class OrderAggregate extends UnionOrderEntity { 
 
 
